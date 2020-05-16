@@ -1,0 +1,61 @@
+{
+  "name": "site",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
+    "aes256": "^1.0.4",
+    "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
+    "contentful": "^7.10.0",
+    "firebase": "^7.8.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
+    "public-ip": "^4.0.0",
+    "rc-steps": "^3.5.0",
+    "react": "^16.11.0",
+    "react-accessible-accordion": "^3.0.1",
+    "react-cookies": "^0.1.1",
+    "react-countdown-now": "^2.1.2",
+    "react-d3-speedometer": "^0.7.3",
+    "react-dom": "^16.11.0",
+    "react-gtm-module": "^2.0.8",
+    "react-media": "^1.10.0",
+    "react-pdf": "^4.1.0",
+    "react-pure-loaders": "^3.0.1",
+    "react-rangeslider": "^2.2.0",
+    "react-responsive": "^8.0.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "react-tabs": "^3.0.0",
+    "react-tooltip": "^3.11.1",
+    "reactjs-popup": "^1.5.0"
+  },
+  "scripts": {
+    "start": "set PORT=8000 && react-scripts start",
+    "information": "for unix, change the command above for 'PORT=8000 react-scripts start'",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {}
+}

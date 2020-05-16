@@ -1,0 +1,375 @@
+// SLIDERS
+.rangeslider {
+  margin: 20px 0;
+  position: relative;
+  background: #e6e6e6;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+.rangeslider,.rangeslider .rangeslider__fill {
+  display: block;
+  background-color: #cccccc;
+}
+.rangeslider .rangeslider__handle {
+    background: #fd6b21;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('/img/handler.png');
+    background-size: 18px 8px;
+}
+.rangeslider .rangeslider__handle .rangeslider__active {
+  opacity: 1;
+}
+
+.rangeslider-horizontal {
+  height: 6px;
+  border-radius: 10px;
+}
+.rangeslider-horizontal .rangeslider__fill {
+  height: 100%;
+  background-color: #fd6b21;
+  border-radius: 10px;
+  top: 0;
+}
+.rangeslider-horizontal .rangeslider__handle {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.rangeslider-horizontal .rangeslider__handle-tooltip {
+  top: -55px;
+}
+.rangeslider-horizontal .rangeslider__handle-tooltip:after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(0, 0, 0, 0.8);
+  left: 50%;
+  bottom: -8px;
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
+}
+.rangeslider-vertical {
+  margin: 20px auto;
+  height: 150px;
+  max-width: 10px;
+  background-color: transparent;
+}
+.rangeslider-vertical .rangeslider__fill,
+.rangeslider-vertical .rangeslider__handle {
+  position: absolute;
+}
+.rangeslider-vertical .rangeslider__fill {
+  width: 100%;
+  background-color: #7cb342;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  bottom: 0;
+}
+.rangeslider-vertical .rangeslider__handle {
+  width: 30px;
+  height: 10px;
+  left: -10px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.rangeslider-vertical .rangeslider__handle-tooltip {
+  left: -100%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.rangeslider-vertical .rangeslider__handle-tooltip:after {
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid rgba(0, 0, 0, 0.8);
+  left: 100%;
+  top: 12px;
+}
+.rangeslider-reverse.rangeslider-horizontal .rangeslider__fill {
+  right: 0;
+}
+.rangeslider-reverse.rangeslider-vertical .rangeslider__fill {
+  top: 0;
+  bottom: inherit;
+}
+.rangeslider__labels {
+    position: relative;
+    margin: 1rem 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 0;
+}
+.rangeslider-vertical .rangeslider__labels {
+  position: relative;
+  list-style-type: none;
+  margin: 0 0 0 24px;
+  padding: 0;
+  text-align: left;
+  width: 250px;
+  height: 100%;
+  left: 10px;
+}
+.rangeslider-vertical .rangeslider__labels .rangeslider__label-item {
+  position: absolute;
+  -webkit-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0);
+}
+.rangeslider-vertical .rangeslider__labels .rangeslider__label-item::before {
+  content: "";
+  width: 10px;
+  height: 2px;
+  background: #000;
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: -1;
+}
+.rangeslider__labels .rangeslider__label-item {
+    font-size: 14px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 300;
+    font-size: 0.7rem;
+}
+
+////////// CALCULATOR /////////////////
+.calculator{
+    border-radius: 10px;
+    width: 375px;
+    position: absolute;
+    right: 9rem;
+    top: 7rem;
+    background-color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.slider-container-go {
+  padding: 1rem 2rem;
+  background-color: #f2f2f2;
+  border-radius: 10px 10px 0 0;
+}
+
+.slider-container-go h2 {
+  text-align: left;
+  color: white;
+  font-size: 5.5rem;
+}
+
+.slider-container-go h3 {
+  text-align: right;
+  color: white;
+  font-size: 4.1rem;
+}
+
+.title-winput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.title-winput p {
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+.title-winput input {
+  width: 65px;
+  color: #000000;
+}
+
+.boton-periodicidad {
+  background-color: white;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  margin: 0.5rem;
+  border: none !important;
+  cursor: pointer;
+}
+
+.boton-periodicidad:hover {
+  background-color: #fd6b21 !important;
+  color: white;
+}
+
+*:focus{
+    outline: none;
+}
+
+.period-active{
+    background-color: #fd6b21 !important;
+    color: white !important;
+}
+
+.slider{
+    position: relative;
+}
+
+.slider-input-wrapper{
+    position: relative;
+    width: 90px;
+    float: right;
+    line-height: 3rem;
+}
+
+.slider-input{
+    width: 90px !important;
+    float: right;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: left;
+    padding: .15rem .75rem;
+    line-height: inherit;
+    height: 35px;
+}
+
+.slider-input-unit{
+    display: inline-block;
+    position: absolute;
+    right: 0.7rem;
+    color: #a8a8a8;
+    margin-top: -2px;
+    line-height: inherit;
+    pointer-events: none;
+}
+
+.slider-steps{
+    width: 321px;
+    position: absolute;
+    top: -0.8rem;
+}
+
+.step{
+    width: 1px;
+    height: 10px;
+    background-color: #ccc;
+    display: inline-block;
+}
+
+.calculator-info{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 1rem 2rem;
+    background-color: white;
+}
+
+.info-row{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.cat-prom{
+    margin: 1rem 0;
+}
+
+.amortization-button{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 235px;
+    margin: 0 auto 1rem auto;
+    box-shadow: 1px 2px 7px grey;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.btn {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    -webkit-transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    -o-transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    color: #ffffff;
+    background-color: #fd6b21;
+    border-color: transparent;
+    display: block;
+    margin-left: initial;
+    margin-right: initial;
+    width: 100%;
+    cursor: pointer;
+    padding: 0.5rem 0rem;
+    font-size: 1.2rem;
+}
+
+.calc-popup .popup-content{
+  margin: auto !important;
+}
+
+.btn:hover{
+    background-color: #e05c1a;
+}
+
+@media(max-width: 1100px){
+  .calculator{
+      right: 6rem;
+  }
+}
+
+@media(max-width: 760px){
+  .calculator{
+    right: auto !important;
+}
+}
+
+@media (max-width: 990px){
+  .calculator {
+      position: relative !important;
+      top: 9rem !important;
+      margin: 0 auto !important;
+      right: auto !important;
+  }
+}

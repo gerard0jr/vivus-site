@@ -1,0 +1,474 @@
+.rc-steps-item-icon{
+    background-color: #fd6b21 !important;
+    display: none !important;
+}
+
+.rc-steps-item-finish .rc-steps-item-title{
+    color: #93d500 !important;
+}
+
+.rc-steps-navigation .rc-steps-item-active .rc-steps-item-container {
+    border-bottom: 3px solid #fd6b21 !important;
+}
+
+.rc-steps-navigation .rc-steps-item-title {
+    max-width: 130px !important;
+    white-space: pre-wrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: center !important;
+}
+
+.rc-steps-navigation, .rc-steps-item {
+    position: relative !important;
+    display: flex !important;
+    vertical-align: top !important;
+    flex: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.register-container{
+    text-align: left;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.register-container a{
+    color: black;
+    text-decoration: underline;
+    margin-left: 0.5rem;
+}
+
+.register-container-full{
+    text-align: left;
+    padding: 2rem;
+    font-size: 1rem;
+}
+
+.register-container-full a{
+    color: black;
+    text-decoration: underline;
+    margin-left: 0.5rem;
+}
+
+.left-register-full{
+    width: 100%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+}
+
+.register-calculator{
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+    width: 385px;
+}
+
+.left-register, .right-register{
+    width: 50%;
+    padding: 0 6rem;
+}
+
+.left-register{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.show-sliders{
+    height: auto;
+    opacity: 1;
+    transition: all 1s ease;
+}
+
+.hide-sliders{
+    height: 0;
+    opacity: 0;
+    z-index: -2;
+}
+
+.hide-sliders div{
+    height: 0;
+    opacity: 0;
+    z-index: -2;
+}
+
+.top-slider-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-right-button{
+    background-color: #eee;
+    color: #fd6b21;
+    border-radius: 20px;
+    text-align: center;
+    padding: 1rem;
+    max-width: 100px;
+    margin: 0 auto;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.register-questions{
+    display: flex;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.register-form-container{
+    max-width: 500px;
+}
+
+.register-form-container-full{
+    max-width: 50vw;
+}
+
+.register-form-container-100{
+    max-width: 100vw;
+}
+
+.big-loader{
+    margin: 2rem 0;
+}
+
+.big-loader > div{
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.input-div{
+    margin-bottom: 1.2rem;
+}
+
+.input-div small{
+    font-weight: 200;
+}
+
+.register-subtitle{
+    margin: 1.5rem 0 1rem;
+}
+
+.register-subtitle h5{
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.register-subtitle p{
+    font-size: 1rem;
+}
+
+.show-password{
+    text-decoration: underline;
+}
+
+.checkbox-div{
+    margin: 2rem 0;
+    position: relative;
+}
+
+.checkbox-div small{
+    font-weight: 200;
+}
+
+.checkbox-top{
+    display: flex;
+    align-items: center;
+}
+
+.btn-register{
+    padding: 0.5rem 1rem;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #fd6b21;
+    min-width: 175px;
+}
+
+.btn-register-disabled{
+    padding: 0.5rem 1rem;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+
+.subtitle-denied{
+    margin-top: 3rem !important;
+    padding: 0;
+    font-weight: 300;
+    font-size: 2rem;
+}
+
+.qn-question{
+    margin-bottom: 0.5rem !important;
+}
+
+.qn-answer{
+    display: flex;
+}
+
+// Checkbox Customization
+.checkbox-div input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+  }
+
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .validation-email-register{
+    display: flex;
+    align-items: center;
+  }
+
+//   pop up
+.popup-content{
+    margin: 1rem auto !important;
+    overflow-y: auto !important;
+}
+
+.register-qualification{
+    padding: 0 1rem 1rem;
+}
+
+.register-qualification h2{
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.register-qualification li{
+    font-size: 0.9rem;
+}
+
+.register-qualification ul{
+	position: relative;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 1.2em;
+}
+
+.register-qualification li:before{
+	content: "✔";
+	position: absolute;
+	left: 0;
+}
+
+.input-error{
+    border-left: 6px solid red;
+    padding-left: 1rem;
+}
+
+.payment-register{
+    background-color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.payment-register-options{
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid lightgrey;
+}
+
+.payment-register-option{
+    display: flex;
+    justify-content: baseline;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.payment-register-option-selected{
+    display: flex;
+    border-bottom: 2px solid #fd6b21;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.payment-register-content{
+    padding-top: 1rem;
+}
+
+.account-container-denied p{
+    font-size: 0.8rem;
+    margin-bottom: 10px !important;
+}
+
+.account-container-denied{
+    display: flex;
+    align-items: center;
+    margin: 0 4rem;
+    justify-content: center;
+}
+
+.account-container-denied h3{
+    font-size: 1.2rem;
+}
+
+.right-dash-denied{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 0;
+}
+
+.zip-button-container{
+    display: flex;
+}
+
+@media(max-width: 1190px){
+    .account-container-denied{
+        display: flex;
+        align-items: center;
+        flex-direction: column-reverse;
+        align-content: center;
+        margin: 0 4rem;
+        justify-content: center;
+    }
+
+    .right-dash-denied{
+        border-radius: 20px 20px 0 0;
+        height: auto !important;
+    }
+
+    .left-dash-denied .slider-container{
+        min-width: 80vw;
+        border-radius: 0;
+    }
+}
+
+@media(max-width: 1150px){
+    .register-container{
+        padding: 2rem 0;
+    }
+    .register-form-container{
+        max-width: none;
+    }
+    .register-calculator{
+        width: auto;
+        margin-top: 2rem;
+    }
+    .left-register, .right-register{
+        width: auto;
+        padding: 0 2rem;
+    }
+}
+
+@media(max-width: 1000px){
+    .popup-content{
+        width: 85% !important;
+    }
+}
+
+@media(max-width: 890px){
+    .register-container{
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .right-register{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .rc-steps-navigation .rc-steps-item-title {
+        max-width: 92px !important;
+    }
+}
+
+@media(max-width: 850px){
+    .register-form-container-full{
+        max-width: 100%;
+    }
+}
+
+@media(max-width: 712px){
+    .rc-steps-navigation{
+        width: 712px !important;
+    }
+    
+    .steps-container{
+        width: 100%;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+    }
+}
+
+@media(max-width: 580px){
+    .button-container{
+        flex-direction: column !important;
+    }
+    .btn-register{
+        margin-left: 0;
+        margin-bottom: 1rem !important;
+    }
+    .left-register-full{
+        padding: 0;
+    }
+}
+
+@media(max-width: 460px){
+    .validation-email-register{
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    .validation-email-register small{
+        margin: 0.5rem 0 !important;
+    }
+    .left-register{
+        padding: 0 1rem;
+    }
+    .checkbox-top{
+        flex-direction: column;
+    }
+}

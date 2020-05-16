@@ -1,0 +1,242 @@
+.app-container-white{
+    background-color: white;
+    border-top: 2px solid rgba(217,217,217,0.44);
+    margin-top: -0.9rem;
+    margin-bottom: -5.5rem;
+    padding-bottom: 3rem;
+}
+
+.first-block{
+    display: flex;    
+    max-width: 1100px;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.first-block-left{
+    text-align: left;
+    width: 60%;
+    padding: 2rem;
+}
+
+.first-block-left h2{
+    font-size: 4rem;
+    font-weight: bold;
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+    margin: 2rem 0 0 0;
+}
+
+.first-block-left p{
+    font-size: 1.2rem;
+}
+
+.first-block-right{
+    width: 40%;
+    padding: 2rem;
+}
+
+.first-block-right img{
+    width: 100%;
+}
+
+.second-block{
+    background-color: #f7f8fa;
+    -webkit-transform: skew(0deg, -5deg);
+    transform: skew(0deg, -5deg);
+}
+
+.second-block-title{
+    color: #95d329;
+    font-size: 2rem;
+    transform: skew(0deg, 5deg);
+    margin: 0;
+    padding: 6rem 0 0;
+}
+
+.second-block-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.reasons-container-us{
+    transform: skew(0deg, 5deg);
+    margin: 0;
+    padding: 0;
+}
+
+.about-features{
+    display: flex;
+    padding: 0 10rem;
+    margin: 1rem 0;
+}
+
+.third-block{
+    background-image: url('/img/map.svg');
+    background-repeat: no-repeat;
+    background-position: 40rem 1%;
+}
+
+.third-block-left{
+    padding: 4rem 0rem 0 8rem;
+    text-align: left;
+}
+
+.third-block-left h2{
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.third-block-left p{
+    font-size: 1.1rem;
+    max-width: 400px;
+}
+
+.fourth-block{
+    background-color: #f7f8fa;
+    -webkit-transform: skew(0deg, -5deg);
+    transform: skew(0deg, -5deg);
+}
+
+.bottom-info-content{
+    transform: skew(0deg, 5deg);
+    padding: 0;
+}
+
+.wallet-block{
+    display: flex;    
+    max-width: 1100px;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.wallet-block-left{
+    text-align: left;
+    width: 70%;
+    padding: 6rem 2rem;
+}
+
+.wallet-block-left h2{
+    font-size: 3rem;
+    font-weight: bold;
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+    margin: 2rem 0 0 0;
+}
+
+.wallet-block-left p{
+    font-size: 1.1rem;
+}
+
+.wallet-block-right{
+    width: 30%;
+    padding: 2rem;
+}
+
+.wallet-block-right img{
+    width: 80%;
+}
+
+.umbrella-block{
+    display: flex;    
+    max-width: 1100px;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.umbrella-block-left{
+    text-align: left;
+    width: 70%;
+    padding: 6rem 2rem;
+    z-index: 1;
+}
+
+.umbrella-block-left h2{
+    font-size: 3rem;
+    font-weight: bold;
+    margin-block-start: 0 !important;
+    margin-block-end: 1rem !important;
+    margin: 2rem 0 0 0;
+}
+
+.umbrella-block-left p{
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    margin-block-end: 2rem !important;
+}
+
+.umbrella-block-left img{
+    width: 20px;
+    margin: 0 1rem 0 0;
+}
+
+.umbrella-block-right{
+    width: 30%;
+    padding: 2rem;
+}
+
+.umbrella-block-right img{
+    width: 80%;
+}
+
+.goTo-about-us{
+    transform: skew(0deg, 5deg);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+.goTo-about-us h2{
+    font-size: 2rem;
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+}
+
+.goTo-about-us h3{
+    font-size: 1.3rem;
+}
+
+@media(max-width: 1280px){
+    .third-block{
+        background-position: 27rem 1%;
+    }
+}
+
+@media(max-width: 1000px){
+    .first-block{
+        flex-direction: column;
+    }
+    .about-features{
+        flex-direction: column;
+    }
+    .second-block-title{
+        padding: 6rem 5rem 0;
+    }
+    .third-block{
+        background-position: 10rem 1%;
+    }
+}
+
+@media(max-width: 650px){
+    .third-block-left{
+        padding: 4rem 0rem 0 1rem;
+    }
+    .wallet-block, .umbrella-block{
+        flex-direction: column;
+    }
+    .about-features{
+        padding: 0 3rem;
+    }
+    .app-container-white{
+        margin-top: 1rem;
+    }
+}

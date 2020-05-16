@@ -1,0 +1,150 @@
+.works-button-nav{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2rem;
+    background-color: #fd6b21;
+    color: white;
+    font-weight: 700;
+    margin: -0.9rem 0 0 0;
+}
+
+.works-button-nav div{
+    width: 200px;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.works-active, .works-button-nav div:hover{
+    background-color: white;
+    color: #fd6b21;
+}
+
+.numbers-work{
+    counter-reset: listcounter;
+    list-style: none;
+    padding: 0;
+    margin: 0px 0;
+    text-align: left;
+}
+
+.numbers-work p{
+    width: 90%;
+}
+
+.numbers-work li{
+    line-height: 32px;
+    clear: both;
+    display: flex;
+    margin: 1rem 3rem !important;
+}
+
+.numbers-work li:before{
+    content: counter(listcounter);
+    counter-increment: listcounter;
+    clear: both;
+    display: inline-block;
+    width: 37px;
+    height: 40px;
+    margin: 0px 1rem;
+    font-size: 26px;
+    line-height: normal;
+    color: #fd6b21;
+    text-align: center;
+    border: 2px solid #fd6b21;
+    border-radius: 10px;
+}
+
+.note{
+    display: flex;
+    padding: 1rem 4rem;
+    align-items: flex-start;
+}
+
+.note-left{
+    color: #fd6b21;
+    font-size: 3rem;
+}
+
+.note-right{
+    padding: 0 1rem;
+    text-align: left;
+    font-weight: 300;
+}
+
+.gray-reestructure-area{
+    background-color: #f8f8f8;
+    padding: 1rem;
+}
+
+.addAmount-questions{
+    text-align: left;
+}
+        
+.addAmount-questions p{
+    font-weight: 500;
+}
+
+.accordion-container{
+    padding: 0 1rem;
+}
+
+.acc-title{
+    display: flex;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.acc-title-open{
+    display: flex;
+    margin: 1rem 0 0;
+    background-color: #e5e5e5;
+    padding-top: 1rem;
+    cursor: pointer;
+}
+
+.acc-icon{
+    color: #fd6b21;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+}
+
+.acc-question{
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.acc-content{
+    height: auto;
+    transition: all 100ms ease;
+    background-color: #e5e5e5;
+    padding: 1rem;
+    text-align: left;
+}
+
+.acc-content-collapsed{
+    display: none;
+}
+
+@media(max-width: 650px){
+    .works-button-nav{
+        margin: 1rem 0;
+    }
+}
+
+@media(max-width: 550px){
+    .works-button-nav{
+        margin: 1rem 0;
+        flex-direction: column;
+        align-items: center;
+    }
+    .numbers-work li{
+        margin: 1rem 1rem !important;
+    }
+    .note{
+        padding: 1rem;
+    }
+}

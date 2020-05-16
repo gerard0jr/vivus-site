@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM25-webfont.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM25-webfont.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM35-webfont.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM45-webfont.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM47-webfont.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM55-webfont.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM65-webfont.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'efectiGo';
+  src: url('/fonts/CoreSansM75-webfont.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'popup';
+  src: url('/fonts/Paloseco-Medium.ttf') format('truetype');
+}
+
+p {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+  font-weight: 300;
+  margin: 0;
+}
+
+body { 
+  font-family: "efectiGo"; 
+  font-size: 14px;
+}
+
+strong { 
+  font-weight: 700;
+}
