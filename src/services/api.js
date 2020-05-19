@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const apiUrl = 'https://tk4f.com.mx/efectigo/TraceIdentityService/Api'
-// const apiUrl = 'https://www.bpoamericas.co/sandbox/traceidentityService/api'
+// const apiUrl = 'https://tk4f.com.mx/efectigo/TraceIdentityService/Api' change to VIVUS
+const apiUrl = 'https://tk4f-stage.com.mx/stagevivus/TraceIdentityService/api'
 
 // SECURITY //
 export const getToken = () => 

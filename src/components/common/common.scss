@@ -19,6 +19,13 @@ a{
     padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
+}
+
+.flex-menu-home li a{ 
+    color: gray;
+}
+
+.flex-menu-home li:nth-last-child(1) a{ 
     color: white;
 }
 
@@ -36,16 +43,16 @@ a{
 }
 
 .flex-menu-section a{
-    color: #fd6b21;
+    color: #A3CD3A;
 }
 
 .active-go{
-    border-bottom: 5px solid #fd6b21 !important;
+    border-bottom: 5px solid rgb(126, 158, 45) !important;
     font-weight: 600;
 }
 
 .menu-button-home{
-    background-color: #ff6b00;
+    background-color: #A3CD3A;
     border-radius: 3px;
     margin-left: 1rem;
     cursor: pointer;
@@ -54,6 +61,7 @@ a{
 .navbar{
     z-index: 1;
     position: relative;
+    align-items: center;
 }
 
 .home{

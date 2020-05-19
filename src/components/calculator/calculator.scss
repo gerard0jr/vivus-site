@@ -29,10 +29,14 @@
 .rangeslider-horizontal {
   height: 6px;
   border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 .rangeslider-horizontal .rangeslider__fill {
   height: 100%;
-  background-color: #fd6b21;
+  background-color: #A3CD3A;
   border-radius: 10px;
   top: 0;
 }
@@ -150,6 +154,9 @@
     font-weight: 300;
     font-size: 0.7rem;
 }
+.rangeslider__labels .rangeslider__label-item{
+  color: white;
+}
 
 ////////// CALCULATOR /////////////////
 .calculator{
@@ -172,7 +179,7 @@
 
 .slider-container-go {
   padding: 1rem 2rem;
-  background-color: #f2f2f2;
+  background-color: #A3CD3A;
   border-radius: 10px 10px 0 0;
 }
 
@@ -198,11 +205,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 0 !important;
 }
 
 .title-winput p {
   font-size: 1.5rem;
-  font-weight: 200;
+  font-weight: bold;
+  color: white;
 }
 
 .title-winput input {
@@ -269,7 +278,7 @@
 }
 
 .slider-steps{
-    width: 321px;
+    width: 312px;
     position: absolute;
     top: -0.8rem;
 }
@@ -277,7 +286,7 @@
 .step{
     width: 1px;
     height: 10px;
-    background-color: #ccc;
+    background-color: rgb(224, 224, 224) !important;
     display: inline-block;
 }
 
@@ -300,7 +309,7 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    padding: 0;
+    padding: 7px 0;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -308,6 +317,7 @@
 
 .cat-prom{
     margin: 1rem 0;
+    text-align: left;
 }
 
 .amortization-button{
@@ -334,7 +344,7 @@
     -o-transition: background-color .2s ease-in-out, color .2s ease-in-out;
     transition: background-color .2s ease-in-out, color .2s ease-in-out;
     color: #ffffff;
-    background-color: #fd6b21;
+    background-color: #A3CD3A !important;
     border-color: transparent;
     display: block;
     margin-left: initial;

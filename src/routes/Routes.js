@@ -18,7 +18,7 @@ import PasswordRecoveryEmailConfirmation from '../components/account/PasswordRec
 import PasswordRecoveryMobileConfirmation from '../components/account/PasswordRecoveryMobileConfirmation';
 import PasswordSet from '../components/account/PasswordSet';
 import { NotFound } from '../components/account/NotFound';
-// import { Blog } from '../components/blog/Blog';
+import { Blog } from '../components/blog/Blog';
 import { PreApproved } from '../components/register/PreApproved';
 import { NotApproved } from '../components/register/NotApproved';
 import DeniedDash from '../components/register/DeniedDash';
@@ -61,7 +61,7 @@ const Routes = () => {
                     <Route exact path='/' component={Home}/>
                     {/* Landing sections */}
                     <Route path='/como-funciona' component={HowItWorks}/>
-                    {/* <Route path='/blog' component={Blog}/> */}
+                    <Route path='/blog' component={Blog}/>
                     <Route path='/us' component={AboutUs}/>
                     {/* Login / Recover password */}
                     <Route path='/login' component={NewLogin} />

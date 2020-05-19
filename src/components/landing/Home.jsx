@@ -8,6 +8,7 @@ import './landing.scss'
 import TagManager from 'react-gtm-module'
 import { momentEs } from '../../services/moment'
 import cookie from 'react-cookies'
+import { RatingCarousel } from './RatingCarousel'
  
 
 
@@ -74,7 +75,7 @@ export const Home = (props) => {
             :
                 null
             }
-            <div className='calculator-container' style={tempScreen ? {backgroundImage: 'url(/img/cover-abril.png)'} : tempScreen === false ? {backgroundImage: 'url(/img/landing.jpg)'} : {backgroundColor: 'white'}}>
+            <div className='calculator-container' style={tempScreen ? {backgroundImage: 'url(/img/landing/cover-abril.jpg)'} : tempScreen === false ? {backgroundImage: 'url(/img/landing/landing.jpg)'} : {backgroundColor: 'white'}}>
                 <Calculator style={{marginTop: '-5rem'}}/>
                 {!tempScreen ? 
                     null
@@ -86,7 +87,7 @@ export const Home = (props) => {
                 }
             </div>
 
-            <div className="home-features">
+            {/* <div className="home-features">
                 <div className='feature'>
                     <img src="/img/time.svg" alt="efectigo time"/>
                     <h2>Rápido y sin tanto rollo</h2>
@@ -108,52 +109,10 @@ export const Home = (props) => {
                         <br/>Si tu INE no tiene dirección, te solicitaremos comprobante de domicilio (Luz, agua o teléfono con antigüedad no mayor a 3 meses).
                     </p>
                 </div>
-            </div>
-
+            </div> */}
             <div className="reasons-container">
                 <div className='left-reasons'>
-                    <div className='home-reasons'>
-                        <div className='reason'>
-                            <img src="/img/efectigo-percent.svg" alt="percent"/>
-                            <div className='reason-description'>
-                                <p className='reason-title'>Flexibilidad</p>
-                                <p>Si necesitas dinero adicional en tu préstamo, o quieres recorrer la fecha de pago de tu parcialidad, con efectiGO es fácil hacerlo.</p>
-                            </div>
-                        </div>
-                        <div className='reason'>
-                            <img src="/img/efectigo-check.svg" alt="percent"/>
-                            <div className='reason-description'>
-                                <p className='reason-title'>Empresa confiable</p>
-                                <p>Millones de personas ya utilizan nuestros servicios. Somos una de las empresas de préstamos más reconocidas en el mundo.</p>
-                            </div>
-                        </div>
-                        <div className='reason'>
-                            <img src="/img/efectigo-head.svg" alt="percent"/>
-                            <div className='reason-description'>
-                                <p className='reason-title'>Soporte local</p>
-                                <p>¡Lo más importante en efectiGO eres tú! Por lo que nuestro equipo está siempre listo para ayudarte.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className='right-reasons'>
-                    <h2>Más razones</h2>
-                    <h2>para solicitar</h2>
-                    <p>un préstamo efectiGO</p>
-                </div>
-                <div className="dotted-ball">
-                    <img src="/img/dotted-ball.svg" alt="dotted"/>
-                </div>
-                {/* <div className="green-ball">
-                    <img src="/img/green-ball.svg" alt="dotted"/>
-                </div>   */}
-            </div>
-
-            <div className='works'>
-                <div className='left-works'>
-                    <h2>¿Cómo funciona?</h2>
-                </div>
-                <div className='right-works'>
+                    <div className='reasons-title'>¿Cómo funciona?</div>
                     <div className="como-efectigo-points">
                         <ul>
                             <li>
@@ -185,9 +144,47 @@ export const Home = (props) => {
                         </ul>
                     </div>
                 </div>
-                <div className="orange-ball">
-                    <img src="/img/orange-ball.svg" alt="orange ball"/>
+                <div className='right-reasons'>
+                    <div className='home-reasons'>
+                        <div className='reasons-isotipo'>
+                            <img src="/img/landing/isotipo.svg" alt="isotipo"/>
+                        </div>
+                        <div className='reason'>
+                            <img src="/img/efectigo-percent.svg" alt="percent"/>
+                            <div className='reason-description'>
+                                <p className='reason-title'>Flexibilidad</p>
+                                <p>Si necesitas dinero adicional en tu préstamo, o quieres recorrer la fecha de pago de tu parcialidad, con efectiGO es fácil hacerlo.</p>
+                            </div>
+                        </div>
+                        <div className='reason'>
+                            <img src="/img/efectigo-check.svg" alt="percent"/>
+                            <div className='reason-description'>
+                                <p className='reason-title'>Empresa confiable</p>
+                                <p>Millones de personas ya utilizan nuestros servicios. Somos una de las empresas de préstamos más reconocidas en el mundo.</p>
+                            </div>
+                        </div>
+                        <div className='reason'>
+                            <img src="/img/efectigo-head.svg" alt="percent"/>
+                            <div className='reason-description'>
+                                <p className='reason-title'>Soporte local</p>
+                                <p>¡Lo más importante en efectiGO eres tú! Por lo que nuestro equipo está siempre listo para ayudarte.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {/* <div className="dotted-ball">
+                    <img src="/img/dotted-ball.svg" alt="dotted"/>
+                </div> */}
+                {/* <div className="green-ball">
+                    <img src="/img/green-ball.svg" alt="dotted"/>
+                </div>   */}
+            </div>
+
+            <div className='rating-container'>
+                <h2>Más de 175,000 préstamos</h2>
+                <h3>Aprobados en México</h3>
+                <RatingCarousel/>
+                <p>Comentarios de clientes en eKomi</p>
             </div>
 
             <div className='call-to-action'>

@@ -40,6 +40,7 @@ const Calculator = (props) => {
 
     const initialConfiguration = async () => {
         const response = await getToken()
+        console.log(response)
         if(response.status !== 200) return loadSimulation()
         cookie.save('token', response.data.token, {maxAge: 60 * 20})
         getConfiguration(idProduct, response.data.token)
@@ -122,20 +123,22 @@ const Calculator = (props) => {
         initialConfiguration()
     }, [])
 
-    let stepWidth = 25
+    let stepWidth = 24
 
     return (
         <>
-            {config === 'error' ?
-            <div className='calculator'>
-                <div className='slider-container-go'>
-                    <FontAwesomeIcon icon={faExclamationTriangle}/>
-                </div>
-                <div className='calculator-info'>
-                    <h2 style={{textAlign: 'center'}}>Servidor no disponible, intenta más tarde</h2>
-                </div>
-            </div> 
-            : config !== null && fecha !== null ?
+            {
+            // config === 'error' ?
+            //     <div className='calculator'>
+            //         <div className='slider-container-go'>
+            //             <FontAwesomeIcon icon={faExclamationTriangle}/>
+            //         </div>
+            //         <div className='calculator-info'>
+            //             <h2 style={{textAlign: 'center'}}>Servidor no disponible, intenta más tarde</h2>
+            //         </div>
+            //     </div> 
+            // : 
+            config !== null && fecha !== null ?
             <div className='calculator'>
             {/* <div style={props.style ? {top: '0'} : null} className='calculator'> */}
                 <div className='slider-container-go'>
@@ -166,22 +169,22 @@ const Calculator = (props) => {
                             min={config.minAmount}
                             max={config.maxAmount}
                             value={monto}
-                            labels={{[config.minAmount]:`$${config.minAmount}`, [config.maxAmount]:`$${config.maxAmount}`}}
+                            labels={config !== 'error' ? {[config.minAmount]:`$${config.minAmount}`, [config.maxAmount]:`$${config.maxAmount}`} : {'0': 0, '0': 0}}
                             step={config.stepAmount}
                             orientation='horizontal'
                             tooltip={false}
                             onChange={val => updateMonto(val)}
                         />
                     </div>
-                    <hr style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem'}}/>
-                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem'}}>
+                    <hr style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem', opacity: 0}}/>
+                    {/* <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem'}}>
                         <p style={{marginBottom: '1rem'}}>Periodicidad de pago</p>
                         <div style={{display: 'flex', justifyContent: 'space-evenly', margin: '0.5rem'}}>
                             <p className={periodicidad === 1 ? 'boton-periodicidad period-active' : 'boton-periodicidad'} onClick={() => updatePeriodicidad(1)}>Semanal</p>
                             <p className={periodicidad === 2 ? 'boton-periodicidad period-active' : 'boton-periodicidad'} onClick={() => updatePeriodicidad(2)}>Quincenal</p>
                         </div>
-                    </div>
-                    <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
+                    </div> */}
+                    <hr style={{width: '100%', border: '0.5px solid #FAFAFA'}}/>
                     <div className='title-winput'>
                         <p>Plazo</p>
                         <div className="slider-input-wrapper">
@@ -261,7 +264,7 @@ const Calculator = (props) => {
                         Calculadora para fines informativos y de comparación. <br/><br/>
                         Nunca solicitamos anticipos, cuotas, pago de pólizas o cualquier otro concepto para otorgarte un préstamo.
                     </div>
-                    <div className='amortization-button'>
+                    {/* <div className='amortization-button'>
                         <div style={{textAlign: 'left', padding: '0 1rem'}}>
                             <p>Tabla de amortización</p>
                             <p onClick={() => setOpen(true)} style={{color: '#fd6b21', cursor: 'pointer'}}>Abrir <FontAwesomeIcon icon={faDownload}/></p>
@@ -269,14 +272,14 @@ const Calculator = (props) => {
                         <div style={{backgroundColor: '#f1f1f1', padding: '1rem', fontSize: '1.5rem', color: '#fd6b21', borderRadius: '0 10px 10px 0'}}>
                             <FontAwesomeIcon icon={faTable}/>
                         </div>
-                    </div>
+                    </div> */}
                     <p onClick={setData} className="btn">SOLICÍTALO YA</p>
                 </div>
             </div>
             :
             <div className='calculator'>
                 <div className='slider-container-go'>
-                    <BallClipRotate loading color={'#fd6b21'}/>
+                    <BallClipRotate loading color={'white'}/>
                 </div>
                 <div className='calculator-info'>
                     <h2 style={{textAlign: 'center'}}>Cargando datos...</h2>
