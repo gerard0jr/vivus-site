@@ -480,7 +480,7 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
                 <p style={{fontWeight: 'bold'}}><strong>Código Postal</strong></p>
                 <div className='zip-button-container'>
                     <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='zipCode' maxlength="5" value={data.zipCode}/>
-                    <div onClick={() => validateZip()} style={{backgroundColor: '#fd6b21', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}>{loadingZip ? <BallBeat loading color={'white'}/> : 'Verificar'}</div>
+                    <div onClick={() => validateZip()} style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}>{loadingZip ? <BallBeat loading color={'white'}/> : 'Verificar'}</div>
                 </div>
                 {notFoundZip ? <small style={{color: 'red'}}>Código postal no encontrado</small> : null}
             </div>

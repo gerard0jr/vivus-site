@@ -32,6 +32,7 @@ import { Error } from '../components/common/Error';
 import { SecondLoan } from '../components/account/SecondLoan';
 import { Manteinance } from '../components/common/Manteinance';
 import { momentEs } from '../services/moment'
+import { Article } from '../components/blog/Article';
 
 const Routes = () => {
 
@@ -61,7 +62,8 @@ const Routes = () => {
                     <Route exact path='/' component={Home}/>
                     {/* Landing sections */}
                     <Route path='/como-funciona' component={HowItWorks}/>
-                    <Route path='/blog' component={Blog}/>
+                    <Route exact path='/blog' component={Blog}/>
+                    <Route path='/blog/:article' render={props => <Article {...props}/>}/>
                     <Route path='/us' component={AboutUs}/>
                     {/* Login / Recover password */}
                     <Route path='/login' component={NewLogin} />

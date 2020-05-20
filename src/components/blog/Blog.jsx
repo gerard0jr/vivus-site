@@ -38,7 +38,7 @@ export const Blog = () => {
                 </ul>
             </div>
             {loading ? 
-                <BallClipRotate loading color={'#fd6b21'}/>
+                <BallClipRotate loading color={'#A3CD3A'}/>
                 :
                 <div className='blog-content'>
                     {section === 0 ?

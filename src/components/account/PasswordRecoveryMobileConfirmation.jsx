@@ -81,7 +81,7 @@ const PasswordRecoveryMobileConfirmation = (props) => {
     return (
       <div className='app-container'>
         <div className='forgot-layout' style={{backgroundColor: 'white', textAlign: 'center'}}>
-            <h2 style={{fontWeight: 'bold', backgroundColor: '#fd6b21', color: 'white', padding: '3rem'}}>¡Enviado! <br/>Revisa tu celular</h2>
+            <h2 style={{fontWeight: 'bold', backgroundColor: '#A3CD3A', color: 'white', padding: '3rem'}}>¡Enviado! <br/>Revisa tu celular</h2>
 		        <img src="/img/vivus-recover-sent.png" alt="user" style={{width: '96px'}} />
 			      <p>Hemos enviado tu código vía SMS al {celular}</p>
             <div style={{margin: '2rem 1rem'}}>

@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "contentful": "^7.10.0",
     "firebase": "^7.8.1",
+    "marked": "^1.1.0",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
     "public-ip": "^4.0.0",

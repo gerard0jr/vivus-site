@@ -127,7 +127,7 @@ const Default = ({history, setBalance, bannerId}) => {
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: '685px', minWidth: '500px'}}>
                 <h2>Cargando...</h2>
                 <div className='big-loader'>
-                    <BallClipRotate loading className='big-loader' color='#fd6b21'/>
+                    <BallClipRotate loading className='big-loader' color='#A3CD3A'/>
                 </div>
             </div>
             :
@@ -165,7 +165,7 @@ const Default = ({history, setBalance, bannerId}) => {
                                 needleColor="red"
                                 startColor="#8e3c12"
                                 segments={customerBalance.term}
-                                endColor="#fd6b21"
+                                endColor="#A3CD3A"
                                 maxSegmentLabels={5}
                                 forceRender
                             />

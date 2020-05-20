@@ -12,7 +12,7 @@ export const Footer = ({location}) => {
         <>
             <div className='footer-container'>
                 <div className='left-footer'>
-                    <img src="/img/mr.png" alt="customer service"/>
+                    <img src="/img/footer/support.webp" alt="customer service"/>
                     <div className='chat-section'>
                         <h2><strong>¿Necesitas ayuda?</strong></h2>
                         <p>Contáctanos</p>
@@ -23,11 +23,11 @@ export const Footer = ({location}) => {
                     <div className='contact-icons'>
                         <div className='contact-icon'>
                             <FontAwesomeIcon className='clickable' icon={faPhone}/> <br/>
-                            <a href="tel:5567170755">(0155) 6717 0755</a>
+                            <a href="tel:5567170750">(0155) 6717 0750</a>
                         </div>
                         <div className='contact-icon'>
                             <FontAwesomeIcon className='clickable' icon={faEnvelope}/> <br/>
-                            <a href="mailto:info@efectigo.com.mx">info@efectigo.com.mx</a>
+                            <a href="mailto:info@vivus.com.mx">info@vivus.com.mx</a>
                         </div>
                     </div>
                     <div className='bussiness-hours'>
@@ -53,7 +53,7 @@ export const Footer = ({location}) => {
                         </div>
                         <div className='text-f-popup-container'>
                             <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                                <img width='150px' src="/img/logo-efectigo.svg" alt="logo"/>
+                                <img width='150px' src="/img/navbar/logo-vivus-mexico.svg" alt="logo"/>
                             </div>
                             <h2>¿Qué es el Buró de Entidades Financieras?</h2>
                             <br/>

@@ -129,7 +129,7 @@ const Done = (props) => {
                     <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>¡No te vayas!</h1>
                     <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>Estamos verificando tu información...</h2>
                     <div className='big-loader'>
-                        <BallClipRotate loading color={'#fd6b21'}/>
+                        <BallClipRotate loading color={'#A3CD3A'}/>
                     </div>
                     <small>No debería tardar más que unos segundos</small>
                 </>

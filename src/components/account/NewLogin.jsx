@@ -259,10 +259,10 @@ const NewLogin = (props) => {
                   <p onClick={handleSubmit} className='btn-minimal-width'>
                       {loading ? <BallBeat color={'#fff'} loading/> : 'INGRESAR'}
                   </p>
-                  <Link className='no-margin-mquery' style={{borderBottom: '0px', marginLeft: '2rem', cursor: 'pointer', color: '#fd6b21'}} to="/recupera">¿Olvidaste tu contraseña?</Link>
+                  <Link className='no-margin-mquery' style={{borderBottom: '0px', marginLeft: '2rem', cursor: 'pointer', color: '#A3CD3A'}} to="/recupera">¿Olvidaste tu contraseña?</Link>
                 </div>
                 <div style={{margin: '2rem 0 0'}}>
-                  <span>¿No tienes cuenta? <Link className='no-margin-mquery' style={{borderBottom: '0px', cursor: 'pointer', color: '#fd6b21'}} to="/registration">Crea tu cuenta</Link></span>
+                  <span>¿No tienes cuenta? <Link className='no-margin-mquery' style={{borderBottom: '0px', cursor: 'pointer', color: '#A3CD3A'}} to="/registration">Crea tu cuenta</Link></span>
                 </div>
                 <div style={{display: 'flex', alignItems: 'flex-start', padding: '2rem 0'}}>
                   <FontAwesomeIcon style={{fontSize:'2rem', color: 'gray'}} icon={faShieldAlt} />

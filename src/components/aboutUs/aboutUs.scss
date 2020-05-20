@@ -1,5 +1,5 @@
 .app-container-white{
-    background-color: white;
+    background-color: #F5F5F5;
     border-top: 2px solid rgba(217,217,217,0.44);
     margin-top: -0.9rem;
     margin-bottom: -5.5rem;
@@ -22,11 +22,15 @@
 }
 
 .first-block-left h2{
-    font-size: 4rem;
-    font-weight: bold;
+    font-size: 3.5rem;
+    font-weight: 300;
+    width: fit-content;
     margin-block-start: 0 !important;
     margin-block-end: 0 !important;
-    margin: 2rem 0 0 0;
+    margin: 2rem 0 2rem -2rem !important;
+    background-color: #026D35;
+    color: white;
+    padding: 0 1rem;
 }
 
 .first-block-left p{
@@ -40,20 +44,30 @@
 
 .first-block-right img{
     width: 100%;
+    max-width: 300px;
+    transform: rotateZ(15deg);
+    -webkit-transform: rotateZ(15deg);
+    -moz-transform: rotateZ(15deg);
+    -ms-transform: rotateZ(15deg);
+    -o-transform: rotateZ(15deg);
 }
 
 .second-block{
-    background-color: #f7f8fa;
+    background-color: #A7CE3A;
     -webkit-transform: skew(0deg, -5deg);
     transform: skew(0deg, -5deg);
 }
 
 .second-block-title{
-    color: #95d329;
+    color: white;
     font-size: 2rem;
     transform: skew(0deg, 5deg);
     margin: 0;
     padding: 6rem 0 0;
+    -webkit-transform: skew(0deg, 5deg);
+    -moz-transform: skew(0deg, 5deg);
+    -ms-transform: skew(0deg, 5deg);
+    -o-transform: skew(0deg, 5deg);
 }
 
 .second-block-content{
@@ -61,16 +75,24 @@
     flex-wrap: wrap;
 }
 
+.feature h2, .feature p{
+    color: white;
+}
+
 .reasons-container-us{
     transform: skew(0deg, 5deg);
     margin: 0;
     padding: 0;
+    -webkit-transform: skew(0deg, 5deg);
+    -moz-transform: skew(0deg, 5deg);
+    -ms-transform: skew(0deg, 5deg);
+    -o-transform: skew(0deg, 5deg);
 }
 
 .about-features{
     display: flex;
     padding: 0 10rem;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 .third-block{
@@ -80,7 +102,7 @@
 }
 
 .third-block-left{
-    padding: 4rem 0rem 0 8rem;
+    padding: 4rem 0rem 2rem 8rem;
     text-align: left;
 }
 
@@ -95,7 +117,7 @@
 }
 
 .fourth-block{
-    background-color: #f7f8fa;
+    background-color: #ECEEF2;
     -webkit-transform: skew(0deg, -5deg);
     transform: skew(0deg, -5deg);
 }
@@ -125,7 +147,7 @@
     font-weight: bold;
     margin-block-start: 0 !important;
     margin-block-end: 0 !important;
-    margin: 2rem 0 0 0;
+    margin: 2rem 0 !important;
 }
 
 .wallet-block-left p{
@@ -188,21 +210,6 @@
 
 .goTo-about-us{
     transform: skew(0deg, 5deg);
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3rem 0;
-}
-
-.goTo-about-us h2{
-    font-size: 2rem;
-    margin-block-start: 0 !important;
-    margin-block-end: 0 !important;
-}
-
-.goTo-about-us h3{
-    font-size: 1.3rem;
 }
 
 @media(max-width: 1280px){

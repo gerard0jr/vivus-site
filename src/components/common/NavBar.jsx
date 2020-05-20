@@ -20,12 +20,12 @@ const NavBar = ({isLogged, location, setLocation}) => {
     }, [])
 
     return (
-        <Media query={{ maxWidth: 649 }}>
+        <Media query={{ maxWidth: 990 }}>
         {matches =>
           matches ? (
             <div  className="flex-horizontal-new navbar" style={location === 'manteinance' ? {padding: '1rem 6rem'} : null}>
                 {location === 'manteinance' ? <img width='300px' src='/img/navbar/logo-vivus-mexico.svg' alt='vivus logo'/> : <Link onClick={() => setLocation('home')} to='/'><img width='300px' src={tempScreen ? '/img/navbar/logo-vivus-mexico.svg' : location === 'home' ? '/img/navbar/logo-vivus-mexico.svg' : '/img/navbar/logo-vivus-mexico.svg'} alt='vivus logo'/></Link>}
-                <div style={tempScreen ? {fontSize:'2rem', color: '#ff6b00', marginTop: '10px'} : location === 'home' ? {fontSize:'2rem', color: 'white', marginTop: '10px'} : {fontSize:'2rem', color: 'black', marginTop: '20px'}}>
+                <div style={tempScreen ? {fontSize:'2rem', color: '#ff6b00', marginTop: '10px'} : location === 'home' ? {fontSize:'2rem', color: 'gray', marginTop: '10px'} : {fontSize:'2rem', color: 'black', marginTop: '20px'}}>
                     <FontAwesomeIcon onClick={() => setShowMenu(!showMenu)} icon={faBars}/>
                 </div>
                 {isLogged && location !== 'home' && location !== 'works' && location !== 'app' && location !== 'blog' 
@@ -56,6 +56,9 @@ const NavBar = ({isLogged, location, setLocation}) => {
                 <ul className={location === 'home' && showMenu  ? 'flex-menu-home flex-menu-home-mobile mobile-open' : location === 'home' && !showMenu ? 'flex-menu-home flex-menu-home-mobile' : showMenu ? 'flex-menu-section flex-menu-mobile mobile-open' : 'flex-menu-section flex-menu-mobile'}>
                     <li className={location === 'works' ? 'active-go' : null}>
                         {location === 'manteinance' ? null : <Link onClick={() => {setLocation('works'); setShowMenu(false)}} to='/como-funciona'>¿Cómo funciona?</Link>}
+                    </li>
+                    <li className={location === 'blog' ? 'active-go' : null}>
+                        {location === 'manteinance' ? null : <Link onClick={() => {setLocation('blog'); setShowMenu(false)}} to='/blog'>Sobre Nosotros</Link>}
                     </li>
                     <li className={location === 'us' ? 'active-go' : null}>
                         {location === 'manteinance' ? null : <Link onClick={() => {setLocation('us'); setShowMenu(false)}} to='/us'>Sobre Nosotros</Link>}
@@ -98,6 +101,9 @@ const NavBar = ({isLogged, location, setLocation}) => {
                     {console.log(tempScreen)}
                     <li className={location === 'works' ? 'active-go' : null}>
                         {location === 'manteinance' ? null : <Link style={tempScreen ? null : null} onClick={() => setLocation('works')} to='/como-funciona'>¿Cómo funciona?</Link>}
+                    </li>
+                    <li className={location === 'blog' ? 'active-go' : null}>
+                        {location === 'manteinance' ? null : <Link style={tempScreen ? null : null} onClick={() => setLocation('blog')} to='/blog'>Blog</Link>}
                     </li>
                     <li className={location === 'us' ? 'active-go' : null}>
                         {location === 'manteinance' ? null : <Link style={tempScreen ? null : null} onClick={() => setLocation('us')} to='/us'>Sobre Nosotros</Link>}

@@ -47,7 +47,7 @@ const PasswordRecoveryMobile = (props) => {
     return (
         <div className='app-container'>
           <div className='forgot-layout' style={{backgroundColor: 'white', textAlign: 'center'}}>
-            <h2 style={{fontWeight: 'bold', backgroundColor: '#fd6b21', color: 'white', padding: '3rem'}}>Ingresa tu número celular para recuperar el acceso</h2>
+            <h2 style={{fontWeight: 'bold', backgroundColor: '#A3CD3A', color: 'white', padding: '3rem'}}>Ingresa tu número celular para recuperar el acceso</h2>
             <div style={{display: 'block', justifyContent: 'center', alignItems: 'center'}}>                
                 <div style={{margin: '2rem 1rem'}}>
                     <div style={{margin: '2rem 0'}}>

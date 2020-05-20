@@ -332,7 +332,7 @@ const Cargo = (props) => {
                         </div>
                     </div>
                     <div className= 'contrato-bottom'>
-                        <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : null}>{loadingConfirm ? <BallClipRotate loading color={'#fd6b21'}/> : 'CONTINUAR'}</p>
+                        <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : null}>{loadingConfirm ? <BallClipRotate loading color={'#A3CD3A'}/> : 'CONTINUAR'}</p>
                         {serverError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente(400, bad request)</p> : null}
                         <Link style={{color: 'black', fontWeight: 'bold', textDecoration: 'underline'}} to='/dashboard'>Modificar solicitud de préstamo</Link>
                     </div>

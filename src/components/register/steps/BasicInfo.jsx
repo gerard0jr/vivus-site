@@ -365,7 +365,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                 <p style={{fontWeight: 'bold'}}><strong>Correo electrónico</strong></p>
                 <div className='validation-email-register'>
                     <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='eMail' value={data.eMail}/>
-                    {validEmail || customer ? null : loading ? <div style={{backgroundColor: '#fd6b21', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}><BallBeat loading color={'white'}/></div> : <small onClick={checkUser} style={{backgroundColor: '#fd6b21', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer'}}>Verificar</small>}
+                    {validEmail || customer ? null : loading ? <div style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}><BallBeat loading color={'white'}/></div> : <small onClick={checkUser} style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer'}}>Verificar</small>}
                 </div>
                 {customerInvalid ? <><small style={{color: 'red', marginLeft: '1rem'}}>Correo electrónico incorrecto</small><br/></> : null}
                 <small>Para mantenerte informado sobre el progreso de tu solicitud</small>

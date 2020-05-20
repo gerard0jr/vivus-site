@@ -11,7 +11,7 @@
   background-color: #cccccc;
 }
 .rangeslider .rangeslider__handle {
-    background: #fd6b21;
+    background: #A3CD3A;
     cursor: pointer;
     display: inline-block;
     position: absolute;
@@ -230,7 +230,7 @@
 }
 
 .boton-periodicidad:hover {
-  background-color: #fd6b21 !important;
+  background-color: #A3CD3A !important;
   color: white;
 }
 
@@ -239,7 +239,7 @@
 }
 
 .period-active{
-    background-color: #fd6b21 !important;
+    background-color: #A3CD3A !important;
     color: white !important;
 }
 
@@ -315,6 +315,10 @@
             align-items: center;
 }
 
+.info-row strong{
+  font-size: 14px;
+}
+
 .cat-prom{
     margin: 1rem 0;
     text-align: left;
@@ -381,5 +385,17 @@
       top: 9rem !important;
       margin: 0 auto !important;
       right: auto !important;
+  }
+}
+
+@media(max-width: 375px){
+  .calculator{
+    width: 320px;
+  }
+  .slider-steps{
+    display: none;
+  }
+  .title-winput{
+    padding: 0;
   }
 }

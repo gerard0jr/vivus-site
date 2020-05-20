@@ -111,12 +111,12 @@
 }
 
 .forgot-layout a{
-    color: #fd6b21;
+    color: #A3CD3A;
     text-decoration: underline;
 }
 
 .btn-minimal-width{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
 }
 
 .btn-forgot{
@@ -168,13 +168,13 @@
 }
 
 .select-option:hover{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     color: white;
     transition: all 200ms ease;
 }
 
 .active{
-    background-color: #fd6b21 !important;
+    background-color: #A3CD3A !important;
     color: white !important;
 }
 
@@ -262,7 +262,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: #fd6b21 1px solid;
+    border: #A3CD3A 1px solid;
     border-radius: 5px;
     padding: 1rem;
     min-height: 191px;
@@ -286,7 +286,7 @@
 }
 
 .importe-en-uso .importe-letra{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     color: white;
     padding: 1.8rem 10px;
 }
@@ -306,7 +306,7 @@
     padding: 10px;
     flex-direction: column;
     min-width: 250px;
-    border: #fd6b21 1px solid;
+    border: #A3CD3A 1px solid;
     border-radius: 5px;
     padding: 1rem;
     min-height: 191px;
@@ -326,15 +326,15 @@ small{
 
 .avance{
     background-color: white; 
-    border: #fd6b21 1px solid;
+    border: #A3CD3A 1px solid;
     border-radius: 5px;
     padding: 1rem;
     height: 191px;
 }
 
 .edo-cuenta{
-    background-color: #fd6b21;
-    border: #fd6b21 1px solid;
+    background-color: #A3CD3A;
+    border: #A3CD3A 1px solid;
     border-radius: 5px;
     padding: 1rem 0 0;
     height: 270px;
@@ -356,8 +356,8 @@ small{
 }
 
 .edo-cuenta-empty{
-    background-color: #fd6b21;
-    border: #fd6b21 1px solid;
+    background-color: #A3CD3A;
+    border: #A3CD3A 1px solid;
     border-radius: 5px;
     padding: 1rem 0 0;
 }
@@ -501,7 +501,7 @@ th, td {
 }
 
 .resume-dashboard-red{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     color: white;
     text-align: left;
     margin-left: 2rem;
@@ -684,7 +684,7 @@ th, td {
 }
 
 .help-banner{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     padding: 3rem 1rem;
     border-radius: 20px;
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.5);
@@ -708,7 +708,7 @@ th, td {
 .pagar-container{
     display: flex;
     flex-direction: column;
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     border-radius: 20px 0 0 20px;
     padding: 1rem;
     text-align: justify;
@@ -816,7 +816,7 @@ th, td {
 }
 
 .liquidate-resume{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     padding: 1rem;
     border-radius: 20px;
     color: white;
@@ -838,7 +838,7 @@ th, td {
 }
 
 .react-tabs__tab-list {
-    border-bottom: 1px solid #fd6b21 !important;
+    border-bottom: 1px solid #A3CD3A !important;
 }
 
 .react-tabs__tab{
@@ -848,8 +848,8 @@ th, td {
 }
 
 .react-tabs__tab--selected {
-    background: #fd6b21 !important;
-    border-color: #fd6b21 !important;
+    background: #A3CD3A !important;
+    border-color: #A3CD3A !important;
     color: white !important;
 }
 
@@ -928,7 +928,7 @@ th, td {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     border-radius: 20px 0 0 20px;
     padding: 1rem;
     text-align: justify;
@@ -1057,7 +1057,7 @@ th, td {
 }
 
 .move-select-button{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     outline: 1px solid white;
     font-size: 1rem !important;
     color: white !important;
@@ -1094,7 +1094,7 @@ th, td {
 }
 
 .tabs-underlined{
-    border-bottom: 1px solid #fd6b21;
+    border-bottom: 1px solid #A3CD3A;
     list-style-type: none;
     padding: 0.5rem;
     cursor: pointer;
@@ -1138,7 +1138,7 @@ th, td {
 .new-loan{
     display: flex;
     padding: 0.5rem;
-    border: 1px solid #fd6b21;
+    border: 1px solid #A3CD3A;
     margin: 0 1rem;
     justify-content: center;
 }
@@ -1236,7 +1236,7 @@ th, td {
 .profile-edit-button{
     width: 120px !important;
     min-width: 120px !important;
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     cursor: pointer;
 }
 
@@ -1310,7 +1310,7 @@ th, td {
 
 .top-friends{
     color: white;
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     padding: 2rem;
     border-radius: 20px 20px 0 0;
 }
@@ -1331,7 +1331,7 @@ th, td {
 }
 
 .bottom-friends a{
-    color: #fd6b21;
+    color: #A3CD3A;
 }
 
 .accordion__button {
@@ -1418,7 +1418,7 @@ th, td {
 }
 
 .return-error-button{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     font-size: 1.5rem;
     padding: 1rem 2rem;
     border-radius: 10px;
@@ -1479,7 +1479,7 @@ th, td {
 }
 
 .left-loan .rangeslider-horizontal .rangeslider__handle{
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
     background-blend-mode: unset;
 }
 
@@ -1523,26 +1523,26 @@ th, td {
 }
 
 .left-loan .rangeslider-horizontal .rangeslider__fill {
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
 }
 
 .boton-periodicidad-loan{
     background-color: white!important;
-    color: #fd6b21!important;
+    color: #A3CD3A!important;
     font-weight: 400;
     padding: 1rem 2rem;
     border-radius: 7px;
     margin: .5rem;
     cursor: pointer;
-    border: 1px solid #fd6b21!important;
-    -webkit-border-radius: #fd6b21 !important;
-    -moz-border-radius: #fd6b21 !important;
-    -ms-border-radius: #fd6b21 !important;
-    -o-border-radius: #fd6b21 !important;
+    border: 1px solid #A3CD3A!important;
+    -webkit-border-radius: #A3CD3A !important;
+    -moz-border-radius: #A3CD3A !important;
+    -ms-border-radius: #A3CD3A !important;
+    -o-border-radius: #A3CD3A !important;
 }
 
 .boton-periodicidad-loan:hover, .period-active-loan{
-    background-color: #fd6b21!important;
+    background-color: #A3CD3A!important;
     color: white!important;
     font-weight: 600;
 
@@ -1666,9 +1666,6 @@ th, td {
         -moz-border-radius: 0 0 20px 20px;
         -ms-border-radius: 0 0 20px 20px;
         -o-border-radius: 0 0 20px 20px;
-    }
-    .step{
-        margin-left: 65px;
     }
 }
 

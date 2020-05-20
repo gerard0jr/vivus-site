@@ -243,7 +243,7 @@ export const Verification = ({props, setCurrentStep}) => {
                 </div>
                 {nipError ? <><small style={{color: 'red'}}>NIP incorrecto</small><br/></> : null}
                 <small>Sólo espera un momento para recibir nuestro mensaje de texto.</small> <br/>
-                <small>{sentBySMS ? <strong>Reenviado</strong> : <strong onClick={sendSMS} style={{cursor: 'pointer', color: '#fd6b21'}}>Reenviar</strong>}</small><br/>
+                <small>{sentBySMS ? <strong>Reenviado</strong> : <strong onClick={sendSMS} style={{cursor: 'pointer', color: '#A3CD3A'}}>Reenviar</strong>}</small><br/>
                 <small>En caso de no recibirlo en 10 min por favor llama a (0155) 6717 0750</small>
             </div>
             <div onClick={handleSubmit} style={{width: '200px'}} className='btn-register'>{loading ? <BallBeat loading color={'white'}/> : 'CONTINUAR'}</div>

@@ -65,7 +65,7 @@ const PasswordSet = (props) => {
     return (
         <div className='app-container'>
           <div className='forgot-layout' style={{backgroundColor: 'white', textAlign: 'center'}}>
-            <h2 style={{fontWeight: 'bold', backgroundColor: '#fd6b21', color: 'white', padding: '3rem'}}>Ingresa tu nueva contraseña</h2>
+            <h2 style={{fontWeight: 'bold', backgroundColor: '#A3CD3A', color: 'white', padding: '3rem'}}>Ingresa tu nueva contraseña</h2>
             <div style={{margin: '2rem 1rem'}}>
               <div style={{margin: '3rem 0'}}>			
                 <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type={showPassword ? 'text' : 'password'} placeholder="Ingresa una nueva contraseña" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />

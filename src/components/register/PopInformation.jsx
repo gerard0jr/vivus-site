@@ -40,7 +40,7 @@ export const PopInformation = ({open, close, data, accept, amortizationTable}) =
                     </table>
                 </> 
                 : 
-                <h2>Cargando...<BallClipRotate loading color='#fd6b21'/></h2>
+                <h2>Cargando...<BallClipRotate loading color='#A3CD3A'/></h2>
                 }
             </div>
         </Popup>

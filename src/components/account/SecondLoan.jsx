@@ -440,9 +440,9 @@ export const SecondLoan = (props) => {
                                 <div style={{margin: '0 auto'}} className='amortization-button'>
                                     <div style={{textAlign: 'left', padding: '0 1rem'}}>
                                         <p>Tabla de amortización</p>
-                                        <p onClick={() => setOpen(true)} style={{color: '#fd6b21', cursor: 'pointer'}}>Abrir <FontAwesomeIcon icon={faDownload}/></p>
+                                        <p onClick={() => setOpen(true)} style={{color: '#A3CD3A', cursor: 'pointer'}}>Abrir <FontAwesomeIcon icon={faDownload}/></p>
                                     </div>
-                                    <div style={{backgroundColor: '#f1f1f1', padding: '1rem', fontSize: '1.5rem', color: '#fd6b21', borderRadius: '0 10px 10px 0'}}>
+                                    <div style={{backgroundColor: '#f1f1f1', padding: '1rem', fontSize: '1.5rem', color: '#A3CD3A', borderRadius: '0 10px 10px 0'}}>
                                         <FontAwesomeIcon icon={faTable}/>
                                     </div>
                                 </div>

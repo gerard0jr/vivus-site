@@ -196,7 +196,7 @@ const FirstTimeDash = (props) => {
                                         needleColor="red"
                                         startColor="#8e3c12"
                                         segments={plazo}
-                                        endColor="#fd6b21"
+                                        endColor="#A3CD3A"
                                         maxSegmentLabels={5}
                                         forceRender
                                     />

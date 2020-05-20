@@ -119,7 +119,7 @@ const More = (props) => {
     }, [allowed])
 
     return (
-        <div style={!allowed ? {backgroundColor: '#FD6B21'} : null} className='more-container'>
+        <div style={!allowed ? {backgroundColor: '#A3CD3A'} : null} className='more-container'>
             {
                 
                 allowed ? 
@@ -229,7 +229,7 @@ const More = (props) => {
                     </div>
                 </>
                 :
-                <div style={{backgroundColor: '#FD6B21', color: 'white',textAlign: 'left'}}>
+                <div style={{backgroundColor: '#A3CD3A', color: 'white',textAlign: 'left'}}>
                     <div className='move-titles'>
                         <p style={{fontSize: '2.5rem'}}>Es un excelente beneficio</p>
                         <p className='move-medium-size bold-style'>Para extender el monto de tu</p>

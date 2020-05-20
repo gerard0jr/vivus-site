@@ -1,7 +1,7 @@
 .blog-sections{
     display: flex;
     justify-content: center;
-    background-color: #fd6b21;
+    background-color: #A3CD3A;
 }
 
 .blog-sections ul{
@@ -39,7 +39,7 @@
 
 .entrie img{
     width: 100%;
-    border-bottom: 10px solid #fd6b21;
+    border-bottom: 10px solid #A3CD3A;
 }
 
 .entrie-text{
@@ -82,6 +82,7 @@
     width: 65%;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .left-blog-container img{
@@ -100,6 +101,11 @@
     overflow: hidden;
     padding: 1rem;
     text-align: left;
+    cursor: pointer;
+}
+
+.text-blog-container:hover{
+    background-color: lightgray;
 }
 
 .absolute-text{
@@ -122,6 +128,74 @@
     width: 65%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
+}
+
+.article-container{
+    display: flex;
+    margin: 2rem;
+    justify-content: center;
+}
+
+.article-container h2{
+    margin-bottom: 30px;
+    font-size: 2.3rem;
+    text-align: left;
+    padding: 0 2rem;
+}
+
+.article-image{
+    height: 350px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.article{
+    width: 66.66%;
+    display: flex;
+    flex-direction: column;
+    max-width: 620px;
+    background-color: white;
+}
+
+.article-content{
+    text-align: left;
+    padding: 0 2rem;
+}
+
+.article-content p{
+    margin-bottom: 20px !important;
+}
+
+.related-box{
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    background-color: white;
+    margin-left: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 0;
+}
+
+.related-post{
+    cursor: pointer;
+    margin: .5rem 0;
+}
+
+.related-post:hover{
+    background-color: lightgray;
+}
+
+.related-post img{
+    width: 90%;
+    margin-top: 0.5rem;
+}
+.related-post p{
+    width: 90%;
+    margin: 5px auto 0.5rem !important;
+    font-weight: bold;
 }
 
 @media(max-width: 750px){

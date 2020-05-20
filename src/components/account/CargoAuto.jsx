@@ -162,13 +162,13 @@ const CargoAuto = (props) => {
                     </div>
                     <div style={{marginLeft:'2rem'}}>
                         <p>Solicito y autorizo a 4Finance, S.A. de C.V. SOFOM ENR realice cargos periódicos para el pago de mi préstamo de forma 
-                            <input value={data && data.frequence} type="text" style={{backgroundColor: '#fd6b21', color: 'white'}}/> a mi cuenta CLABE y/o tarjeta bancaria de 
-                            <input value={data && data.bank} type="text" style={{backgroundColor: '#fd6b21', color: 'white'}} /> con número 
-                            <input type='text' value={data && data.bankAccountNumber} style={{backgroundColor: '#fd6b21', color: 'white'}} /> por un importe de 
-                            <input type="text" value={data && data.firstPaymentAmount} style={{backgroundColor: '#fd6b21', color: 'white'}} /> pesos m.n.</p>
-                        <p>Esta autorización vence el <input type="text" value={data && momentEs(data.dueDate).format('D/MMM/Y')} style={{backgroundColor: '#fd6b21', color: 'white'}} /> fecha de mi última cuota de pago o hasta que quede liquidado en su totalidad dicho préstamo.</p>
+                            <input value={data && data.frequence} type="text" style={{backgroundColor: '#A3CD3A', color: 'white'}}/> a mi cuenta CLABE y/o tarjeta bancaria de 
+                            <input value={data && data.bank} type="text" style={{backgroundColor: '#A3CD3A', color: 'white'}} /> con número 
+                            <input type='text' value={data && data.bankAccountNumber} style={{backgroundColor: '#A3CD3A', color: 'white'}} /> por un importe de 
+                            <input type="text" value={data && data.firstPaymentAmount} style={{backgroundColor: '#A3CD3A', color: 'white'}} /> pesos m.n.</p>
+                        <p>Esta autorización vence el <input type="text" value={data && momentEs(data.dueDate).format('D/MMM/Y')} style={{backgroundColor: '#A3CD3A', color: 'white'}} /> fecha de mi última cuota de pago o hasta que quede liquidado en su totalidad dicho préstamo.</p>
                         <p>Estoy enterado de que en cualquier momento podré solicitar la cancelación de la presente domiliciación sin costo a mi cargo.</p>
-                        <p>Atentamente. <input type="text" value={data && data.customerName} style={{backgroundColor: '#fd6b21', color: 'white', width: '300px'}} /></p>
+                        <p>Atentamente. <input type="text" value={data && data.customerName} style={{backgroundColor: '#A3CD3A', color: 'white', width: '300px'}} /></p>
                     </div>
                 </div>
                 <p className={auth ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={goTo}>CONTINUAR</p>

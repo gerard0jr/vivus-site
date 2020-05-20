@@ -86,7 +86,7 @@ const PasswordRecoveryEmailConfirmation = (props) => {
     return (
         <div className='app-container'>
           <div className='forgot-layout' style={{backgroundColor: 'white', textAlign: 'center'}}>
-            <h2 style={{fontWeight: 'bold', backgroundColor: '#fd6b21', color: 'white', padding: '3rem'}}>¡Enviado! <br/>Revisa tu email</h2>
+            <h2 style={{fontWeight: 'bold', backgroundColor: '#A3CD3A', color: 'white', padding: '3rem'}}>¡Enviado! <br/>Revisa tu email</h2>
             <img src="/img/vivus-recover-sent.png" alt="user" style={{width: '96px'}} />
 			      <p>Hemos enviado un link para que puedas recuperar tu acceso a tu email {eMail}</p>
             <div style={{margin: '2rem 1rem'}}>

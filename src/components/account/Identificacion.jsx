@@ -403,7 +403,7 @@ const Identificacion = (props) => {
                             </div>
                         </div>
                         <div style={{margin: '1rem 0'}}>
-                            <p className='btn-minimal-width' style={{backgroundColor: 'white', outline: '1px solid #fd6b21', color: '#fd6b21', margin: '1rem 0'}}>ENVIARÉ MIS DOCUMENTOS</p>
+                            <p className='btn-minimal-width' style={{backgroundColor: 'white', outline: '1px solid #A3CD3A', color: '#A3CD3A', margin: '1rem 0'}}>ENVIARÉ MIS DOCUMENTOS</p>
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <p>Por favor asegúrate de enviarnos tus documentos.</p>
