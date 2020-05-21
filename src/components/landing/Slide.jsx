@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const Slide = ({review}) => {
+export const Slide = ({review, key}) => {
     return (
-        <div className='ekomi-container'>
+        <div key={key} className='ekomi-container'>
             <div className='comment-ekomi'>{review}</div>
             <div className="rating-star"/>
         </div>

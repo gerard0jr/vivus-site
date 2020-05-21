@@ -128,16 +128,16 @@ const Calculator = (props) => {
     return (
         <>
             {
-            // config === 'error' ?
-            //     <div className='calculator'>
-            //         <div className='slider-container-go'>
-            //             <FontAwesomeIcon icon={faExclamationTriangle}/>
-            //         </div>
-            //         <div className='calculator-info'>
-            //             <h2 style={{textAlign: 'center'}}>Servidor no disponible, intenta más tarde</h2>
-            //         </div>
-            //     </div> 
-            // : 
+            config === 'error' ?
+                <div className='calculator'>
+                    <div className='slider-container-go'>
+                        <FontAwesomeIcon icon={faExclamationTriangle}/>
+                    </div>
+                    <div className='calculator-info'>
+                        <h2 style={{textAlign: 'center'}}>Servidor no disponible, intenta más tarde</h2>
+                    </div>
+                </div> 
+            : 
             config !== null && fecha !== null ?
             <div className='calculator'>
             {/* <div style={props.style ? {top: '0'} : null} className='calculator'> */}

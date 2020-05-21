@@ -17,7 +17,7 @@ export const RatingCarousel = () => {
       }
     return (
         <Slider {...settings}>
-            {ratings.map(review => <Slide {...review}/>)}
+            {ratings.map((review, ix) => <Slide key={ix} {...review}/>)}
         </Slider>
     )
 }

@@ -71,7 +71,7 @@ const Move = ({setFlux}) => {
                     {
                         notAllowedReasons.length > 0 ?
                         notAllowedReasons.map(reason => 
-                            <div className='check-requirement'>
+                            <div key={reason.reason} className='check-requirement'>
                                 <p>{reason.reason}</p>
                             </div>
                         )

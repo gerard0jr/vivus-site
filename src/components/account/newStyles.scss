@@ -1667,6 +1667,9 @@ th, td {
         -ms-border-radius: 0 0 20px 20px;
         -o-border-radius: 0 0 20px 20px;
     }
+    .app-container{
+        margin-top: 1rem;
+    }
 }
 
 @media(max-width: 920px){
@@ -1799,9 +1802,6 @@ th, td {
 }
 
 @media(max-width: 650px){
-    .app-container{
-        margin-top: 1rem;
-    }
     .manteinance-page{
         margin: 0.5rem 3rem 2rem;
     }

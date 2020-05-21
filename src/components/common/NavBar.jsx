@@ -58,7 +58,7 @@ const NavBar = ({isLogged, location, setLocation}) => {
                         {location === 'manteinance' ? null : <Link onClick={() => {setLocation('works'); setShowMenu(false)}} to='/como-funciona'>¿Cómo funciona?</Link>}
                     </li>
                     <li className={location === 'blog' ? 'active-go' : null}>
-                        {location === 'manteinance' ? null : <Link onClick={() => {setLocation('blog'); setShowMenu(false)}} to='/blog'>Sobre Nosotros</Link>}
+                        {location === 'manteinance' ? null : <Link onClick={() => {setLocation('blog'); setShowMenu(false)}} to='/blog'>Blog</Link>}
                     </li>
                     <li className={location === 'us' ? 'active-go' : null}>
                         {location === 'manteinance' ? null : <Link onClick={() => {setLocation('us'); setShowMenu(false)}} to='/us'>Sobre Nosotros</Link>}
@@ -98,7 +98,6 @@ const NavBar = ({isLogged, location, setLocation}) => {
                 </ul>
                 :
                 <ul className={location === 'home' ? 'flex-menu-home' : 'flex-menu-section'}>
-                    {console.log(tempScreen)}
                     <li className={location === 'works' ? 'active-go' : null}>
                         {location === 'manteinance' ? null : <Link style={tempScreen ? null : null} onClick={() => setLocation('works')} to='/como-funciona'>¿Cómo funciona?</Link>}
                     </li>
