@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { getToken, getOXXOPaymentReference } from '../../../../../services/api'
 import { BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const CashOption = ({moveImgWidth, extensionReference}) => {
     const [loading, setLoading] = useState(false)

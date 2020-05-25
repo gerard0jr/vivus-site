@@ -7,10 +7,10 @@ import cookie from 'react-cookies'
 import { momentEs } from '../../services/moment'
 import { withRouter, Link } from 'react-router-dom'
 import { PopInformation } from '../register/PopInformation'
-import { faTable, faDownload } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faTable, faDownload } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const idProduct = 2
+const idProduct = 1
 
 const RegisterCalculator = ({proposalChange, props}) => {
 
@@ -18,7 +18,7 @@ const RegisterCalculator = ({proposalChange, props}) => {
     const [monto, setMonto] = useState(null)
     const [firstPaymentAmount, setFirstPaymentAmount] = useState(null)
     const [plazo, setPlazo] = useState(null)
-    const [periodicidad, setPeriodicidad] = useState(2)
+    const [periodicidad, setPeriodicidad] = useState(1)
     const [cat, setCat] = useState(null)
     const [interesIVA, setInteresIVA] = useState(null)
     const [fecha, setFecha] = useState(null)
@@ -59,15 +59,15 @@ const RegisterCalculator = ({proposalChange, props}) => {
         setPlazo(val)
     }
 
-    const updatePeriodicidad = val => {
-        if(val === 2){
-            if(plazo > 6) setPlazo(6)
-        }
-        if(val === 1){
-            if(plazo < 4) setPlazo(4)
-        }
-        setPeriodicidad(val)
-    }
+    // const updatePeriodicidad = val => {
+    //     if(val === 2){
+    //         if(plazo > 6) setPlazo(6)
+    //     }
+    //     if(val === 1){
+    //         if(plazo < 4) setPlazo(4)
+    //     }
+    //     setPeriodicidad(val)
+    // }
 
     const getInitConfig = async () => {
         let validToken = await cookie.load('token')
@@ -91,9 +91,9 @@ const RegisterCalculator = ({proposalChange, props}) => {
                     }
                     setRegisterData({sliderConfig:config})
                     setMonto(data.defaultAmount)
-                    setPlazo(data.frequencies[1].frequencyTerm.defaultValue)
-                    simulate(data.defaultAmount, 2, data.frequencies[1].frequencyTerm.defaultValue)
-                    sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:2, plazo:data.frequencies[1].frequencyTerm.defaultValue}))
+                    setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
+                    simulate(data.defaultAmount, 2, data.frequencies[0].frequencyTerm.defaultValue)
+                    sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:1, plazo:data.frequencies[0].frequencyTerm.defaultValue}))
                 }
             })
             .catch(err => console.log(err))
@@ -205,20 +205,20 @@ const RegisterCalculator = ({proposalChange, props}) => {
                                 onChange={val => updateMonto(val)}
                             />
                         </div>
-                        <hr style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem'}}/>
-                        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem'}}>
+                        <hr style={{width: '100%', border: '0.5px solid #FAFAFA', marginTop: '3rem'}}/>
+                        {/* <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem'}}>
                             <p style={{marginBottom: '1rem', color: 'white'}}>Periodicidad de pago</p>
                             <div style={{display: 'flex', justifyContent: 'space-evenly', margin: '0.5rem'}}>
                                 <p className={periodicidad === 1 ? 'boton-periodicidad period-active' : 'boton-periodicidad'} onClick={() => updatePeriodicidad(1)}>Semanal</p>
                                 <p className={periodicidad === 2 ? 'boton-periodicidad period-active' : 'boton-periodicidad'} onClick={() => updatePeriodicidad(2)}>Quincenal</p>
                             </div>
-                        </div>
-                        <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
+                        </div> */}
+                        <hr style={{width: '100%', border: '0.5px solid #737373', opacity: 0}}/>
                         <div className='title-winput-register'>
                             <p>Plazo</p>
                             <div className="slider-input-wrapper">
                                 <input className="slider-input" type="text" value={plazo} readOnly/>
-                                <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' semanas'}</span>
+                                <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' días'}</span>
                             </div>
                         </div>
                         <div className='slider'>
@@ -266,7 +266,7 @@ const RegisterCalculator = ({proposalChange, props}) => {
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row-register'>
                         <p>Plazo</p>
-                        <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'semanas'}</p>
+                        <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'días'}</p>
                     </div>
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row-register'>
@@ -292,7 +292,7 @@ const RegisterCalculator = ({proposalChange, props}) => {
                         Calculadora para fines informativos y de comparación. <br/><br/>
                         Nunca solicitamos anticipos, cuotas, pago de pólizas o cualquier otro concepto para otorgarte un préstamo.
                     </div>
-                    <div className='amortization-button'>
+                    {/* <div className='amortization-button'>
                         <div style={{textAlign: 'left', padding: '0 1rem'}}>
                             <p>Tabla de amortización</p>
                             <p onClick={() => setOpen(true)} style={{color: '#A3CD3A', cursor: 'pointer'}}>Abrir <FontAwesomeIcon icon={faDownload}/></p>
@@ -300,7 +300,7 @@ const RegisterCalculator = ({proposalChange, props}) => {
                         <div style={{backgroundColor: '#f1f1f1', padding: '1rem', fontSize: '1.5rem', color: '#A3CD3A', borderRadius: '0 10px 10px 0'}}>
                             <FontAwesomeIcon icon={faTable}/>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='register-qualification'>
                         <h2>Para calificar, necesitas:</h2>
                         <ul>

@@ -37,14 +37,14 @@ const Options = ({user, setSection}) => {
                     <p className='pfield-title'>Métodos de pago</p>
                     {/* <p className='pfield-content'>Cuenta Bancaria</p> */}
                 </div>
-                <p onClick={() => {}} className='btn-minimal-width btn-full-width profile-edit-button-blocked'>EDITAR</p>
-                {/* <p onClick={() => setSection('payment')} className='btn-minimal-width btn-full-width profile-edit-button'>EDITAR</p> */}
+                {/* <p onClick={() => {}} className='btn-minimal-width btn-full-width profile-edit-button-blocked'>EDITAR</p> */}
+                <p onClick={() => setSection('payment')} className='btn-minimal-width btn-full-width profile-edit-button'>EDITAR</p>
             </div>
-            <hr/>
+            {/* <hr/>
             <div className='profile-field'>
                 <p className='pfield-title'>Preferencias</p>
                 <div style={{display: 'flex'}}><input style={{marginRight: '1rem'}} type='checkbox'/><p className='pfield-content'>Recibir promociones y ofertas</p></div>
-            </div>
+            </div> */}
         </div>
     )
 }

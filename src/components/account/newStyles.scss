@@ -1164,7 +1164,7 @@ th, td {
 
 .profile-top-home{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 2rem;
 }
@@ -1294,10 +1294,22 @@ th, td {
 
 .login-container{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
 
-.leftLogin, .rightLogin{
+.rightLogin{
     width: 50%;
+    max-width: 400px;
+}
+
+.leftLogin{
+    width: 50%;
+    text-align: left;
+    max-width: 480px;
+    padding: 2rem 0;
+    margin-right: 100px;
 }
 
 .friends-container{
@@ -1628,6 +1640,10 @@ th, td {
     .left-manteinance, .right-manteinance{
         width: auto;
     }
+    
+    .leftLogin{
+        margin-right: 20px;
+    }
 }
 
 @media(max-width: 990px){
@@ -1690,6 +1706,20 @@ th, td {
     }
     .dash-box{
         margin-bottom: 1rem;
+    }
+    .login-container{
+        flex-direction: column;
+    }
+    
+    .rightLogin{
+        width: 100%;
+        margin-bottom: 4rem;
+    }
+    
+    .leftLogin{
+        width: 100%;
+        padding: 2rem 0 1rem;
+        margin-right: 0;
     }
 }
 
@@ -1930,5 +1960,9 @@ th, td {
     }
     .resume-dashboard-red{
         min-width: auto;
+    }
+    .friends-container{
+        width: 95%;
+        margin: 0 auto;
     }
 }

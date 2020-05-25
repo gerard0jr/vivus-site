@@ -3,7 +3,7 @@ import { getToken, getCustomerByMail, getQuestionnaire, answerQuestionnaire } fr
 import { withRouter } from 'react-router-dom'
 import { BallBeat, BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const Questionnaire = (props) => {
 

@@ -4,7 +4,7 @@ import cookie from 'react-cookies'
 import { getToken, recoverPassword, getCustomerByMail, sendCodeBySMS } from '../../services/api'
 import { BallBeat } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const NewForgotPassword = (props) => {
 

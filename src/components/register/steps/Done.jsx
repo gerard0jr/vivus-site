@@ -6,7 +6,7 @@ import Questionnaire from './Questionnaire'
 import TagManager from 'react-gtm-module'
 import publicIp from 'public-ip'
 
-const idProduct = 2
+const idProduct = 1
 
 const iovationBlackBox = document.getElementsByName('ioBlackBox')[0].value
 

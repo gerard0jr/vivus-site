@@ -9,7 +9,7 @@ import Popup from "reactjs-popup"
 import { useMediaQuery } from 'react-responsive'
 import { BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const Cargo = (props) => {
     

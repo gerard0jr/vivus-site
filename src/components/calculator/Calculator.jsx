@@ -10,7 +10,7 @@ import { momentEs } from '../../services/moment'
 import { withRouter } from 'react-router-dom'
 import { PopInformation } from '../register/PopInformation'
 
-const idProduct = 2
+const idProduct = 1
 
 const Calculator = (props) => {
 
@@ -18,7 +18,7 @@ const Calculator = (props) => {
     const [monto, setMonto] = useState(null)
     const [firstPaymentAmount, setFirstPaymentAmount] = useState(0)
     const [plazo, setPlazo] = useState(null)
-    const [periodicidad, setPeriodicidad] = useState(2)
+    const [periodicidad, setPeriodicidad] = useState(1)
     const [cat, setCat] = useState(null)
     const [interesIVA, setInteresIVA] = useState(null)
     const [fecha, setFecha] = useState(null)
@@ -40,17 +40,17 @@ const Calculator = (props) => {
 
     const initialConfiguration = async () => {
         const response = await getToken()
-        console.log(response)
         if(response.status !== 200) return loadSimulation()
         cookie.save('token', response.data.token, {maxAge: 60 * 20})
         getConfiguration(idProduct, response.data.token)
             .then(res => {
                 const { data } = res
+                console.log(data)
                 if(res.status === 200) {
                     setMonto(data.defaultAmount)
-                    setPlazo(data.frequencies[1].frequencyTerm.defaultValue)
+                    setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
                     setConfig(data)
-                    return simulate(data.dafaultAmount, 2, data.frequencies[1].frequencyTerm.defaultValue, response.data.token)
+                    return simulate(data.dafaultAmount, 2, data.frequencies[0].frequencyTerm.defaultValue, response.data.token)
                 }
                 setConfig('error')
             })
@@ -68,6 +68,7 @@ const Calculator = (props) => {
             getSimulation(idProduct, amount, freq, term, validToken)
                 .then(res => {
                     const { data } = res
+                    console.log(data)
                     if(res.status === 200){
                         setCat(data.cat)
                         setInteresIVA(data.interest)
@@ -189,7 +190,7 @@ const Calculator = (props) => {
                         <p>Plazo</p>
                         <div className="slider-input-wrapper">
                             <input className="slider-input" type="text" value={plazo} readOnly/>
-                            <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' semanas'}</span>
+                            <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' días'}</span>
                         </div>
                     </div>
                     <div className='slider'>
@@ -238,7 +239,7 @@ const Calculator = (props) => {
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row'>
                         <p>Plazo</p>
-                        <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'semanas'}</p>
+                        <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'días'}</p>
                     </div>
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row'>

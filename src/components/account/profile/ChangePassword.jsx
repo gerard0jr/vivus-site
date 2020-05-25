@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { getToken, login, changePassword } from '../../../services/api'
 import { BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const ChangePassword = ({setSection}) => {
     const [oldPassword, setOldPassword] = useState('')

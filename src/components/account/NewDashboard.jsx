@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 import { BallClipRotate } from 'react-pure-loaders'
 import { getStatus } from '../../services/api'
 
-const idProduct = 2
+const idProduct = 1
 
 const NewDashboard = (props) => {
     
@@ -17,6 +17,7 @@ const NewDashboard = (props) => {
     const [user, setUser] = useState(null)
     const [balance, setBalance] = useState({})
     const [bannerId, setBannerId] = useState(null)
+    const [serverError, setServerError] = useState(false)
 
     const checkUser = (user, token) => {
         return getStatus(idProduct, user.customerId, false, token)
@@ -49,6 +50,7 @@ const NewDashboard = (props) => {
                 }
             }
         })
+        .catch(err => setServerError(true))
     }
 
     const checkToken = () => {
@@ -73,31 +75,41 @@ const NewDashboard = (props) => {
     
     return (
         <div className='app-container'>
-            {user ? 
-            <div style={{textAlign: 'center', justifyContent: 'center'}}>
-                <div className='account-container'>
-                    <div className='left-dash-new'>
-                        <h2 style={{margin: '2rem 0'}}>| TU CUENTA |</h2>
-                        {
-                            flux === 'default' ? <Default history={props.history} setBalance={setBalance} bannerId={bannerId}/> :
-                            flux === 'pay' ? <Pay balance={balance}/> :
-                            flux === 'move' ? <Move setFlux={setFlux}/> :
-                            flux === 'more' ? <More/> :
-                            <Default/>
-                        }
+            {
+                // serverError ? 
+                //     <div style={{textAlign: 'center', justifyContent: 'center'}}>
+                //         <div className='account-container'>
+                //             <div className='left-dash-new'>
+                //                 <h2 style={{margin: '2rem 0'}}>Error en el servidor</h2>
+                //             </div>
+                //         </div>
+                //     </div>
+                // :
+                // user ? 
+                    <div style={{textAlign: 'center', justifyContent: 'center'}}>
+                        <div className='account-container'>
+                            <div className='left-dash-new'>
+                                <h2 style={{margin: '2rem 0'}}>| TU CUENTA |</h2>
+                                {
+                                    flux === 'default' ? <Default history={props.history} setBalance={setBalance} bannerId={bannerId}/> :
+                                    flux === 'pay' ? <Pay balance={balance}/> :
+                                    flux === 'move' ? <Move setFlux={setFlux}/> :
+                                    flux === 'more' ? <More/> :
+                                    <Default/>
+                                }
+                            </div>
+                            <div className='right-dash-new'>
+                                <h2 style={{margin: '2rem 0'}}>| TÚ DECIDES |</h2>
+                                <div onClick={() => {setFlux('pay'); checkToken()}} style={flux === 'pay' || flux === 'move' || flux === 'more' ? {padding: '6.4rem 3rem'} : null} className={flux === 'pay' || flux === 'default' ? 'active select-option' : 'select-option'}><strong>PAGAR MI PRÉSTAMO</strong></div>
+                                <div onClick={() => {setFlux('move'); checkToken()}} style={flux === 'pay' || flux === 'move' || flux === 'more' ? {padding: '6.4rem 3rem', borderTop: '1px solid black', borderBottom: '1px solid black'} : {borderTop: '1px solid black', borderBottom: '1px solid black'}} className={flux === 'move' ? 'active select-option' : 'select-option'} ><strong>RECORRE LA FECHA DE TU PRÉSTAMO</strong></div>
+                                <div onClick={() => {setFlux('more'); checkToken()}} style={flux === 'pay' || flux === 'move' || flux === 'more' ? {padding: '6.4rem 3rem'} : null} className={flux === 'more' ? 'active select-option' : 'select-option'}><strong>SOLICITA MÁS DINERO</strong></div>
+                            </div>
+                        </div>
+                        <br/>
+                        <p style={{margin: '0 auto', width: '290px'}}className='btn-minimal-width' onClick={() => {setFlux('default'); checkToken()}}>Regresar a dashboard principal</p>
                     </div>
-                    <div className='right-dash-new'>
-                        <h2 style={{margin: '2rem 0'}}>| TÚ DECIDES |</h2>
-                        <div onClick={() => {setFlux('pay'); checkToken()}} style={flux === 'pay' || flux === 'move' || flux === 'more' ? {padding: '6.4rem 3rem'} : null} className={flux === 'pay' || flux === 'default' ? 'active select-option' : 'select-option'}><strong>PAGAR MI PRÉSTAMO</strong></div>
-                        <div onClick={() => {setFlux('move'); checkToken()}} style={flux === 'pay' || flux === 'move' || flux === 'more' ? {padding: '6.4rem 3rem', borderTop: '1px solid black', borderBottom: '1px solid black'} : {borderTop: '1px solid black', borderBottom: '1px solid black'}} className={flux === 'move' ? 'active select-option' : 'select-option'} ><strong>RECORRE LA FECHA DE TU PRÉSTAMO</strong></div>
-                        <div onClick={() => {setFlux('more'); checkToken()}} style={flux === 'pay' || flux === 'move' || flux === 'more' ? {padding: '6.4rem 3rem'} : null} className={flux === 'more' ? 'active select-option' : 'select-option'}><strong>SOLICITA MÁS DINERO</strong></div>
-                    </div>
-                </div>
-                <br/>
-                <p style={{margin: '0 auto', width: '290px'}}className='btn-minimal-width' onClick={() => {setFlux('default'); checkToken()}}>Regresar a dashboard principal</p>
-            </div>
-            :
-            <BallClipRotate color={'#A8CC46'} loading/>
+            // :
+            //     <BallClipRotate color={'#A8CC46'} loading/>
             }
       </div>
     )

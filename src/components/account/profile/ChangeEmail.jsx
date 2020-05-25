@@ -10,7 +10,7 @@ const ChangeEmail = ({history, setSection}) => {
     const [emailError, setEmailError] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const idProduct = 2
+    const idProduct = 1
 
     const checkEmail = async () => {
         if(!email) return setEmailErr(true)

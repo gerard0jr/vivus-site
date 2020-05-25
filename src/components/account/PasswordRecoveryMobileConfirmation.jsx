@@ -5,7 +5,7 @@ import { getToken, checkCode, sendCodeBySMS } from '../../services/api'
 import Countdown from 'react-countdown-now'
 import { BallBeat } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const PasswordRecoveryMobileConfirmation = (props) => {
   const [idCustomer, setIdCustomer] = useState(null)

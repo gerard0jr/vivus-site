@@ -5,7 +5,7 @@ import cookie from 'react-cookies'
 import { BallBeat } from 'react-pure-loaders'
 import TagManager from 'react-gtm-module'
 
-const idProduct = 2
+const idProduct = 1
 
 export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
     

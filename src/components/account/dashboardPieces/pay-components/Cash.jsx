@@ -4,7 +4,7 @@ import { getToken, getOXXOPaymentReference } from '../../../../services/api'
 import { BallClipRotate } from 'react-pure-loaders'
 import { momentEs } from '../../../../services/moment'
 
-const idProduct = 2
+const idProduct = 1
 
 const Cash = ({balance}) => {
     const [loading, setLoading] = useState(false)

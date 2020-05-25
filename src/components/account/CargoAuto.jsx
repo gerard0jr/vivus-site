@@ -5,7 +5,7 @@ import { getToken, getCustomerByMail, getDirectDebitInformation, setDirectDebitA
 import { momentEs } from '../../services/moment'
 import TagManager from 'react-gtm-module'
 
-const idProduct = 2
+const idProduct = 1
 
 const CargoAuto = (props) => {
     const [customer, setCustomer] = useState(null)

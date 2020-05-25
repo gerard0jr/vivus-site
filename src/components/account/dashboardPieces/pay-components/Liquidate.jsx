@@ -7,7 +7,7 @@ import BankOption from './liquidate-components/BankOption'
 import DebitOption from './liquidate-components/DebitOption'
 import CashOption from './liquidate-components/CashOption'
 
-const idProduct = 2
+const idProduct = 1
 
 const Liquidate = ({balance}) => {
     console.log(balance)

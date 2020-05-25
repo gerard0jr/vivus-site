@@ -6,7 +6,7 @@ import { BallClipRotate } from 'react-pure-loaders'
 import { getToken, getStatus, getCustomerByMail, getAnalytics } from '../../services/api'
 import TagManager from 'react-gtm-module'
 
-const idProduct = 2
+const idProduct = 1
 
 const DeniedDash = (props) => {
     let stepWidth = 25

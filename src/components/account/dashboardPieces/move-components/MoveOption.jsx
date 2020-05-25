@@ -9,7 +9,7 @@ import { momentEs } from '../../../../services/moment'
 import { getToken, requestExtension } from '../../../../services/api'
 
 
-const idProduct = 2
+const idProduct = 1
 const MoveOption = ({extensionData, user}) => {
 
     const [willPay, setWillPay] = useState(false)

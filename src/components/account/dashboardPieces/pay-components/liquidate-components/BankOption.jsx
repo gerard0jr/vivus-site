@@ -3,7 +3,7 @@ import {Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, Acc
 import './accordion.scss'
 import { getToken, getBankPaymentReference } from '../../../../../services/api'
 
-const idProduct = 2
+const idProduct = 1
 
 const BankOption = () => {
 

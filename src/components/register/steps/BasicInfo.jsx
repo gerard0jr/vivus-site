@@ -5,8 +5,9 @@ import { getToken, getContract, getTermsAndConditions, getCustomerByMail, savePr
 import cookie from 'react-cookies'
 import { BallBeat } from 'react-pure-loaders'
 import TagManager from 'react-gtm-module'
+import Axios from 'axios'
 
-const idProduct = 2
+const idProduct = 1
 
 const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
     
@@ -36,6 +37,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
     const [loadingForm, setLoadingForm] = useState(false)
     const [loading, setLoading] = useState(false)
     const [logged, setLogged] = useState(false)
+    const [ip, setIp] = useState(null)
     
     // Error handling
     const [firstNameError, setFirstNameError] = useState(false)
@@ -132,7 +134,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
             utm: sessionStorage.getItem('utm') || '/',
             customerOrigin: document.URL,
             userAgent: navigator.userAgent,
-            clientIP: sessionStorage.getItem('ip'),
+            clientIP: sessionStorage.getItem('ip') || ip,
             additionalFields: []
         }
         if(logged) submittedData.password = ''
@@ -299,6 +301,9 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
             return
         }
         askToken()
+        Axios.get('https://api.ipify.org')
+            .then(res => setIp(res.data))
+            .catch(err => setIp('0.0.0.0'))
     }, [])
 
     useEffect(() => {
@@ -439,7 +444,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                 : null}
                 <div className='register-subtitle'>
                     <h5>Consentimiento legal</h5>
-                    <p>Por favor, abre, lee y acepta a efectiGO.</p>
+                    <p>Por favor, abre, lee y acepta a Vivus.</p>
                 </div>
                 <div className='checkbox-div'>
                     <div className='checkbox-top'>
@@ -460,7 +465,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                         <p style={{fontWeight: 'bold', margin: '0 2rem'}}><strong>Aviso de Privacidad</strong></p>
                         {privacyAccepted ? <p style={{backgroundColor: 'lightgray', cursor: 'default'}} className='btn-register'>Aceptado</p> : <div onClick={privacy ? () => {setOpenPrivacy(true); blockScroll()} : null} className='btn-register'>{privacy ? 'Por favor, lee y acepta' : <BallBeat loading color={'white'}/>}</div>}
                     </div>
-                    <small>Al proporcionar tu correo electrónico aceptas recibir por parte de efectiGO noticias y comunicaciones promocionales. Podrás revocar dicho consentimiento en cualquier momento, para más detalles consulta nuestro Aviso de Privacidad</small>
+                    <small>Al proporcionar tu correo electrónico aceptas recibir por parte de Vivus noticias y comunicaciones promocionales. Podrás revocar dicho consentimiento en cualquier momento, para más detalles consulta nuestro Aviso de Privacidad</small>
                 </div>
                 <div className='checkbox-div'>
                     <div className='checkbox-top'>

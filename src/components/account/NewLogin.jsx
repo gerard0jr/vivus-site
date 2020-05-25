@@ -9,7 +9,7 @@ import { getToken, getStatus, login, getCustomerByMail, saveSingleUTM } from '..
 import publicIp from 'public-ip'
 import TagManager from 'react-gtm-module'
 
-const idProduct = 2
+const idProduct = 1
 
 const NewLogin = (props) => {
     const [password, setPassword] = useState(null)
@@ -22,6 +22,11 @@ const NewLogin = (props) => {
     const [cleanLogin, setCleanLogin] = useState(false)
 
     const [emailError, setEmailError] = useState(false)
+
+    let handleEnterKey = e => {
+      if(e.key === 'Enter') return handleSubmit()
+      return
+    }
 
     const handleSubmit = async () => {
       setLoading(true)
@@ -116,7 +121,6 @@ const NewLogin = (props) => {
       let utm = sessionStorage.getItem('utm')
 
       saveSingleUTM({customerOrigin: document.URL, utm, userAgent: navigator.userAgent, clientIP: ip, idCustomer, idProduct},token)
-      .then(res => console.log(res.status))
 
       return getStatus(idProduct, idCustomer, false, token)  //false is for isNIP
         .then(res => {
@@ -170,7 +174,7 @@ const NewLogin = (props) => {
                     if(dataWithStatus.step === 5) return props.history.push('/registration-complete')
                     // return props.history.push('/registration')
                 })
-                .catch(err => console.log(err))
+                .catch(err => setServerError(true))
               }
               if(data.idStatus === 4){
                 sessionStorage.setItem('empty-customer', JSON.stringify({idCustomer, email, mobile: res.data.mobile, penaltyDays: res.data.penaltyDays}))
@@ -183,7 +187,6 @@ const NewLogin = (props) => {
                 return props.history.push('/dashboard/welcome')
               }
               if(data.idStatus === 7){
-                console.log(res.data)
                 sessionStorage.setItem('empty-customer', JSON.stringify(res.data))
                 sessionStorage.setItem('APP', 'yes')
                 return props.history.push('/dashboard/welcome')
@@ -193,7 +196,7 @@ const NewLogin = (props) => {
               return props.history.push('/dashboard/welcome')
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => setServerError(true))
     }
 
     useEffect(() => {
@@ -231,9 +234,9 @@ const NewLogin = (props) => {
 
     return (
       <div className='app-container login-container'>
-          <div className='leftLogin' style={{width: '58%', textAlign: 'left', padding: '3rem 6rem'}}>
+          <div className='leftLogin'>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Bienvenido de nuevo</h1>
-            <h1 style={{margin: '0 0 1rem 0', padding: 0, fontWeight: '300'}}>Ingresa a tu cuenta efectiGO</h1>
+            <h1 style={{margin: '0 0 1rem 0', padding: 0, fontWeight: '300'}}>Ingresa a tu cuenta Vivus</h1>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
 
             <div style={{marginTop: '2rem'}}>
@@ -249,7 +252,7 @@ const NewLogin = (props) => {
                 <p style={{fontWeight: 'bold'}}><strong>Ingresar contraseña</strong></p>
                 <div className={showPassword ? 'password-wrapper eye' : 'password-wrapper eye-hidden'}>
                   <div className="input-wrapper">
-                    <input onChange={(e) => setPassword(e.target.value)} style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type={showPassword ? 'text' : 'password'} className="form-control" id="password" name="password"/>
+                    <input onChange={(e) => setPassword(e.target.value)} onKeyPress={handleEnterKey} style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type={showPassword ? 'text' : 'password'} className="form-control" id="password" name="password"/>
                   </div>
                   <p onClick={() => setShowPassword(!showPassword)} className="show-password">{showPassword ? 'Ocultar' : 'Mostrar'} contraseña</p>
                 </div>
@@ -271,7 +274,7 @@ const NewLogin = (props) => {
             </div>
           </div>
           {/* Ready for referred plan? */}
-          {/* <div className='rightLogin'>
+          <div className='rightLogin'>
             <div className="friends-container">
               <div className='top-friends'>
                 <p><strong>Invita</strong></p>
@@ -280,12 +283,12 @@ const NewLogin = (props) => {
               <div className='bottom-friends'>
                 <img src="/img/ref_man.svg" alt="refman"/>
                 <div style={{padding: '1rem'}}>
-                  <p style={{fontWeight: 300, fontSize: '1rem', marginBottom: '1rem'}}>Gana dinero invitando a tus amigos a solicitar un préstamo con efectiGO. Ingresa a tu cuenta para comenzar a invitar.</p>
+                  <p style={{fontWeight: 300, fontSize: '1rem', marginBottom: '1rem'}}>Gana dinero invitando a tus amigos a solicitar un préstamo con Vivus. Ingresa a tu cuenta para comenzar a invitar.</p>
                   <Link to='/'>Más información</Link>
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
       </div>
     )
 }

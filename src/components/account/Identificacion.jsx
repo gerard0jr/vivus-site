@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { getToken, getFile, uploadFile, getStatus, getAnalytics } from '../../services/api'
 import TagManager from 'react-gtm-module'
 
-const idProduct = 2
+const idProduct = 1
 
 const Identificacion = (props) => {
 

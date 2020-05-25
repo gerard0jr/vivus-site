@@ -5,7 +5,7 @@ import '../../newStyles.scss'
 import { getToken, getBankPaymentReference } from '../../../../services/api'
 import { momentEs } from '../../../../services/moment'
 
-const idProduct = 2
+const idProduct = 1
 
 const Bank = ({balance}) => {
 

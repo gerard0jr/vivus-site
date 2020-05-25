@@ -3,7 +3,7 @@ import CheckCode from './email/CheckCode'
 import { getToken, sendCodeByNewSMS } from '../../../services/api'
 import { BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const ChangePhone = ({history, setSection}) => {
 

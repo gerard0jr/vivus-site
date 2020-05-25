@@ -4,7 +4,7 @@ import { BallBeat } from 'react-pure-loaders'
 import { getToken, changePassword } from '../../services/api'
 import { Link } from 'react-router-dom'
 
-const idProduct = 2
+const idProduct = 1
 
 const PasswordSet = (props) => {
     

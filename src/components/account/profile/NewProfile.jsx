@@ -12,7 +12,7 @@ import cookie from 'react-cookies'
 import { BallClipRotate } from 'react-pure-loaders'
 import { Link } from 'react-router-dom'
 
-const logo = '/img/logo-efectigo.svg'
+const logo = '/img/navbar/logo-vivus-mexico.svg'
 
 
 const NewProfile = (props) => {
@@ -36,8 +36,8 @@ const NewProfile = (props) => {
             <div style={{padding: '2rem'}}>
                 <div className='profile-top-home'>
                     <h3>Mis datos</h3>
-                    <p><strong>Número de contrato:</strong> 983123899</p>
-                    <p>Contrato de Reestructura</p>
+                    {/* <p><strong>Número de contrato:</strong> 983123899</p>
+                    <p>Contrato de Reestructura</p> */}
                 </div>
                 <div className='profile-home'>
                     <div className='left-profile'>

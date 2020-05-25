@@ -4,7 +4,7 @@ import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { getToken, changeDebit, getBanks } from '../../../../services/api'
 
-const idProduct = 2
+const idProduct = 1
 
 const PaymentDebit = ({history, setSection}) => {
 

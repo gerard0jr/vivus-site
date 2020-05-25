@@ -11,7 +11,7 @@ import { momentEs } from '../../services/moment'
 import TagManager from 'react-gtm-module'
 
 
-const idProduct = 2
+const idProduct = 1
 
 export const SecondLoan = (props) => {
 

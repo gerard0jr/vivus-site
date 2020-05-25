@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { getToken, changeCLABE } from '../../../../services/api'
 
-const idProduct = 2
+const idProduct = 1
 
 const PaymentBank = ({setSection}) => {
 

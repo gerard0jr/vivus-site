@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { checkCode, getToken, changeCustomerEmail, changeCustomerMobile } from '../../../../services/api'
 import { BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const CheckCode = ({history, email, setValidEmail, setSection, number, setValidNumber}) => {
     

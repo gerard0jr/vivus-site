@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import MoveOption from './move-components/MoveOption'
 import { requestExtension, getToken } from '../../../services/api'
 
-const idProduct = 2
+const idProduct = 1
 
 const Move = ({setFlux}) => {
     const [canMove, setCanMove] = useState(false)

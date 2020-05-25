@@ -3,7 +3,7 @@ import { BallBeat } from 'react-pure-loaders'
 import { getToken, getCustomerByMail, setBureauAuthorization, getAnalytics } from '../../../services/api'
 import TagManager from 'react-gtm-module'
 
-const idProduct = 2
+const idProduct = 1
 
 export const Identity = ({props, setCurrentStep}) => {
 

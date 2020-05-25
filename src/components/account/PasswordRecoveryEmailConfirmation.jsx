@@ -5,7 +5,7 @@ import { BallBeat } from 'react-pure-loaders'
 import cookie from 'react-cookies'
 import { getToken, checkCode, recoverPassword, getCustomerByMail } from '../../services/api'
 
-const idProduct = 2
+const idProduct = 1
 
 const PasswordRecoveryEmailConfirmation = (props) => {
   const [eMail, setEMail] = useState(null)

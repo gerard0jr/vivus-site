@@ -6,7 +6,7 @@ import { getToken, requestAdditionalAmount, getSimulation } from '../../../servi
 import { momentEs } from '../../../services/moment'
 import { BallClipRotate } from 'react-pure-loaders'
 
-const idProduct = 2
+const idProduct = 1
 
 const More = (props) => {
 
