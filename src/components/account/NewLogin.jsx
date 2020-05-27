@@ -23,12 +23,28 @@ const NewLogin = (props) => {
 
     const [emailError, setEmailError] = useState(false)
 
+    let fillDemo = () => {
+      setEmail('demo@demo.com')
+      setPassword('parole1')
+    }
+
     let handleEnterKey = e => {
       if(e.key === 'Enter') return handleSubmit()
       return
     }
 
+    let demoContinue = () => {
+      sessionStorage.setItem('loggedUser', JSON.stringify({
+        customerId: 8330,
+        eMail: "demo@demo.com",
+        fullName: "DEMO",
+        mobile: "5565829661"
+      }))
+      return props.history.push('/dashboard/welcome')
+    }
+
     const handleSubmit = async () => {
+      if(email === 'demo@demo.com') return demoContinue()
       setLoading(true)
       let rex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if(!email || !rex.test(email.toLowerCase())) {
@@ -125,7 +141,6 @@ const NewLogin = (props) => {
       return getStatus(idProduct, idCustomer, false, token)  //false is for isNIP
         .then(res => {
           const { data } = res
-          console.log(data)
           let directStep = 1
           if(res.status === 200){
             if(data.idStatus === 1){
@@ -234,6 +249,7 @@ const NewLogin = (props) => {
 
     return (
       <div className='app-container login-container'>
+          <div onClick={fillDemo} className="fill-demo">DEMO</div>
           <div className='leftLogin'>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Bienvenido de nuevo</h1>
             <h1 style={{margin: '0 0 1rem 0', padding: 0, fontWeight: '300'}}>Ingresa a tu cuenta Vivus</h1>
@@ -252,7 +268,7 @@ const NewLogin = (props) => {
                 <p style={{fontWeight: 'bold'}}><strong>Ingresar contraseña</strong></p>
                 <div className={showPassword ? 'password-wrapper eye' : 'password-wrapper eye-hidden'}>
                   <div className="input-wrapper">
-                    <input onChange={(e) => setPassword(e.target.value)} onKeyPress={handleEnterKey} style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type={showPassword ? 'text' : 'password'} className="form-control" id="password" name="password"/>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleEnterKey} style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type={showPassword ? 'text' : 'password'} className="form-control" id="password" name="password"/>
                   </div>
                   <p onClick={() => setShowPassword(!showPassword)} className="show-password">{showPassword ? 'Ocultar' : 'Mostrar'} contraseña</p>
                 </div>

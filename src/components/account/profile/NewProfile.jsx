@@ -22,12 +22,13 @@ const NewProfile = (props) => {
     const [section, setSection] = useState('home')
 
     useEffect(() => {
-        let getToken = cookie.load('token')
-        if(!getToken) return props.history.push('/login')
-        setToken(getToken)
         let getUser = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(!getUser) return props.history.push('/login')
         setUser(getUser)
+        if(getUser.eMail === 'demo@demo.com') return
+        let getToken = cookie.load('token')
+        if(!getToken) return props.history.push('/login')
+        setToken(getToken)
     }, [section])
     
     return( 

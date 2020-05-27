@@ -115,6 +115,37 @@ const Default = ({history, setBalance, bannerId}) => {
     useEffect(() => {
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
+            if(user.eMail === 'demo@demo.com'){
+                let dummyData = {
+                    creditLimit: 5000,
+                    creditLimitUsed: 2500,
+                    liquidateAmount: 1500,
+                    term: 3,
+                    frequency: 1,
+                    curentInstallment: {
+                        idDeferral: 1,
+                        principalBalance: 500,
+                        interest: 250,
+                        paymentValue: 560,
+                        dueDate: new Date()
+                    },
+                    paidAmount: 1000,
+                    installments: [
+                        {idDeferral: 1, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 2, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 3, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 4, dueDate: new Date(), paymentValue: 200}
+                    ],
+                    payments: [
+                        {idDeferral: 1, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 2, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 3, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 4, dueDate: new Date(), paymentValue: 200}
+                    ]
+                }
+                setCustomerBalance(dummyData)
+                return setBalance(dummyData)
+            }
             getData(user)
         }
     }, [])
@@ -151,7 +182,7 @@ const Default = ({history, setBalance, bannerId}) => {
                         <div className='dash-box'>
                             <p className='title'><strong>Mi parcialidad</strong></p>
                             <div className='parcialidad'>
-                                <p>Plazo {customerBalance.term} {customerBalance.idFrequency === 1 ? 'semanas' : 'quincenas'}</p>
+                                <p>Plazo {customerBalance.term} {customerBalance.idFrequency === 1 ? 'días' : 'quincenas'}</p>
                                 <p>Interés {customerBalance.curentInstallment ?  customerBalance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0} </p>
                                 <p>Parcialidad a pagar {customerBalance.curentInstallment ? customerBalance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0} <small>IVA incluído</small></p>
                                 <p>Fecha de pago {customerBalance.curentInstallment ? momentEs(customerBalance.curentInstallment.dueDate).format('D/MMM/Y') : 'dd/mm/aaaa'}</p>

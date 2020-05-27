@@ -54,6 +54,7 @@ const NewDashboard = (props) => {
     }
 
     const checkToken = () => {
+        if(user.eMail === 'demo@demo.com') return
         let getToken = cookie.load('token')
         if(!getToken) return props.history.push('/login')
     }
@@ -64,6 +65,7 @@ const NewDashboard = (props) => {
         setUser(getUser)
         let approved = sessionStorage.getItem('APP')
         if(approved === 'no') return props.history.push('/denied')
+        if(getUser.eMail === 'demo@demo.com') return setBannerId(1)
         let getToken = cookie.load('token')
         if(!getToken) return props.history.push('/login')
         checkUser(getUser, getToken)

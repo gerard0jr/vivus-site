@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Options from './pay-components/Options'
 import '../newStyles.scss'
 import Liquidate from './pay-components/Liquidate'
