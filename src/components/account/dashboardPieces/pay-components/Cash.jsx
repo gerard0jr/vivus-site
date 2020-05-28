@@ -32,6 +32,10 @@ const Cash = ({balance}) => {
     }
 
     const requestRef = () => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser){
+            return setReference(1234789456123)
+        }
         setLoading(true)
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){

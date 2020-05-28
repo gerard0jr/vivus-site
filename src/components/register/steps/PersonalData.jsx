@@ -127,6 +127,7 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
         if(!referenceNumber || referenceNumber.length < 10) return setReferenceNumberError(true)
         if(referenceNumber.search(/[a-zA-Z]/) !== -1) return setReferenceNumberError(true)
         setReferenceNumberError(false)
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/registration/employment-details')
         setLoading(true)
         let birthDate = new Date(date.year, date.month - 1, date.day).toISOString()
         let submittedData = {
@@ -350,6 +351,19 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
 
     useEffect(() => {
         const populateCatalog = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser){
+                setBankCatalog([
+                    {value: 1, text: 'Banamex'},
+                    {value: 2, text: 'Santander'},
+                    {value: 3, text: 'BBVA'}
+                ])
+                return setCatalog([
+                    {value: 1, text: 'CDMX'},
+                    {value: 2, text: 'Edo. Mex.'},
+                    {value: 3, text: 'Monterrey'}
+                ])
+            }
             let response = await getToken()
             const validToken = response.data.token
             let data = {
@@ -372,6 +386,8 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
 
     useEffect(() => {
         const loadPersonalData = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser) return setCustomer(demoUser)
             let validToken = cookie.load('token')
             if(!validToken){
                 let response = await getToken()
@@ -401,8 +417,35 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
         }
         loadPersonalData()
     }, [])
+
+    let fillDemo = () => {
+        setDate({day: 1, month: 5, year: 1990})
+        setBirthPlace(1)
+        setData({
+            gender: 1,
+            birthPlace: 1,
+            curp: 'AAPR931117HDFMNR09',
+            rfc: 'AAPR931117AA0',
+            street: 'Calle 32',
+            exteriorNumber: '12',
+            interiorNumber: 'H34',
+            zipCode: '07839'
+        })
+        setColCat([
+            {colonia: 'Gertrudis Sánchez'}
+        ])
+        setMunicipality('GAM')
+        setSuburb(1)
+        setStateName('CDMX')
+        setClabe('123456789012345678')
+        setDebit('')
+        setReferenceName('Contacto')
+        setReferenceNumber('5511223344')
+    }
+
     return (
         <div className='register-form-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Información</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>Personal</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
@@ -485,7 +528,7 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
                 {notFoundZip ? <small style={{color: 'red'}}>Código postal no encontrado</small> : null}
             </div>
             <div className={municipalityError ? 'input-div input-error' : 'input-div'}>
-                <p style={{fontWeight: 'bold'}}><strong>Delegación o Municipio</strong></p>
+                <p style={{fontWeight: 'bold'}}><strong>Alcaldía o Municipio</strong></p>
                 <div>
                     <input disabled style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='municipality' maxlength="30" value={municipality}/>
                 </div>

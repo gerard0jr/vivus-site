@@ -16,6 +16,8 @@ const MoveOption = ({extensionData, user}) => {
     const [serverError, setServerError] = useState(false)
 
     const setExtension = async () => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser) return setWillPay(true)
         let response = await getToken()  
         if(!response) return setServerError(true)
         let validToken = response.data.token
@@ -60,7 +62,9 @@ const MoveOption = ({extensionData, user}) => {
                         <p className='move-md-size'><strong>{extensionData.extensionFee ? extensionData.extensionFee.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
                         <p>IVA incluído</p>
                         <p>Costo del servicio</p>
-                        <p className='btn-minimal-width move-select-button' onClick={setExtension}>SOLICITAR</p>
+                        <div style={{marginTop: '10px'}}>
+                            <p className='btn-minimal-width move-select-button' onClick={setExtension}>SOLICITAR</p>
+                        </div>
                     </div>
                     <div>
                         <p><u>Nuevo vencimiento de</u></p>

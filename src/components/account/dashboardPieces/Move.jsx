@@ -23,7 +23,6 @@ const Move = ({setFlux}) => {
         requestExtension(data, validToken)
         .then(res => {
             const {data} = res
-            console.log(data)
             if(data){
                 if(data.continue){
                     // ALLOW EXTENSION
@@ -38,14 +37,32 @@ const Move = ({setFlux}) => {
     }
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser) return setUser(demoUser)
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
             setUser(user)
+            if(user.eMail === 'demo@demo.com') return
             getData(user)
         }
     }, [])
+
+    let fillDemo = () => {
+        setCanMove(true)
+        setExtensionData({
+            idDeferral: 1,
+            oldDueDate: new Date(2020, 10, 10),
+            oldLastDueDate: new Date(2020, 10, 20),
+            extensionFee: 450,
+            newDueDate: new Date(2020, 10, 12),
+            newLastDueDate: new Date(2020, 10, 22),
+            oxxoReference: 123456789
+        })
+    }
+
     return (
         <div className='move-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             {serverError ? 
                 <div className='move-titles'>
                    <p style={{fontSize: '2.5rem'}}>Error en el servidor</p>

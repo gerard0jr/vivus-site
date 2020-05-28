@@ -61,7 +61,7 @@ export const Home = (props) => {
                 <div className='popup'>
                     <div className='popup-container'>
                         <div className='close-button' onClick={() => setPopup(false)}><FontAwesomeIcon icon={faTimes}/> </div>
-                        <h2>En <span>EFECTIGO</span><br/>estamos de tu lado.</h2>
+                        <h2>En <span>VIVUS</span><br/>estamos de tu lado.</h2>
                         <div className='popup-rectangle'>
                             <p>Si tienes un <span>préstamo</span> y necesitas apoyo,
                             podemos brindarte una <span>opción personalizada</span></p>
@@ -90,17 +90,17 @@ export const Home = (props) => {
 
             {/* <div className="home-features">
                 <div className='feature'>
-                    <img src="/img/time.svg" alt="efectigo time"/>
+                    <img src="/img/time.svg" alt="vivus time"/>
                     <h2>Rápido y sin tanto rollo</h2>
                     <p>Solicita por internet en minutos y recíbelo en tu cuenta en menos de 1 hora.*</p>
                 </div>
                 <div className='feature'>
-                    <img src="/img/lock.svg" alt="efectigo lock"/>
+                    <img src="/img/lock.svg" alt="vivus lock"/>
                     <h2>Seguro y transparente</h2>
                     <p>Escoges el monto y periodicidad de pago, así como el tiempo. Sin costos ocultos. Tu información está protegida.</p>
                 </div>
                 <div className='feature'>
-                    <img src="/img/id.svg" alt="efectigo id"/>
+                    <img src="/img/id.svg" alt="vivus id"/>
                     <h2>Requisitos Simples</h2>
                     <p>
                         - Ser mexicano(a)
@@ -114,29 +114,29 @@ export const Home = (props) => {
             <div className="reasons-container">
                 <div className='left-reasons'>
                     <div className='reasons-title'>¿Cómo funciona?</div>
-                    <div className="como-efectigo-points">
+                    <div className="como-vivus-points">
                         <ul>
                             <li>
-                                <span className="como-efectigo-span"><strong>1</strong></span>
+                                <span className="como-vivus-span"><strong>1</strong></span>
                                 <strong className="bold-title">Completa tu solicitud</strong>
                                 <p>Llena la solicitud con tu información personal y financiera, te tomará pocos minutos. </p>
                             </li>
                             <li>
-                                <span className="como-efectigo-span"><strong>2</strong></span>
+                                <span className="como-vivus-span"><strong>2</strong></span>
                                 <strong className="bold-title">Confirma tu identidad</strong>
                                 <p>Te pediremos que nos envíes una foto de tu Credencial para Votar expedida por el INE y cualquiera de los siguientes documentos: tu último recibo de nómina timbrado por el Servicio de Administración Tributaria (SAT), algún estado de cuenta reciente o tu declaración de impuestos.</p>
                             </li>
                             <li>
-                                <span className="como-efectigo-span"><strong>3</strong></span>
+                                <span className="como-vivus-span"><strong>3</strong></span>
                                 <strong className="bold-title">Recibe tu dinero</strong>
                                 <p>Una vez aprobada tu solicitud, recibirás el préstamo en tu cuenta en menos de 1 hora.*</p>
                             </li>
                             <li className='span-last'>
-                                <span className="como-efectigo-span"><strong>4</strong></span>
+                                <span className="como-vivus-span"><strong>4</strong></span>
                                 <strong className="bold-title">Paga tu préstamo</strong>
                                 <p className="como-p">Recibirás un recordatorio de pago antes de la fecha de tu vencimiento. Pagar es muy fácil y hay muchas opciones, </p>
                                 <div className="popup-link">
-                                    <p data-tip="1. En tiendas OXXO - Ingresa a tu perfil efectiGO, crea un número de referencia para pago total o de parcialidad y paga con él en OXXO bajo la modalidad OXXO Pay. <br/> 2. Con tu tarjeta de débito - Ingresa a tu perfil efectiGO y paga total o parcialmente usando tu tarjeta de débito. <br/>3. Pago en cuenta bancaria - Realiza deposito en cuenta bancaria a la cuenta de CI Banco 1633635, a nombre de INTEGRATED MANAGEMENT SERVICES MEXICO SA DE CV.<br/> No olvides poner tu número de crédito y nombre en la referencia." 
+                                    <p data-tip="1. En tiendas OXXO - Ingresa a tu perfil vivus, crea un número de referencia para pago total o de parcialidad y paga con él en OXXO bajo la modalidad OXXO Pay. <br/> 2. Con tu tarjeta de débito - Ingresa a tu perfil vivus y paga total o parcialmente usando tu tarjeta de débito. <br/>3. Pago en cuenta bancaria - Realiza deposito en cuenta bancaria a la cuenta de CI Banco 1633635, a nombre de INTEGRATED MANAGEMENT SERVICES MEXICO SA DE CV.<br/> No olvides poner tu número de crédito y nombre en la referencia." 
                                     style={{color: '#A3CD3A'}}>
                                         conócelas aquí
                                     </p>
@@ -154,7 +154,7 @@ export const Home = (props) => {
                             <img src="/img/efectigo-percent.svg" alt="percent"/>
                             <div className='reason-description'>
                                 <p className='reason-title'>Flexibilidad</p>
-                                <p>Si necesitas dinero adicional en tu préstamo, o quieres recorrer la fecha de pago de tu parcialidad, con efectiGO es fácil hacerlo.</p>
+                                <p>Si necesitas dinero adicional en tu préstamo, o quieres recorrer la fecha de pago de tu parcialidad, con vivus es fácil hacerlo.</p>
                             </div>
                         </div>
                         <div className='reason'>
@@ -168,7 +168,7 @@ export const Home = (props) => {
                             <img src="/img/efectigo-head.svg" alt="percent"/>
                             <div className='reason-description'>
                                 <p className='reason-title'>Soporte local</p>
-                                <p>¡Lo más importante en efectiGO eres tú! Por lo que nuestro equipo está siempre listo para ayudarte.</p>
+                                <p>¡Lo más importante en vivus eres tú! Por lo que nuestro equipo está siempre listo para ayudarte.</p>
                             </div>
                         </div>
                     </div>

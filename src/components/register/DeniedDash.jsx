@@ -262,7 +262,7 @@ const DeniedDash = (props) => {
                             </div>
                             <div style={{textAlign: 'right'}}>
                                 <h2 style={{margin: '0', padding: 0, fontWeight: 600, fontSize: '2rem'}}>Gracias por tu solicitud de préstamo</h2>
-                                <img width='200px' src="/img/white-logo.png" alt="efectigo"/>
+                                <img width='200px' src="/img/white-logo.png" alt="Vivus"/>
                             </div>
                         </div>
                     }

@@ -11,8 +11,8 @@ export const BlogContent = ({category, entries}) => {
                     <div className='entries-container'>
                         {entries.map((entrie, ix) => 
                             <div className='entrie' key={ix}>
-                                <a href={`https://efectigo.firebaseapp.com/blog/${entrie.fields.url}`}>
-                                    <img src={entrie.fields.image ? entrie.fields.image.fields.file.url : '/img/blog/default.jfif'} alt="efectigo"/>
+                                <a href={`https://vivus-dev.web.app/blog/${entrie.fields.url}`}>
+                                    <img src={entrie.fields.image ? entrie.fields.image.fields.file.url : '/img/blog/default.jfif'} alt="Vivus"/>
                                     <div className='entrie-text'>
                                         <p className='entrie-title'>{entrie.fields.title}</p>
                                         <p className='entrie-date'>{momentEs(entrie.fields.publishTime).format('DD/MM/YYYY')}</p>
@@ -53,8 +53,8 @@ export const BlogContent = ({category, entries}) => {
                     <div className='entries-container'>
                         {entries.filter((entrie, ix) => ix > 2).map((entrie, ix) => 
                             <div className='entrie' key={ix}>
-                                <a href={`https://efectigo.firebaseapp.com/blog/${entrie.fields.url}`}>
-                                    <img src={entrie.fields.image.fields.file.url} alt="efectigo"/>
+                                <a href={`https://vivus-dev.web.app/blog/${entrie.fields.url}`}>
+                                    <img src={entrie.fields.image.fields.file.url} alt="vivus"/>
                                     <div className='entrie-text'>
                                         <p className='entrie-title'>{entrie.fields.title}</p>
                                         <p className='entrie-date'>{momentEs(entrie.fields.publishTime).format('DD/MM/YYYY')}</p>

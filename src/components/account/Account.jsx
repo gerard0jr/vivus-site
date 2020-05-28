@@ -64,7 +64,7 @@ const Account = (props) => {
     <div className='app-container'> 
       <div style={{width: '58%', textAlign: 'left', padding: '6rem'}}>
         <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '4rem'}}>Bienvenido de nuevo</h1>
-        <h1 style={{margin: '0 0 1rem 0', padding: 0, fontWeight: '400'}}>Ingresa a tu cuenta efectiGO</h1>
+        <h1 style={{margin: '0 0 1rem 0', padding: 0, fontWeight: '400'}}>Ingresa a tu cuenta Vivus</h1>
         <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
 
         <div style={{marginTop: '2rem'}}>

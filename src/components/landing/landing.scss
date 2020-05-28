@@ -326,20 +326,20 @@
 }
 
 // POINTS
-.como-efectigo-points {
+.como-vivus-points {
     text-align: left;
     width: 500px;
     max-width: 100%;
     padding: 20px 0 0;
 }
 
-.como-efectigo-points ul {
+.como-vivus-points ul {
     list-style: none;
     padding-left: 0px;
     max-width: 460px;
 }
                 
-.como-efectigo-points li {
+.como-vivus-points li {
     padding-left: 60px;
     position: relative;
     color: #444;
@@ -347,11 +347,11 @@
     border-left: solid 2px #95d329;
 }
 
-.como-efectigo-points li p{
+.como-vivus-points li p{
     color: #636266;
 }
 
-.como-efectigo-span{
+.como-vivus-span{
     color: #95d329;
     border: solid 2px #95d329;
     border-radius: 100%;
@@ -453,6 +453,14 @@
 .shadow{
     position: absolute;
     background-image: linear-gradient(transparent, #FFF);
+    width: 100%;
+    height: 150px;
+    top: 8rem;
+}
+
+.shadow-gray{
+    position: absolute;
+    background-image: linear-gradient(transparent, #eceef2);
     width: 100%;
     height: 150px;
     top: 8rem;

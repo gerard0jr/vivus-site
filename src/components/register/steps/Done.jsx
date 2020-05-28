@@ -99,6 +99,12 @@ const Done = (props) => {
     
     useEffect(() => {
         const initialConfig = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser) {
+                setTimeout(() => {
+                    return props.history.push('/pre-approved')
+                },2000)
+            }
             sessionStorage.removeItem('customer-direct-step')
             sessionStorage.setItem('session-step', 5)
             const loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))

@@ -17,6 +17,7 @@ export const Verification = ({props, setCurrentStep}) => {
         setLoading(true)
         if(!nip) return setNipError(true)
         if(nip.length > 4) return setNipError(true)
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/registration/identity')
         let response = await getToken()
         let validToken = response.data.token
         let data = {
@@ -114,6 +115,8 @@ export const Verification = ({props, setCurrentStep}) => {
 
     useEffect(() => {
         const initialConfig = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser) return setCustomer(demoUser)
             let response = await getToken()
             let validToken = response.data.token
             sessionStorage.removeItem('customer-direct-step')
@@ -228,8 +231,13 @@ export const Verification = ({props, setCurrentStep}) => {
         initialConfig()
     }, [])
 
+    let fillDemo = () => {
+        setNip(1234)
+    }
+
     return (
         <div className={'register-form-container-full'}>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Ingresar</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>NIP</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>

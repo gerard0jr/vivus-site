@@ -33,6 +33,7 @@ const Cargo = (props) => {
     const [open, setOpen] = useState(false)
 
     const goTo = async () => {
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/dashboard/confirm')
         setLoadingConfirm(true)
         const onCoords = async ({coords, timestamp}) => {
             const myIp = await publicIp.v4()
@@ -183,6 +184,38 @@ const Cargo = (props) => {
 
     useEffect(() => {
         const initialConfig = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser){
+                let dummyData = {
+                    creditLimit: 5000,
+                    creditLimitUsed: 2500,
+                    liquidateAmount: 1500,
+                    term: 3,
+                    frequency: 1,
+                    curentInstallment: {
+                        idDeferral: 1,
+                        principalBalance: 500,
+                        interest: 250,
+                        paymentValue: 560,
+                        dueDate: new Date()
+                    },
+                    paidAmount: 1000,
+                    installments: [
+                        {idDeferral: 1, dueDate: new Date(), paymentValue: 200, interest: 25},
+                        {idDeferral: 2, dueDate: new Date(), paymentValue: 200, interest: 25},
+                        {idDeferral: 3, dueDate: new Date(), paymentValue: 200, interest: 25},
+                        {idDeferral: 4, dueDate: new Date(), paymentValue: 200, interest: 25}
+                    ],
+                    payments: [
+                        {idDeferral: 1, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 2, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 3, dueDate: new Date(), paymentValue: 200},
+                        {idDeferral: 4, dueDate: new Date(), paymentValue: 200}
+                    ]
+                }
+                setBalance(dummyData)
+                return setCustomer(demoUser)
+            }
             let response = await getToken()
             let validToken = response.data.token
             const checkUser = async (user) => {
@@ -223,8 +256,14 @@ const Cargo = (props) => {
 
     const checkMobile = useMediaQuery({ query: '(max-device-width: 700px)' })
 
+    let fillDemo = () => {
+        setLoading(false)
+        setTermsAccepted(true)
+    }
+
     return (
         <div className='app-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <Popup onClose={() => setOpen(false)} open={open} position="right center">
                 <iframe style={{width:'100%', height:'85%'}} src={`data:application/pdf;base64,${contract}`} title='Contract' frameborder="0"></iframe>
                 <div className='button-container'>

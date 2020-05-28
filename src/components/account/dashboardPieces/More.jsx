@@ -107,6 +107,8 @@ const More = (props) => {
     }
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser) return setUser(demoUser)
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
             setUser(user)
@@ -115,6 +117,8 @@ const More = (props) => {
     }, [])
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser) return
         simulate()
     }, [allowed])
 
@@ -176,7 +180,7 @@ const More = (props) => {
                             </div>
                         </div>
                         <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
-                        <p style={{margin: '0'}}><strong>Recuerda:</strong> uno de los <strong>beneficios</strong> de efectiGO, es que tus pagos anticipados <strong>reducen</strong> el <strong>plazo</strong> para finalizar tu préstamo</p>
+                        <p style={{margin: '0'}}><strong>Recuerda:</strong> uno de los <strong>beneficios</strong> de Vivus, es que tus pagos anticipados <strong>reducen</strong> el <strong>plazo</strong> para finalizar tu préstamo</p>
                         <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     </div>
                     <div className='right-monto-option'>

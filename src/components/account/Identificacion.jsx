@@ -151,6 +151,8 @@ const Identificacion = (props) => {
     }
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser) return
         const checkFile = async (idCustomer) => {
             let response = await getToken()
             if(!response) return
@@ -296,6 +298,8 @@ const Identificacion = (props) => {
     }, [])
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser) return setUser(demoUser)
         askToken()
         return
         // let getToken = cookie.load('token')
@@ -303,8 +307,20 @@ const Identificacion = (props) => {
         // setToken(getToken)
     }, [])
 
+    let fillDemo = () => {
+        setLoading(false)
+        setLoading1(false)
+        setLoading2(false)
+        setLoading3(false)
+        setCargadoAnverso(true)
+        setCargadoNomina(true)
+        setCargadoReverso(true)
+        setCargadoSelfie(true)
+    }
+
     return (
         <div className='app-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <div className='id-container'>
                 <div className="id-top-container">
                     <div className='top-instructions'>
@@ -397,7 +413,7 @@ const Identificacion = (props) => {
                                 <img src="/img/mail-account.png" alt='email'/>
                             </div>
                             <div>
-                                <p>Envíanos tus documentos a la siguiente dirección <a href="mailto:documentos@efectigo.com.mx">documentos@efectigo.com.mx</a></p>
+                                <p>Envíanos tus documentos a la siguiente dirección <a href="mailto:documentos@Vivus.com.mx">documentos@Vivus.com.mx</a></p>
                                 <br/>
                                 <p>Este método podría tomar más tiempo que cargar las imágenes</p>
                             </div>

@@ -188,7 +188,7 @@ const Default = ({history, setBalance, bannerId}) => {
                                 <p>Fecha de pago {customerBalance.curentInstallment ? momentEs(customerBalance.curentInstallment.dueDate).format('D/MMM/Y') : 'dd/mm/aaaa'}</p>
                             </div>
                         </div>
-                        <div className='dash-box'>
+                        {/* <div className='dash-box'>
                             <p className='title'><strong>Mi avance en pagos</strong></p>
                             <div className='avance'>
                                 <ReactSpeedometer
@@ -203,7 +203,7 @@ const Default = ({history, setBalance, bannerId}) => {
                                     forceRender
                                 />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <Media queries={{
                         small: "(max-width: 930px)"

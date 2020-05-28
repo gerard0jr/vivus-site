@@ -50,7 +50,7 @@ export const NotApproved = () => {
                     por favor contáctanos nuevamente y te atenderemos con gusto.
                 </p>
                 <div style={{marginTop: '2rem'}}>
-                    <p style={{fontSize: '1rem'}}>Mucha suerte. El equipo de efectiGO.com.mx</p>
+                    <p style={{fontSize: '1rem'}}>Mucha suerte. El equipo de Vivus.com.mx</p>
                 </div>
             </div>
         </div>

@@ -32,6 +32,11 @@ const CashOption = ({moveImgWidth, extensionReference}) => {
     }
 
     const requestRef = () => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser){
+            setExtension(1234789456123)
+            return setLoading(false)
+        }
         setLoading(true)
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
@@ -41,6 +46,11 @@ const CashOption = ({moveImgWidth, extensionReference}) => {
     }
 
     const oxxoRef = () => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser){
+            setExtension(1234789456123)
+            return setLoading(false)
+        }
         setLoading(true)
         setTimeout(() => {
             setExtension(extensionReference)

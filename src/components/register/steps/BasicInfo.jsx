@@ -94,6 +94,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
     // TAG MANAGER END
 
     const submitData = async () => {
+        if(data.eMail === 'demo@demo.com') return props.push('/registration/personal-details')
         if(!(termsAccepted && privacyAccepted && financialAccepted)) return
         if(!data.firstName) return setFirstNameError(true)
         else setFirstNameError(false)
@@ -181,6 +182,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
         sessionStorage.removeItem('data-step-registration')
         sessionStorage.removeItem('session-step')
         sessionStorage.removeItem('customer-logged')
+        if(data.eMail === 'demo@demo.com') return setValidEmail(true)
         setLoading(true)
         let rex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(!data.eMail || !rex.test(data.eMail.toLowerCase())) {
@@ -287,7 +289,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
             let validToken = cookie.load('token')
             if(!validToken){
                 let response = await getToken()
-                if(!response.data) return props.push('/error')
+                if(!response.data) return
                 if(response.data) validToken = response.data.token
             }
 
@@ -311,7 +313,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
             let validToken = cookie.load('token')
             if(!validToken){
                 let response = await getToken()
-                if(!response.data) return props.push('/error')
+                if(!response.data) return
                 if(response.data) validToken = response.data.token
             }
             let currentStep = await sessionStorage.getItem('session-step')
@@ -354,10 +356,33 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
         askLogged()
     }, [])
 
+    let fillDemo = () => {
+        sessionStorage.setItem('demoUser', JSON.stringify({
+            eMail: 'demo@demo.com',
+            customerId: 12345,
+            fullName: 'Demo',
+            mobile: '5565829661'
+        }))
+        if(!data.eMail) return setData({eMail: 'demo@demo.com'})
+        setData({...data, 
+            firstName: 'Demo',
+            firstLastName: 'FN',
+            secondLastName: 'LN',
+            homePhone: '5565829661',
+            mobilePhone: '5544778899',
+            password: 'parole1',
+        })
+        setRepeatPassword('parole1')
+        setTermsAccepted(true)
+        setPrivacyAccepted(true)
+        setFinancialAccepted(true)
+    }
+
     return (
         <>
         {!tokenError ? 
         <div className='register-form-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Registro</h1>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
             <div style={{marginBottom: '1rem'}}>

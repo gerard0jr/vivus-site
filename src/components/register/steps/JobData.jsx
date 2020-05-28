@@ -37,6 +37,7 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
         if(data.employmentPhone.search(/[a-zA-Z]/) !== -1) return setEmployerPhoneError(true)
         else setEmployerPhoneError(false)
         if(antMonth === null || antYear === null) return setAntError(true)
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/registration/nip-bureau')
         else setAntError(false)
         setLoading(true)
         let submittedData = {
@@ -184,6 +185,19 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
 
     useEffect(() => {
         const getCatalogs = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser){
+                setEmploymentCatalog([
+                    {value: 1, text: 'Ingeniero'},
+                    {value: 2, text: 'Contador'},
+                    {value: 3, text: 'Abogado'}
+                ])
+                return setIndustryCatalog([
+                    {value: 1, text: 'Tecnología'},
+                    {value: 2, text: 'Construcción'},
+                    {value: 3, text: 'Otra industria'}
+                ])
+            }
             let response = await getToken()
             let validToken = response.data.token
             let tipo = {
@@ -210,6 +224,8 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
 
     useEffect(() => {
         const loadPersonalData = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser) return setCustomer(demoUser)
             let response = await getToken()
             let validToken = response.data.token
             let currentStep = await sessionStorage.getItem('session-step')
@@ -239,8 +255,21 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
         loadPersonalData()
     }, [])
 
+    let fillDemo = () => {
+        setEmploymentType(1)
+        setIdEmploymentIndustry(1)
+        setIncome(25000)
+        setData({
+            employerName: 'Mayorga',
+            employmentPhone: '5562788120'
+        })
+        setAntYear(2)
+        setAntMonth(5)
+    }
+
     return (
         <div className='register-form-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Detalles</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>de tu empleo</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>

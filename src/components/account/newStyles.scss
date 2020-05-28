@@ -108,11 +108,11 @@
 
 .fill-demo{
     position: absolute;
-    top: 2rem;
+    top: 3rem;
     right: 2rem;
     background-color: #A3CD3A;
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     font-size: 1.5rem;
     box-shadow: 1px 1px 5px gray;
     cursor: pointer;
@@ -172,7 +172,7 @@
 }
 
 .account-container p{
-    margin-bottom: 10px !important;
+    // margin-bottom: 10px !important;
 }
 
 .account-container h3{
@@ -829,7 +829,7 @@ th, td {
 
 .liquidate-left{
     margin: 1rem;
-    width: 240px;
+    width: 300px;
 }
 
 .liquidate-left h4{
@@ -852,6 +852,10 @@ th, td {
 .liquidate-values{
     display: flex;
     justify-content: space-between;
+}
+
+.liquidate-values p{
+    text-align: left;
 }
 
 .bold{
@@ -919,11 +923,13 @@ th, td {
 .bank-header{
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 .bank-header p{
     width: fit-content;
-    background-color: #93d500;
+    background-color: #0E672E;
     color: white;
     padding: 1rem 4rem;
     margin: 0;
@@ -948,7 +954,7 @@ th, td {
 
 .bank-accordion{
     padding: 1rem;
-    width: 400px;
+    width: 350px;
 }
 
 .move-container{
@@ -1046,7 +1052,7 @@ th, td {
 }
 
 .move-option-title{
-    margin: 0;
+    margin: 0 0 1rem;
 }
 
 .move-option-title img{
@@ -1587,6 +1593,12 @@ th, td {
 
 }
 
+@media(max-width: 1493px){
+    .select-option{
+        padding: 6.3rem 3rem;
+    }
+}
+
 @media(max-width: 1350px){
     .account-container{
         flex-direction: column;
@@ -1991,5 +2003,18 @@ th, td {
     .friends-container{
         width: 95%;
         margin: 0 auto;
+    }
+    .account-container {
+        display: flex;
+        align-items: center;
+        margin: 0 1rem;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .btn-minimal-width{
+        width: 70% !important;
+    }
+    .flex-horizontal{
+        padding: 0;
     }
 }

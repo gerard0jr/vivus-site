@@ -46,6 +46,22 @@ const BankOption = () => {
     }
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+        if(demoUser){
+            setBank0({
+                account: '25478154',
+                paymentReference: '12354874561237862'
+            })
+            setBank1({
+                account: '25478154',
+                paymentReference: '12354874561237862'
+            })
+            setBank2({
+                account: '25478154',
+                paymentReference: '12354874561237862'
+            })
+            return
+        }
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
             getData(user)

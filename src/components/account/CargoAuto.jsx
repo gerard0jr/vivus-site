@@ -13,6 +13,7 @@ const CargoAuto = (props) => {
     const [data, setData] = useState(null)    
 
     const goTo = async () => {
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/dashboard/id')
         let response = await getToken()
         let validToken = response.data.token
         let coords = sessionStorage.getItem('coords')
@@ -108,6 +109,18 @@ const CargoAuto = (props) => {
 
     useEffect(() => {
         const initialConfig = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser){
+                setData({
+                    frequence: 'semanal',
+                    bank: 'Santander',
+                    bankAccountNumber: '123456789012345678',
+                    firstPaymentAmount: '1250',
+                    dueDate: new Date(),
+                    customerName: 'Demo'
+                })
+                return setCustomer(demoUser)
+            }
             let response = await getToken()
             let validToken = response.data.token
             const checkUser = async (user) => {
@@ -144,8 +157,13 @@ const CargoAuto = (props) => {
         initialConfig()
     }, [])
 
+    let fillDemo = () => {
+        setAuth(true)
+    }
+
     return (
         <div className='app-container'>
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <div className='buro-container'>
                 <div>
                     <p>Estamos <span style={{fontSize:'2rem'}}>ya casi listos</span> para que disfutes de tu nuevo <span style={{fontSize:'2.8rem'}}>préstamo,</span> <span style={{fontSize:'2.4rem'}}> el cual será más fácil pagar</span><span style={{fontSize:'2.8rem'}}> sin filas</span><span style={{fontSize:'2.4rem'}}> ni</span><span style={{fontSize:'2.8rem'}}> comisiones extras.</span></p>
@@ -155,20 +173,20 @@ const CargoAuto = (props) => {
                     <div style={{margin: 0}} className='checkbox-div'>
                         <div className="checkbox-top">
                             <label className="container">
-                                <input onChange={() => setAuth(!auth)} type='checkbox'/>
+                                <input onChange={() => setAuth(!auth)} type='checkbox' value={auth} checked={auth}/>
                                 <span className="checkmark"></span>
                             </label>
                         </div>
                     </div>
-                    <div style={{marginLeft:'2rem'}}>
-                        <p>Solicito y autorizo a 4Finance, S.A. de C.V. SOFOM ENR realice cargos periódicos para el pago de mi préstamo de forma 
-                            <input value={data && data.frequence} type="text" style={{backgroundColor: '#A3CD3A', color: 'white'}}/> a mi cuenta CLABE y/o tarjeta bancaria de 
-                            <input value={data && data.bank} type="text" style={{backgroundColor: '#A3CD3A', color: 'white'}} /> con número 
-                            <input type='text' value={data && data.bankAccountNumber} style={{backgroundColor: '#A3CD3A', color: 'white'}} /> por un importe de 
-                            <input type="text" value={data && data.firstPaymentAmount} style={{backgroundColor: '#A3CD3A', color: 'white'}} /> pesos m.n.</p>
-                        <p>Esta autorización vence el <input type="text" value={data && momentEs(data.dueDate).format('D/MMM/Y')} style={{backgroundColor: '#A3CD3A', color: 'white'}} /> fecha de mi última cuota de pago o hasta que quede liquidado en su totalidad dicho préstamo.</p>
+                    <div style={{marginLeft:'2rem', lineHeight: '2rem'}}>
+                        <p>Solicito y autorizo a 4Finance, S.A. de C.V. SOFOM ENR realice cargos periódicos para el pago de mi préstamo de forma &nbsp; 
+                            <input value={data && data.frequence} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}}/> a mi cuenta CLABE y/o tarjeta bancaria de &nbsp;
+                            <input value={data && data.bank} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> con número &nbsp;
+                            <input type='text' value={data && data.bankAccountNumber} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> por un importe de &nbsp;
+                            <input type="text" value={data && data.firstPaymentAmount} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> pesos m.n.</p>
+                        <p>Esta autorización vence el <input type="text" value={data && momentEs(data.dueDate).format('D/MMM/Y')} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> fecha de mi última cuota de pago o hasta que quede liquidado en su totalidad dicho préstamo.</p>
                         <p>Estoy enterado de que en cualquier momento podré solicitar la cancelación de la presente domiliciación sin costo a mi cargo.</p>
-                        <p>Atentamente. <input type="text" value={data && data.customerName} style={{backgroundColor: '#A3CD3A', color: 'white', width: '300px'}} /></p>
+                        <p>Atentamente. <input type="text" value={data && data.customerName} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white', width: '300px'}} /></p>
                     </div>
                 </div>
                 <p className={auth ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={goTo}>CONTINUAR</p>
