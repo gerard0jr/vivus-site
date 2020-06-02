@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DebitOption = ({moveLoan}) => {
+const DebitOption = () => {
     return (
         <div>
             <p>Por favor presiona el botón de abajo y serás redirigido a la plataforma de pago. Ahí deberás llenar toda la información requerida y podrás hacer tu pago</p>

@@ -104,6 +104,7 @@ const Done = (props) => {
                 setTimeout(() => {
                     return props.history.push('/pre-approved')
                 },2000)
+                return
             }
             sessionStorage.removeItem('customer-direct-step')
             sessionStorage.setItem('session-step', 5)

@@ -185,7 +185,8 @@ const Cargo = (props) => {
     useEffect(() => {
         const initialConfig = async () => {
             let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
-            if(demoUser){
+            const loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))
+            if(demoUser || loggedUser.eMail === 'demo@demo.com'){
                 let dummyData = {
                     creditLimit: 5000,
                     creditLimitUsed: 2500,
@@ -214,6 +215,7 @@ const Cargo = (props) => {
                     ]
                 }
                 setBalance(dummyData)
+                if(loggedUser && loggedUser.eMail==='demo@demo.com') return setCustomer(loggedUser)
                 return setCustomer(demoUser)
             }
             let response = await getToken()
@@ -228,7 +230,6 @@ const Cargo = (props) => {
             }
             let approved = sessionStorage.getItem('APP')
             if(approved === 'no') return props.history.push('/denied')
-            const loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))
             if(!loggedUser){
                 const emptyCustomer = await JSON.parse(sessionStorage.getItem('empty-customer'))
                 if(emptyCustomer) {
@@ -292,88 +293,90 @@ const Cargo = (props) => {
                         </div>
                         }
                     </div>
-                    <div className='resume-dashboard-red'>
-                            <h2>Revisa el Monto de préstamo</h2>
-                            <p>De acuerdo a nuestras políticas internas en este momento podemos ofrecerte hasta el monto indicado en tu <strong>Resumen de condiciones</strong></p>
-                            <p>Si deseas modificarlo da click en:</p>
-                            <div style={{display: 'flex', alignItems: 'center'}}>
-                                <Link to='/dashboard'><p style={{textDecoration: 'underline'}}><strong>Modificar solicitud de préstamo</strong></p></Link>
-                                <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : null}>CONTINUAR</p>
-                            </div>
-                    </div>
                 </div>
-                <div className='resumen-contrato'>
-                    <div className='contrato-top'>
-                        <div className='resumen-left'>
-                            <h2 style={{color: 'white'}}>Resumen de condiciones</h2>
-                            <div className='data'>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Monto del préstamo</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                <div className='contract-resume-container'>
+                    <div className='resume-dashboard-red'>
+                                <h2>Revisa el Monto de préstamo</h2>
+                                <p>De acuerdo a nuestras políticas internas en este momento podemos ofrecerte hasta el monto indicado en tu <strong>Resumen de condiciones</strong></p>
+                                <p>Si deseas modificarlo da click en:</p>
+                                <div style={{display: 'flex', alignItems: 'center', marginTop: '1rem'}}>
+                                    <Link to='/dashboard'><p style={{textDecoration: 'underline'}}><strong>Modificar solicitud de préstamo</strong></p></Link>
+                                    <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : null}>CONTINUAR</p>
                                 </div>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Interés</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>${balance.installments.reduce((acc, installment) => acc + installment.interest, 0).toFixed(2)}</p>
-                                </div>
-                            </div>
-                            <div className='data'>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Plazo del préstamo</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.term} {balance.idFrequency === 1 ? 'semanas' : 'quincenas'}</p>
-                                </div>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Inicio del préstamo</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{momentEs(balance.installments[0].dueDate).format('D/MMM/Y')}</p>
-                                </div>
-                            </div>
-                            <div className='data'>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Monto de parcialidad</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} <small style={{color: 'white'}}>IVA incluído</small></p> 
-                                </div>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Fin del préstamo</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{momentEs(balance.installments[balance.installments.length - 1].dueDate).format('D/MMM/Y')}</p>
-                                </div>
-                            </div>
-                            <div className='data'>
-                                <div className='data-margin'>
-                                    <p className='data-title'>Número de parcialidades</p>
-                                    <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.term}</p>
-                                </div>
-                            </div>
-                            <p style={{fontSize: '0.8rem', color: 'white', marginLeft: '2rem'}}>El préstamo está sujeto a aprobación y verificación de crédito</p>
                         </div>
-                        <div className='resumen-right'>
-                          <h5>Parcialidades a pagar</h5>      
-                          <table className='tabla'>
-                            <thead>
-                                <tr>
-                                    <th>Pago</th>
-                                    <th>Fecha</th>
-                                    <th>Total</th>
-                                    <th>Capital</th>
-                                    <th>Interés</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {balance.installments.filter(el => el.idDeferral !== 0).map((el, ix) => 
-                                    <tr key={ix}>
-                                        <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.idDeferral}</td>
-                                        <td className={ix % 2 ? 'row-non' : 'row-par'}>{momentEs(el.dueDate).format('D/MMM/Y')}</td>
-                                        <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.paymentValue ? el.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</td>
-                                        <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.principal ? el.principal.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</td>
-                                        <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.interest ? el.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</td>
+                    <div className='resumen-contrato'>
+                        <div className='contrato-top'>
+                            <div className='resumen-left'>
+                                <h2 style={{color: 'white'}}>Resumen de condiciones</h2>
+                                <div className='data'>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Monto del préstamo</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                    </div>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Interés</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>${balance.installments.reduce((acc, installment) => acc + installment.interest, 0).toFixed(2)}</p>
+                                    </div>
+                                </div>
+                                <div className='data'>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Plazo del préstamo</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.term} {balance.idFrequency === 1 ? 'semanas' : 'días'}</p>
+                                    </div>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Inicio del préstamo</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{momentEs(balance.installments[0].dueDate).format('D/MMM/Y')}</p>
+                                    </div>
+                                </div>
+                                <div className='data'>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Monto total a pagar</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} <small style={{color: 'white'}}>IVA incluído</small></p> 
+                                    </div>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Fin del préstamo</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{momentEs(balance.installments[balance.installments.length - 1].dueDate).format('D/MMM/Y')}</p>
+                                    </div>
+                                </div>
+                                {/* <div className='data'>
+                                    <div className='data-margin'>
+                                        <p className='data-title'>Número de parcialidades</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.term}</p>
+                                    </div>
+                                </div> */}
+                                <p style={{fontSize: '0.8rem', color: 'white', marginLeft: '2rem'}}>El préstamo está sujeto a aprobación y verificación de crédito</p>
+                            </div>
+                            {/* <div className='resumen-right'>
+                            <h5>Parcialidades a pagar</h5>      
+                            <table className='tabla'>
+                                <thead>
+                                    <tr>
+                                        <th>Pago</th>
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                        <th>Capital</th>
+                                        <th>Interés</th>
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {balance.installments.filter(el => el.idDeferral !== 0).map((el, ix) => 
+                                        <tr key={ix}>
+                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.idDeferral}</td>
+                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{momentEs(el.dueDate).format('D/MMM/Y')}</td>
+                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.paymentValue ? el.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</td>
+                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.principal ? el.principal.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</td>
+                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.interest ? el.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                            </div> */}
                         </div>
-                    </div>
-                    <div className= 'contrato-bottom'>
-                        <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : null}>{loadingConfirm ? <BallClipRotate loading color={'#A3CD3A'}/> : 'CONTINUAR'}</p>
-                        {serverError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente(400, bad request)</p> : null}
-                        <Link style={{color: 'black', fontWeight: 'bold', textDecoration: 'underline'}} to='/dashboard'>Modificar solicitud de préstamo</Link>
+                        <div className= 'contrato-bottom'>
+                            <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : null}>{loadingConfirm ? <BallClipRotate loading color={'#A3CD3A'}/> : 'CONTINUAR'}</p>
+                            {serverError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente(400, bad request)</p> : null}
+                            <Link style={{color: 'black', fontWeight: 'bold', textDecoration: 'underline'}} to='/dashboard'>Modificar solicitud de préstamo</Link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -49,7 +49,8 @@ const Bank = ({balance}) => {
 
     useEffect(() => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
-        if(demoUser){
+        let user = JSON.parse(sessionStorage.getItem('loggedUser'))
+        if(demoUser || user.eMail === 'demo@demo.com'){
             setBank0({
                 account: '25478154',
                 paymentReference: '12354874561237862'
@@ -58,16 +59,15 @@ const Bank = ({balance}) => {
                 account: '25478154',
                 paymentReference: '12354874561237862'
             })
-            setBank2({
+            return setBank2({
                 account: '25478154',
                 paymentReference: '12354874561237862'
             })
-            return
         }
-        let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
             getData(user)
         }        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     return (
@@ -81,17 +81,17 @@ const Bank = ({balance}) => {
                 <p>Te sugerimos que al usarla realices el <strong>pago antes</strong> de la fecha de <strong>vencimiento</strong> para evitar aclaraciones.</p>
                 <div className='bank-bottom-container'>
                     <div className='liquidate-left'>
-                    <div className='liquidate-resume'>
-                            <p className='bold-type'>Tu parcialidad no. <strong>{balance.curentInstallment.idDeferral}</strong></p>
+                        <div className='liquidate-resume'>
+                            <p className='bold-type'>DETALLES DEL PAGO</p>
                             <hr/>
-                            <div className='liquidate-values'><p className='bold-type'>Monto a pagar:</p><p className='bold-type'>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
+                            <div className='liquidate-values'><p>Capital:</p><p>{balance.curentInstallment.principalBalance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
                             <hr/>
-                            <div className='liquidate-values'><p>Capital:</p><p>${balance.curentInstallment.principalBalance}</p></div>
+                            <div className='liquidate-values'><p>Intereses:</p><p>{balance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
                             <hr/>
-                            <div className='liquidate-values'><p>Intereses:</p><p>${balance.curentInstallment.interest}</p></div>
+                            <div className='liquidate-values'><p className='bold-type'>Monto a pagar:</p><p style={{textAlign: 'right'}} className='bold-type'>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> IVA incluído</small></p></div>
                             <hr/>
-                            <p className='bold-type'>Fecha de vencimiento</p>
-                            <p style={{textAlign: 'right'}}>{momentEs(balance.curentInstallment.dueDate).format('D/MMM/Y')}</p>
+                            <p>Fecha de vencimiento</p>
+                            <p className='bold-type' style={{textAlign: 'right'}}>{momentEs(balance.curentInstallment.dueDate).format('D/MMM/Y')}</p>
                         </div>
                     </div>
                     <div className='bank-accordion'>
@@ -135,6 +135,7 @@ const Bank = ({balance}) => {
                                 </AccordionItemPanel>
                             </AccordionItem>
                         </Accordion>
+                        {serverError && <span>*Error en el servidor</span>}
                     </div>
                 </div>
             </div>

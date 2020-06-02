@@ -16,8 +16,8 @@ const Options = ({cargos, setCargos}) => {
                     <button onClick={() => setCargos('debit')} className='dashboard-gray-button'>Tarjeta débito</button>
                 </div>
                 <div className='op-right-buttons' style={{alignItems: 'center'}}>
-                    <button onClick={() => setCargos('cash')} style={{width: '400px', marginBottom: '1rem'}} className='dashboard-gray-button'>Efectivo</button>
-                    <img style={{width: '200px', height: 'auto'}} src="/img/oxxoPay.png" alt="efectivo pago"/>
+                    <button onClick={() => setCargos('cash')} style={{width: '320px', marginBottom: '1rem'}} className='dashboard-gray-button'>Efectivo</button>
+                    {/* <img style={{width: '200px', height: 'auto'}} src="/img/oxxoPay.png" alt="efectivo pago"/> */}
                 </div>
             </div>
         </div>

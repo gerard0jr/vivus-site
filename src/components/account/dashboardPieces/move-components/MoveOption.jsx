@@ -10,14 +10,26 @@ import { getToken, requestExtension } from '../../../../services/api'
 
 
 const idProduct = 1
-const MoveOption = ({extensionData, user}) => {
+const MoveOption = ({user}) => {
 
     const [willPay, setWillPay] = useState(false)
     const [serverError, setServerError] = useState(false)
+    const [extensionData, setExtensionData] = useState({
+        oldDueDate: new Date(),
+        dueDateSeven: new Date(),
+        dueDateFourteen: new Date(),
+        dueDateThirty: new Date(),
+        priceSeven: 121,
+        priceFourteen: 216,
+        priceThirty: 429,
+        reference: '123456789'
+    })
+    const [selected, setSelected] = useState(null)
 
     const setExtension = async () => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
-        if(demoUser) return setWillPay(true)
+        let loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'))
+        if(demoUser || loggedUser.eMail === 'demo@demo.com') return setWillPay(true)
         let response = await getToken()  
         if(!response) return setServerError(true)
         let validToken = response.data.token
@@ -32,8 +44,7 @@ const MoveOption = ({extensionData, user}) => {
             if(data){
                 // ALLOW EXTENSION
                 setWillPay(true)
-                // DENY EXTENSION
-                return setServerError(true)
+                setExtensionData(data)
             }            
 
         })
@@ -45,35 +56,63 @@ const MoveOption = ({extensionData, user}) => {
                     <img src="/img/calendar_icon.png" alt="calendar"/>
                     <div>
                         <p className='move-md-size'><strong>Recorre la fecha</strong></p>   
-                        <p style={{fontSize: '1.5rem'}}>de pago de tu parcialidad</p>
+                        <p style={{fontSize: '1.5rem'}}>de pago de tu préstamo</p>
                     </div>
                 </div>
-                <p>Solo necesitas seleccionar la nueva fecha de vencimiento, elegir el método de pago, realizarlo y no preocuparte más.</p>
-                <div className='move-vencimiento'>
-                    <p>Vencimiento actual de tu parcialidad numero {extensionData.idDeferral}:</p>
-                    <p className='move-md-size' style={{marginLeft: '2rem', textAlign: 'right'}}>{momentEs(extensionData.oldDueDate).format('D/MMM/Y')}</p>
-                </div>
+                <p style={{fontSize: '1.2rem'}}>Selecciona el número de días que deseas recorrer</p>
                 <div className='move-vencimiento'>
                     <p>Vencimiento actual de tu préstamo:</p>
-                    <p className='move-md-size' style={{marginLeft: '2rem', textAlign: 'right'}}>{momentEs(extensionData.oldLastDueDate).format('D/MMM/Y')}</p>
+                    <p className='move-md-size' style={{marginLeft: '2rem', textAlign: 'right'}}>{momentEs(extensionData.oldDueDate).format('D/MMM/Y')}</p>
                 </div>
-                <div className={willPay ? 'move-nuevo-vencimiento-selected' : 'move-nuevo-vencimiento'}>
-                    <div className='price-move'>
-                        <p className='move-md-size'><strong>{extensionData.extensionFee ? extensionData.extensionFee.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
-                        <p>IVA incluído</p>
-                        <p>Costo del servicio</p>
-                        <div style={{marginTop: '10px'}}>
-                            <p className='btn-minimal-width move-select-button' onClick={setExtension}>SOLICITAR</p>
+                <div className="move-options-container">
+                    <div className={selected === 7 ? 'move-nuevo-vencimiento move-selected' : 'move-nuevo-vencimiento'}>
+                        <div className='price-move'>
+                            <p>7</p>
+                            <p>días</p>
+                            <p>hasta</p>
+                            <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
+                            <hr/>
+                            <p className='move-md-size'><strong>{extensionData.priceSeven ? extensionData.priceSeven.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
+                            <small>Costo de la extensión</small>
+                            <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
+                                <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(7)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p><u>Nuevo vencimiento de</u></p>
-                        <p>parcialidad No. {extensionData.idDeferral}:</p>
-                        <p className="move-md-size"><strong>{momentEs(extensionData.newDueDate).format('D/MMM/Y')}</strong></p>
-                        <p>préstamo:</p>
-                        <p className="move-md-size"><strong>{momentEs(extensionData.newLastDueDate).format('D/MMM/Y')}</strong></p>
+                    <div className={selected === 14 ? 'move-nuevo-vencimiento move-selected' : 'move-nuevo-vencimiento'}>
+                        <div className='price-move'>
+                            <p>14</p>
+                            <p>días</p>
+                            <p>hasta</p>
+                            <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
+                            <hr/>
+                            <p className='move-md-size'><strong>{extensionData.priceFourteen ? extensionData.priceFourteen.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
+                            <small>Costo de la extensión</small>
+                            <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
+                                <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(14)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={selected === 30 ? 'move-nuevo-vencimiento move-selected' : 'move-nuevo-vencimiento'}>
+                        <div className='price-move'>
+                            <p>30</p>
+                            <p>días</p>
+                            <p>hasta</p>
+                            <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
+                            <hr/>
+                            <p className='move-md-size'><strong>{extensionData.priceThirty ? extensionData.priceThirty.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
+                            <small>Costo de la extensión</small>
+                            <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
+                                <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(30)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <p className='move-terms'>
+                    Al seleccionar el núnero de días que deseas reestructurar y con ello recorrer la fecha de pago de tu préstamo,
+                    confirmas que has leído y que estás de acuerdo con los términos y condiciones del Contrato de Reestructura y 
+                    otorgas tu consentimiento de manera expresa de conformidad con el Art. 1803 del Código Civil Federal vigente.
+                </p>
             </div>
             <div className='right-move-option'>
                 {willPay ? <div className='will-pay-options'>
@@ -82,16 +121,12 @@ const MoveOption = ({extensionData, user}) => {
                     <br/><br/>
                     <Tabs>
                         <TabList>
-                            <Tab className='tabs-underlined'>Cargo automático</Tab>
-                            <Tab className='tabs-underlined'>Efectivo en tiendas(OXXO)</Tab>
+                            <Tab className='tabs-underlined'>Efectivo en tiendas</Tab>
                             <Tab className='tabs-underlined'>Banco</Tab>
                             <Tab className='tabs-underlined'>Tarjeta de Débito</Tab>
                         </TabList>
                         <TabPanel>
-                            <ChargeOption/>
-                        </TabPanel>
-                        <TabPanel>
-                            <CashOption extensionReference={extensionData.oxxoReference} moveImgWidth={'200px'}/>
+                            <CashOption extensionReference={extensionData.reference} moveImgWidth={'200px'}/>
                         </TabPanel>
                         <TabPanel>
                             <BankOption/>

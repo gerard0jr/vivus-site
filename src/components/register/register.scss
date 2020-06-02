@@ -341,6 +341,16 @@
     margin-bottom: 10px !important;
 }
 
+.account-container-denied .title-winput p{
+    font-size: 0.8rem;
+    margin-bottom: 10px !important;
+    color: black;
+}
+
+.account-container-denied .rangeslider__labels .rangeslider__label-item {
+    color: black;
+}
+
 .account-container-denied{
     display: flex;
     align-items: center;
@@ -366,6 +376,10 @@
 
 .zip-button-container{
     display: flex;
+}
+
+.left-dash-denied .slider-container{
+    background-color: #F2F2F2;
 }
 
 @media(max-width: 1190px){

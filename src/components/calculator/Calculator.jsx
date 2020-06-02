@@ -3,7 +3,7 @@ import './calculator.scss'
 import Slider from 'react-rangeslider'
 import { BallClipRotate } from 'react-pure-loaders'
 import { getToken, getConfiguration, getSimulation } from '../../services/api.js'
-import { faExclamationTriangle, faTable, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import cookie from 'react-cookies'
 import { momentEs } from '../../services/moment'
@@ -18,7 +18,7 @@ const Calculator = (props) => {
     const [monto, setMonto] = useState(null)
     const [firstPaymentAmount, setFirstPaymentAmount] = useState(0)
     const [plazo, setPlazo] = useState(null)
-    const [periodicidad, setPeriodicidad] = useState(1)
+    const [periodicidad, setPeriodicidad] = useState(3)
     const [cat, setCat] = useState(null)
     const [interesIVA, setInteresIVA] = useState(null)
     const [fecha, setFecha] = useState(null)
@@ -101,15 +101,15 @@ const Calculator = (props) => {
         setPlazo(val)
     }
 
-    const updatePeriodicidad = val => {
-        if(val === 2){
-            if(plazo > 6) setPlazo(6)
-        }
-        if(val === 1){
-            if(plazo < 4) setPlazo(4)
-        }
-        setPeriodicidad(val)
-    }
+    // const updatePeriodicidad = val => {
+    //     if(val === 2){
+    //         if(plazo > 6) setPlazo(6)
+    //     }
+    //     if(val === 1){
+    //         if(plazo < 4) setPlazo(4)
+    //     }
+    //     setPeriodicidad(val)
+    // }
 
     const setData = () => {
         sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto, periodicidad, plazo}))
@@ -118,10 +118,12 @@ const Calculator = (props) => {
 
     useEffect(() => {
         simulate(monto, periodicidad, plazo)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [monto, periodicidad, plazo])
 
     useEffect(() => {
         initialConfiguration()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     let stepWidth = 24
@@ -170,7 +172,7 @@ const Calculator = (props) => {
                             min={config.minAmount}
                             max={config.maxAmount}
                             value={monto}
-                            labels={config !== 'error' ? {[config.minAmount]:`$${config.minAmount}`, [config.maxAmount]:`$${config.maxAmount}`} : {'0': 0, '0': 0}}
+                            labels={config !== 'error' ? {[config.minAmount]:`$${config.minAmount}`, [config.maxAmount]:`$${config.maxAmount}`} : {'0': 0, '1': 1}}
                             step={config.stepAmount}
                             orientation='horizontal'
                             tooltip={false}
@@ -190,7 +192,7 @@ const Calculator = (props) => {
                         <p>Plazo</p>
                         <div className="slider-input-wrapper">
                             <input className="slider-input" type="text" value={plazo} readOnly/>
-                            <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' días'}</span>
+                            <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' días' : ' días'}</span>
                         </div>
                     </div>
                     <div className='slider'>
@@ -223,7 +225,7 @@ const Calculator = (props) => {
                                         {[config.frequencies[0].frequencyTerm.minTerm]:`${config.frequencies[0].frequencyTerm.minTerm}`,
                                         [config.frequencies[0].frequencyTerm.maxTerm]: `${config.frequencies[0].frequencyTerm.maxTerm}`}
                                         :
-                                        {"0":"0","0":"0"}
+                                        {"0":"0","1":"1"}
                             }
                             orientation='horizontal'
                             tooltip={false}
@@ -239,7 +241,7 @@ const Calculator = (props) => {
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row'>
                         <p>Plazo</p>
-                        <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'días'}</p>
+                        <p>{plazo} {periodicidad === 2 ? 'días' : 'días'}</p>
                     </div>
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row'>
@@ -250,14 +252,14 @@ const Calculator = (props) => {
                     </div>
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row'>
-                        <p><strong>Parcialidad a pagar</strong></p>
+                        <p><strong>Monto a pagar</strong></p>
                         <div>
                             <p><strong>{firstPaymentAmount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                         </div>
                     </div>
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                     <div className='info-row'>
-                        <p><strong>Fecha de pago 1er parcialidad</strong></p>
+                        <p><strong>Fecha de pago</strong></p>
                         <p><strong>{momentEs(fecha).format('D/MMM/Y')}</strong></p>
                     </div>
                     <div className='cat-prom'>

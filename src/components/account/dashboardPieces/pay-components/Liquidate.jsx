@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import '../../newStyles.scss'
 import 'react-tabs/style/react-tabs.scss'
@@ -6,8 +6,7 @@ import ChargeOption from './liquidate-components/ChargeOption'
 import BankOption from './liquidate-components/BankOption'
 import DebitOption from './liquidate-components/DebitOption'
 import CashOption from './liquidate-components/CashOption'
-
-const idProduct = 1
+import { momentEs } from '../../../../services/moment'
 
 const Liquidate = ({balance}) => {
     console.log(balance)
@@ -16,13 +15,16 @@ const Liquidate = ({balance}) => {
             <div className='liquidate-left'>
                 <h4>Monto para liquidar préstamo</h4>
                 <div className='liquidate-resume'>
-                    <p className='bold-type'>Tu préstamo</p>
+                    <p className='bold-type'>DETALLES DEL PAGO</p>
                     <hr/>
-                    <div className='liquidate-values'><p className='bold-type'>Monto total a pagar:</p><strong>{balance.liquidateAmount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</strong></div>
+                    <div className='liquidate-values'><p>Capital:</p><p>{balance.curentInstallment.principalBalance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
                     <hr/>
-                    <div className='liquidate-values'><p>Monto del préstamo:</p><strong>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</strong></div>
+                    <div className='liquidate-values'><p>Intereses:</p><p>{balance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
                     <hr/>
-                    <div className='liquidate-values'><p>Intereses:</p><strong>${balance.installments.reduce((acc, installment) => acc + installment.interest, 0).toFixed(2)}</strong></div>
+                    <div className='liquidate-values'><p className='bold-type'>Monto a pagar:</p><p style={{textAlign: 'right'}} className='bold-type'>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> IVA incluído</small></p></div>
+                    <hr/>
+                    <p>Fecha de vencimiento</p>
+                    <p className='bold-type' style={{textAlign: 'right'}}>{momentEs(balance.curentInstallment.dueDate).format('D/MMM/Y')}</p>
                 </div>
             </div>
             <div className='liquidate-right'>
@@ -31,7 +33,7 @@ const Liquidate = ({balance}) => {
                 <Tabs>
                     <TabList>
                         <Tab>Cargo automático</Tab>
-                        <Tab>Efectivo en tiendas(OXXO)</Tab>
+                        <Tab>Efectivo en tiendas</Tab>
                         <Tab>Banco</Tab>
                         <Tab>Tarjeta de Débito</Tab>
                     </TabList>

@@ -11,7 +11,7 @@ const PasswordRecoveryEmail = (props) => {
   
   const confirmation = async () => {
     setLoading(true)
-    let rex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let rex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!email || !rex.test(email.toLowerCase())) {
         setLoading(false)
         return setEmailError(true)
@@ -42,7 +42,7 @@ const PasswordRecoveryEmail = (props) => {
     
     useEffect(() => {
       if(sessionStorage.getItem('loggedUser') && cookie.load('token')) props.history.push('/dashboard/initial')
-    }, [])
+    }, [props])
   
     return (
         <div className='app-container'>

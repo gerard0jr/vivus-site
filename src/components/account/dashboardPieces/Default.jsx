@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import ReactSpeedometer from "react-d3-speedometer"
 import { withRouter } from 'react-router-dom'
-import { getToken, getCustomerBalance, getPaymentsDetail, getFilledContract, getAccountStatement, getAnalytics, getStatus } from '../../../services/api'
+import { getToken, getCustomerBalance, getFilledContract, getAccountStatement, getAnalytics, getStatus } from '../../../services/api'
 import { BallClipRotate } from 'react-pure-loaders'
 import { momentEs } from '../../../services/moment'
 import TagManager from 'react-gtm-module'
@@ -118,10 +117,11 @@ const Default = ({history, setBalance, bannerId}) => {
             if(user.eMail === 'demo@demo.com'){
                 let dummyData = {
                     creditLimit: 5000,
-                    creditLimitUsed: 2500,
+                    creditLimitUsed: 1500,
                     liquidateAmount: 1500,
                     term: 3,
-                    frequency: 1,
+                    frequency: 3,
+                    idFrequency: 3,
                     curentInstallment: {
                         idDeferral: 1,
                         principalBalance: 500,
@@ -168,58 +168,62 @@ const Default = ({history, setBalance, bannerId}) => {
                     <div className='dash-top-container'>
                         <div className='dash-box'>
                             <p className='title'><strong>Mi préstamo</strong></p>
-                            <div className='prestamo'>
-                                <div className='importe-disponible'>
-                                    <div className='importe-letra'>importe disponible</div>
-                                    <div className='importe-numero'>{(customerBalance.creditLimit - customerBalance.creditLimitUsed).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</div>
+                            <div className="prestamo">
+                                <div className='prestamo-bars'>
+                                    <div style={{width: `${(customerBalance.creditLimit - customerBalance.creditLimitUsed) * 500 / customerBalance.creditLimit}px`}} className="prestamo-bar-disponible"></div>
+                                    <div style={{width: `${customerBalance.creditLimitUsed * 500 / customerBalance.creditLimit}px`}} className="prestamo-bar-uso"></div>
                                 </div>
-                                <div className='importe-en-uso'>
-                                    <div className='importe-letra'>importe en uso</div>
-                                    <div className='importe-numero'>{customerBalance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</div>
+                                <div className="prestamo-texto">
+                                    <div className='prestamo-disponible'>
+                                        <p>Importe disponible</p>
+                                        <p>{(customerBalance.creditLimit - customerBalance.creditLimitUsed).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                    </div>
+                                    <div className='prestamo-en-uso'>
+                                        <p>Importe en uso</p>
+                                        <p>{customerBalance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className='dash-box'>
-                            <p className='title'><strong>Mi parcialidad</strong></p>
+                            <p className='title'><strong>Mi pago</strong></p>
                             <div className='parcialidad'>
-                                <p>Plazo {customerBalance.term} {customerBalance.idFrequency === 1 ? 'días' : 'quincenas'}</p>
-                                <p>Interés {customerBalance.curentInstallment ?  customerBalance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0} </p>
-                                <p>Parcialidad a pagar {customerBalance.curentInstallment ? customerBalance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0} <small>IVA incluído</small></p>
-                                <p>Fecha de pago {customerBalance.curentInstallment ? momentEs(customerBalance.curentInstallment.dueDate).format('D/MMM/Y') : 'dd/mm/aaaa'}</p>
+                                <div className="parcialidad-container">
+                                    <p>Plazo</p>
+                                    <p>{customerBalance.term}</p>
+                                    <p>{customerBalance.idFrequency === 3 ? 'días' : ''}</p>
+                                </div>
+                                <div className="parcialidad-container">
+                                    <p>Interés</p>
+                                    <p>{customerBalance.curentInstallment ?  customerBalance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</p>
+                                </div>
+                                <div className="parcialidad-container">
+                                    <p>Monto a pagar</p>
+                                    <p>{customerBalance.curentInstallment ? customerBalance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</p>
+                                    <p>IVA incluído</p>
+                                </div>
+                                <div className="parcialidad-container">
+                                    <p>Fecha de pago</p>
+                                    <p>{customerBalance.curentInstallment ? momentEs(customerBalance.curentInstallment.dueDate).format('D/MMM/Y') : 'dd/mm/aaaa'}</p>
+                                </div>
                             </div>
                         </div>
-                        {/* <div className='dash-box'>
-                            <p className='title'><strong>Mi avance en pagos</strong></p>
-                            <div className='avance'>
-                                <ReactSpeedometer
-                                    maxValue={customerBalance.creditLimit}
-                                    value={customerBalance.paidAmount}
-                                    valueFormat={"($,.2f"}
-                                    needleColor="red"
-                                    startColor="#8e3c12"
-                                    segments={customerBalance.term}
-                                    endColor="#A3CD3A"
-                                    maxSegmentLabels={5}
-                                    forceRender
-                                />
-                            </div>
-                        </div> */}
                     </div>
                     <Media queries={{
-                        small: "(max-width: 930px)"
+                        small: "(max-width: 1000px)"
                     }}>
                     {matches => (
                         <>
                         {!matches.small && 
                             <div className='dash-banner'>
-                                <video width='900' height='65' autoplay="autoplay">
+                                <video width='900' height='65' autoplay="autoplay" loop={true}>
                                     <source src={`/img/banners/Desktop/Video${bannerId}.mp4`} type="video/mp4"/>
                                     Tu navegaror no soporta la reproducción de video
                                 </video>
                             </div>}
                         {matches.small && bannerId && 
                         <div className='dash-banner'>
-                            <video width='300' height='65' autoplay="autoplay">
+                            <video width='300' height='65' autoplay="autoplay" loop={true}>
                                 <source src={`/img/banners/Mobile/Video${bannerId}.mp4`} type="video/mp4"/>
                                 Tu navegaror no soporta la reproducción de video
                             </video>
@@ -227,150 +231,6 @@ const Default = ({history, setBalance, bannerId}) => {
                         </>
                     )}
                     </Media>
-                    <div className='dash-bottom-container'>
-                        <div className='dash-box'>
-                            <div className='edo-cuenta'>
-                                <p className='bottom-title'>Parcialidades pendientes</p>
-                                <table className='tabla'>
-                                    <thead>
-                                        <tr>
-                                            <th>Número de pago</th>
-                                            <th>Fecha de pago</th>
-                                            <th>Importe</th>
-                                        </tr>
-                                    </thead>
-                                    {customerBalance.installments && customerBalance.installments.length > 0 ? customerBalance.installments.map((el, ix) => 
-                                    <tbody>
-                                        <tr index={ix}>
-                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.idDeferral}</td>
-                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{momentEs(el.dueDate).format('D/MMM/Y')}</td>
-                                            <td className={ix % 2 ? 'row-non' : 'row-par'}>{el.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
-                                        </tr>
-                                    </tbody>
-                                    ) : 
-                                    <tbody>
-                                        <tr>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                            <td className='row-par'> </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                            <td className='row-non'> </td>
-                                        </tr>
-                                    </tbody>}
-                                    <tr style={{backgroundColor: '#EBFEA6'}}>
-                                        <td colSpan='2'>Monto de pago si decides liquidar el día de hoy</td>
-                                        <td>{customerBalance.liquidateAmount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div className='dash-box'>
-                            <div className='contrato-table'>
-                                <p className='bottom-title'>Parcialidades pagadas</p>
-                                <table className='tabla'>
-                                    <thead>
-                                        <tr>
-                                            <th>Número de pago</th>
-                                            <th>Fecha de pago</th>
-                                            <th>Importe</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {customerBalance.payments && customerBalance.payments.length > 0 ? customerBalance.payments.map((el, ix) => 
-                                            <tr index={ix}>
-                                                <td className={ix % 2 ? 'row-non' : 'row-gray'}>{el.idDeferral}</td>
-                                                <td className={ix % 2 ? 'row-non' : 'row-gray'}>{momentEs(el.paymentDate).format('D/MMM/Y')}</td>
-                                                <td className={ix % 2 ? 'row-non' : 'row-gray'}>{el.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
-                                            </tr>
-                                        ) : 
-                                        <>
-                                            <tr>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                                <td className='row-gray'> </td>
-                                            </tr>
-                                            <tr>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                                <td className='row-non'> </td>
-                                            </tr>
-                                        </>}
-                                        </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                     <div className="flex-horizontal" style={{justifyContent: 'space-evenly', width: '100%', marginTop: '0.9rem'}}>
                         <Popup onClose={() => setOpen(false)} open={open} position="right center">
                             <iframe style={{width:'100%', height:'85%'}} src={`data:application/pdf;base64,${accStatement}`} title='Contract' frameborder="0"></iframe>

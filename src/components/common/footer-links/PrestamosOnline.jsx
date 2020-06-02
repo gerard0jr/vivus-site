@@ -63,7 +63,7 @@ export const PrestamosOnline = () => {
                     <li>En efectivo, a través de las tiendas Oxxo en todo el país. Únicamente debes acudir con el número de referencia que te hicimos llegar por email. El número de referencia solo puede usarse una vez.</li>
                 </ol>
                 <h1 style={{margin: '2rem 0 0 0', padding: 0, fontWeight: '300', fontSize: '2rem'}}>¿Qué ocurre si no puedo pagar mi préstamo en la fecha límite?</h1>
-                <p>Puedes reestructurar tu préstamo y con ello recorrer tu fecha de pago. Sólo ingresa a tu perfil en Vivus.com.mx para seleccionar la reestructura de tu preferencia y acepta los términos y condiciones. Puedes solicitar ayuda a un asesor de Servicio al Cliente llamando al (0155) 6717 0755. Te atendemos de lunes a viernes de 8:00 a 20:00 horas o los sábados de 08:00 a 14:00 horas.</p>
+                <p>Puedes reestructurar tu préstamo y con ello recorrer tu fecha de pago. Sólo ingresa a tu perfil en Vivus.com.mx para seleccionar la reestructura de tu preferencia y acepta los términos y condiciones. Puedes solicitar ayuda a un asesor de Servicio al Cliente llamando al (0155) 6717 0750. Te atendemos de lunes a viernes de 8:00 a 20:00 horas o los sábados de 08:00 a 14:00 horas.</p>
             </div>
             <div class="get-loan-nobg">
                 <Link to='/registration' class="cta-button" >SOLICÍTALO YA</Link>

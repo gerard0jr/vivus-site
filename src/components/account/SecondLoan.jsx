@@ -16,14 +16,14 @@ const idProduct = 1
 export const SecondLoan = (props) => {
 
     const [open, setOpen] = useState(false)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false) //CHANGE
     const [customer, setCustomer] = useState(null)
     const [amortizationTable, setAmortizationTable] = useState([])
     const [registerData, setRegisterData] = useState(null)
     const [monto, setMonto] = useState(0)
     const [firstPaymentAmount, setFirstPaymentAmount] = useState(0)
     const [plazo, setPlazo] = useState(1)
-    const [periodicidad, setPeriodicidad] = useState(2)
+    const [periodicidad, setPeriodicidad] = useState(3)
     const [cat, setCat] = useState(0)
     const [interesIVA, setInteresIVA] = useState(0)
     const [fecha, setFecha] = useState('dd/mm/aaaa')
@@ -54,6 +54,7 @@ export const SecondLoan = (props) => {
     }
 
     const finishProposal = async () => {
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/pre-approved')
         let validToken = await cookie.load('token')
         if(!validToken){
             let response = await getToken()
@@ -144,7 +145,7 @@ export const SecondLoan = (props) => {
                 return simulate(res.data.amount, res.data.opFrequency, res.data.term)
             }
             setMonto(3000)
-            setPeriodicidad(1)
+            setPeriodicidad(3)
             setPlazo(4)
             // sessionStorage.setItem('proposal', JSON.stringify({monto: 3000, periodicidad: 1, plazo: 4, idProduct}))
             simulate(3000, 1, 4)
@@ -170,10 +171,13 @@ export const SecondLoan = (props) => {
     }
 
     useEffect(() => {
+        let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            if(demoUser) return 
         if(!loading) {
             simulate(monto, periodicidad, plazo)
             sessionStorage.setItem('proposal', JSON.stringify({monto, periodicidad, plazo, idProduct}))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [monto, periodicidad, plazo])
 
     const loadLocalData = async () => {
@@ -205,15 +209,13 @@ export const SecondLoan = (props) => {
                         maxAmount: data.maxAmount,
                         stepAmount: data.stepAmount,
                         minTermSem: data.frequencies[0].frequencyTerm.minTerm,
-                        maxTermSem: data.frequencies[0].frequencyTerm.maxTerm,
-                        minTermQuin: data.frequencies[1].frequencyTerm.minTerm,
-                        maxTermQuin: data.frequencies[1].frequencyTerm.maxTerm
+                        maxTermSem: data.frequencies[0].frequencyTerm.maxTerm
                     }
                     setRegisterData({sliderConfig:config})
                     setMonto(data.defaultAmount)
-                    setPlazo(data.frequencies[1].frequencyTerm.defaultValue)
-                    simulate(data.defaultAmount, 2, data.frequencies[1].frequencyTerm.defaultValue)
-                    sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:2, plazo:data.frequencies[1].frequencyTerm.defaultValue}))
+                    setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
+                    simulate(data.defaultAmount, idProduct, data.frequencies[1].frequencyTerm.defaultValue)
+                    sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:3, plazo:data.frequencies[0].frequencyTerm.defaultValue}))
                 }
             })
             .catch(err => console.log(err))
@@ -235,9 +237,7 @@ export const SecondLoan = (props) => {
                         maxAmount: data.maxAmount,
                         stepAmount: data.stepAmount,
                         minTermSem: data.frequencies[0].frequencyTerm.minTerm,
-                        maxTermSem: data.frequencies[0].frequencyTerm.maxTerm,
-                        minTermQuin: data.frequencies[1].frequencyTerm.minTerm,
-                        maxTermQuin: data.frequencies[1].frequencyTerm.maxTerm
+                        maxTermSem: data.frequencies[0].frequencyTerm.maxTerm
                     }
                     setRegisterData({sliderConfig:config})
                 }
@@ -256,10 +256,35 @@ export const SecondLoan = (props) => {
             return simulate(getLocalProposal.monto, getLocalProposal.periodicidad, getLocalProposal.plazo)
         }
         loadConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         const initialConfig = async () => {
+            let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
+            const loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))
+            if(demoUser || loggedUser.eMail === 'demo@demo.com') {
+                if(loggedUser && loggedUser.eMail === 'demo@demo.com') setCustomer(loggedUser)
+                else setCustomer(demoUser)
+                setRegisterData({
+                  sliderConfig: {
+                        minAmount: 1000,
+                        maxAmount: 8000,
+                        stepAmount: 1000,
+                        minTermSem: 7,
+                        maxTermSem: 30
+                  }  
+                })
+                setMonto(2000)
+                setPlazo(7)
+                setPeriodicidad(3)
+                setCat(321)
+                setInteresIVA(500)
+                setFirstPaymentAmount(new Date())
+                setFecha(new Date()) 
+                setLoading(false)
+                return
+            }
             let response = await getToken()
             let validToken = response.data.token
             const checkUser = async (user) => {
@@ -272,7 +297,6 @@ export const SecondLoan = (props) => {
             }
             let approved = sessionStorage.getItem('APP')
             if(approved === 'no') return props.history.push('/denied')
-            const loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))
             if(!loggedUser){
                 const emptyCustomer = await JSON.parse(sessionStorage.getItem('empty-customer'))
                 if(emptyCustomer) {
@@ -294,6 +318,7 @@ export const SecondLoan = (props) => {
             proposal(loggedUser.customerId, validToken)
         }
         initialConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     let stepWidth = 23
     return (
@@ -304,7 +329,7 @@ export const SecondLoan = (props) => {
                 <div className='loan-container'>
                     <div className="left-loan">
 
-                        <div>
+                        <div style={{width: '100%'}}>
                             <div className='title-winput-register'>
                                 <p style={{fontWeight: 'bold'}}>Monto total</p>
                                 <div className="slider-input-wrapper">
@@ -339,20 +364,13 @@ export const SecondLoan = (props) => {
                                     onChange={val => updateMonto(val)}
                                 />
                             </div>
-                            <hr style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem'}}/>
-                            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem'}}>
-                                <p style={{marginBottom: '1rem', color: 'black', fontWeight: 'bold'}}>Periodicidad de pago</p>
-                                <div style={{display: 'flex', justifyContent: 'space-evenly', margin: '0.5rem'}}>
-                                    <p className={periodicidad === 1 ? 'boton-periodicidad-loan period-active-loan' : 'boton-periodicidad-loan'} onClick={() => updatePeriodicidad(1)}>Semanal</p>
-                                    <p className={periodicidad === 2 ? 'boton-periodicidad-loan period-active-loan' : 'boton-periodicidad-loan'} onClick={() => updatePeriodicidad(2)}>Quincenal</p>
-                                </div>
-                            </div>
+                            <hr style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem', opacity: 0}}/>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='title-winput-register'>
                                 <p style={{fontWeight: 'bold'}}>Plazo</p>
                                 <div className="slider-input-wrapper">
                                     <input className="slider-input" type="text" value={plazo} readOnly/>
-                                    <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' semanas'}</span>
+                                    <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' días'}</span>
                                 </div>
                             </div>
                             <div className='slider'>
@@ -437,7 +455,7 @@ export const SecondLoan = (props) => {
                                 Calculadora para fines informativos y de comparación.
                             </div>
                             <div className='amortization-loan-button'>
-                                <div style={{margin: '0 auto'}} className='amortization-button'>
+                                {/* <div style={{margin: '0 auto'}} className='amortization-button'>
                                     <div style={{textAlign: 'left', padding: '0 1rem'}}>
                                         <p>Tabla de amortización</p>
                                         <p onClick={() => setOpen(true)} style={{color: '#A3CD3A', cursor: 'pointer'}}>Abrir <FontAwesomeIcon icon={faDownload}/></p>
@@ -445,7 +463,7 @@ export const SecondLoan = (props) => {
                                     <div style={{backgroundColor: '#f1f1f1', padding: '1rem', fontSize: '1.5rem', color: '#A3CD3A', borderRadius: '0 10px 10px 0'}}>
                                         <FontAwesomeIcon icon={faTable}/>
                                     </div>
-                                </div>
+                                </div> */}
                                 <p onClick={finishProposal} style={{width: '50%', padding: '1rem 0'}} className="btn">SOLICÍTALO YA</p>
                             </div>
                             {serverError ? <p style={{padding: '2rem 0 1rem', color: 'red'}}>Ocurrió un problema, intenta nuevamente</p> : null}

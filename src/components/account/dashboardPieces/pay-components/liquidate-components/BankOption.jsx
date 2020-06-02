@@ -47,7 +47,8 @@ const BankOption = () => {
 
     useEffect(() => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
-        if(demoUser){
+        let user = JSON.parse(sessionStorage.getItem('loggedUser'))
+        if(demoUser || user.eMail === 'demo@demo.com'){
             setBank0({
                 account: '25478154',
                 paymentReference: '12354874561237862'
@@ -62,53 +63,56 @@ const BankOption = () => {
             })
             return
         }
-        let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
             getData(user)
         }        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     return (
-        <Accordion allowZeroExpanded='true' >
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>
-                        BBVA
-                    </AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <ol>
-                        <li>Acude a una practicaja en la opción pagar <strong>otros servicios</strong></li>
-                        <li>Utiliza el convenio <strong>{bank0.account}</strong> e ingresa en concepto <strong>pago total</strong></li>
-                        <li>Ingresa tu <strong>monto</strong> y tu número de <strong>referencia</strong> {bank0.paymentReference}</li>
-                    </ol>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>
-                        CI BANCO
-                    </AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>Acude a una sucursal bancaria y proporciona:</p>
-                    <p>Número de Cuenta: <strong>{bank1.account}</strong></p>
-                    <p>Referencia: <strong>{bank1.paymentReference}</strong></p>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>
-                        Inbursa
-                    </AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>Acude a una sucursal o cualquier módulo dentro de Sanborns, Sam's o Walmart y proporciona:</p>
-                    <p>Convenio: <strong>{bank2.account}</strong></p>
-                    <p>Referencia: <strong>{bank2.paymentReference}</strong></p>
-                </AccordionItemPanel>
-            </AccordionItem>
-        </Accordion>
+        <>
+            <Accordion allowZeroExpanded='true' >
+                <AccordionItem>
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            BBVA
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                        <ol>
+                            <li>Acude a una practicaja en la opción pagar <strong>otros servicios</strong></li>
+                            <li>Utiliza el convenio <strong>{bank0.account}</strong> e ingresa en concepto <strong>pago total</strong></li>
+                            <li>Ingresa tu <strong>monto</strong> y tu número de <strong>referencia</strong> {bank0.paymentReference}</li>
+                        </ol>
+                    </AccordionItemPanel>
+                </AccordionItem>
+                <AccordionItem>
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            CI BANCO
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                        <p>Acude a una sucursal bancaria y proporciona:</p>
+                        <p>Número de Cuenta: <strong>{bank1.account}</strong></p>
+                        <p>Referencia: <strong>{bank1.paymentReference}</strong></p>
+                    </AccordionItemPanel>
+                </AccordionItem>
+                <AccordionItem>
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            Inbursa
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                        <p>Acude a una sucursal o cualquier módulo dentro de Sanborns, Sam's o Walmart y proporciona:</p>
+                        <p>Convenio: <strong>{bank2.account}</strong></p>
+                        <p>Referencia: <strong>{bank2.paymentReference}</strong></p>
+                    </AccordionItemPanel>
+                </AccordionItem>
+            </Accordion>
+            {serverError && <span>*Error en el servidor</span>}
+        </>
     )
 }
 

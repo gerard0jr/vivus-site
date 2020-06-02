@@ -23,7 +23,7 @@ export const VideoSlide = ({video}) => {
             <div onClick={() => setOpened(true)} className="full-thumb">
                 <div className='button-open'>
                     <svg viewBox='0 0 100 100'>
-                        <polygon points="30 25,30 75,80 50" class="triangle" />
+                        <polygon points="30 25,30 75,80 50" className="triangle" />
                     </svg>
                 </div>
                 <img src={imageUrl} alt="fullthumb"/>

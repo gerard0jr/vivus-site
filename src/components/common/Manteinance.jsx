@@ -11,7 +11,7 @@ export const Manteinance = () => {
                     <br/>
                     <h3 style={{fontWeight: 'bold'}}>¿Necesitas ayuda?</h3>
                     <h2>info@Vivus.com.mx</h2>
-                    <h2>(0155) 6717 0755</h2>
+                    <h2>(0155) 6717 0750</h2>
                 </div>
                 <div className='right-manteinance'>
                     <img src="/img/manteinance.png" alt="manteinance-Vivus"/>

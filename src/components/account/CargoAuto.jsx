@@ -112,7 +112,7 @@ const CargoAuto = (props) => {
             let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
             if(demoUser){
                 setData({
-                    frequence: 'semanal',
+                    frequence: 'de un solo pago',
                     bank: 'Santander',
                     bankAccountNumber: '123456789012345678',
                     firstPaymentAmount: '1250',
@@ -155,6 +155,7 @@ const CargoAuto = (props) => {
             loadDebitData(loggedUser.customerId, validToken)
         }
         initialConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     let fillDemo = () => {
@@ -184,7 +185,7 @@ const CargoAuto = (props) => {
                             <input value={data && data.bank} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> con número &nbsp;
                             <input type='text' value={data && data.bankAccountNumber} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> por un importe de &nbsp;
                             <input type="text" value={data && data.firstPaymentAmount} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> pesos m.n.</p>
-                        <p>Esta autorización vence el <input type="text" value={data && momentEs(data.dueDate).format('D/MMM/Y')} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> fecha de mi última cuota de pago o hasta que quede liquidado en su totalidad dicho préstamo.</p>
+                        <p>Esta autorización vence el <input type="text" value={data && momentEs(data.dueDate).format('D/MMM/Y')} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> fecha del vencimiento de mi pago o hasta que quede liquidado en su totalidad dicho préstamo.</p>
                         <p>Estoy enterado de que en cualquier momento podré solicitar la cancelación de la presente domiliciación sin costo a mi cargo.</p>
                         <p>Atentamente. <input type="text" value={data && data.customerName} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white', width: '300px'}} /></p>
                     </div>

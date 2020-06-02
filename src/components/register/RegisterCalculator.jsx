@@ -20,7 +20,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
     const [monto, setMonto] = useState(null)
     const [firstPaymentAmount, setFirstPaymentAmount] = useState(null)
     const [plazo, setPlazo] = useState(null)
-    const [periodicidad, setPeriodicidad] = useState(1)
+    const [periodicidad, setPeriodicidad] = useState(3)
     const [cat, setCat] = useState(null)
     const [interesIVA, setInteresIVA] = useState(null)
     const [fecha, setFecha] = useState(null)
@@ -89,14 +89,14 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                         stepAmount: data.stepAmount,
                         minTermSem: data.frequencies[0].frequencyTerm.minTerm,
                         maxTermSem: data.frequencies[0].frequencyTerm.maxTerm,
-                        minTermQuin: data.frequencies[1].frequencyTerm.minTerm,
-                        maxTermQuin: data.frequencies[1].frequencyTerm.maxTerm
+                        minTermQuin: data.frequencies[1] ? data.frequencies[1].frequencyTerm.minTerm : 0,
+                        maxTermQuin: data.frequencies[1] ? data.frequencies[1].frequencyTerm.maxTerm : 0
                     }
                     setRegisterData({sliderConfig:config})
                     setMonto(data.defaultAmount)
                     setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
                     simulate(data.defaultAmount, 2, data.frequencies[0].frequencyTerm.defaultValue)
-                    sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:1, plazo:data.frequencies[0].frequencyTerm.defaultValue}))
+                    sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:3, plazo:data.frequencies[0].frequencyTerm.defaultValue}))
                 }
             })
             .catch(err => console.log(err))
@@ -119,8 +119,8 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                         stepAmount: data.stepAmount,
                         minTermSem: data.frequencies[0].frequencyTerm.minTerm,
                         maxTermSem: data.frequencies[0].frequencyTerm.maxTerm,
-                        minTermQuin: data.frequencies[1].frequencyTerm.minTerm,
-                        maxTermQuin: data.frequencies[1].frequencyTerm.maxTerm
+                        minTermQuin: data.frequencies[1] ? data.frequencies[1].frequencyTerm.minTerm : 0,
+                        maxTermQuin: data.frequencies[1] ? data.frequencies[1].frequencyTerm.maxTerm : 0
                     }
                     setRegisterData({sliderConfig:config})
                 }
@@ -141,6 +141,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
             return simulate(getLocalProposal.monto, getLocalProposal.periodicidad, getLocalProposal.plazo)
         }
         loadConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -148,6 +149,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
             simulate(monto, periodicidad, plazo)
             sessionStorage.setItem('proposal', JSON.stringify({monto, periodicidad, plazo, idProduct}))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [monto, periodicidad, plazo])
 
     useEffect(() => {
@@ -158,6 +160,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
             simulate(proposalChange.monto, proposalChange.periodicidad, proposalChange.plazo)
             sessionStorage.setItem('proposal', JSON.stringify({monto: proposalChange.monto, periodicidad: proposalChange.periodicidad, plazo: proposalChange.plazo, idProduct}))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [proposalChange])
 
     let stepWidth = 25
@@ -233,7 +236,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                                     <p>Plazo</p>
                                     <div className="slider-input-wrapper">
                                         <input className="slider-input" type="text" value={plazo} readOnly/>
-                                        <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' quincenas' : ' días'}</span>
+                                        <span style={{fontSize: '0.7rem'}} className="slider-input-unit">{periodicidad === 2 ? ' días' : ' días'}</span>
                                     </div>
                                 </div>
                                 <div className='slider'>
@@ -281,7 +284,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
                                 <p>Plazo</p>
-                                <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'días'}</p>
+                                <p>{plazo} {periodicidad === 2 ? 'días' : 'días'}</p>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>

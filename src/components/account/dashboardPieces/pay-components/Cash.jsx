@@ -33,11 +33,11 @@ const Cash = ({balance}) => {
 
     const requestRef = () => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
-        if(demoUser){
+        let user = JSON.parse(sessionStorage.getItem('loggedUser'))
+        if(demoUser || user.eMail === 'demo@demo.com'){
             return setReference(1234789456123)
         }
         setLoading(true)
-        let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(user){
             getData(user)
         }        
@@ -50,21 +50,21 @@ const Cash = ({balance}) => {
                 <p><strong>Efectivo</strong></p>
             </div>
             <div className='bank-content'>
-                <p>Puedes usar esta opción sólo en caso de tener algún <strong>problema</strong> con tu <strong>cuenta</strong> para el <strong>cargo automático</strong> de tu siguiente <strong>parcialidad.</strong></p>
+                <p>Puedes usar esta opción sólo en caso de tener algún <strong>problema</strong> con tu <strong>cuenta</strong> para el <strong>cargo automático</strong> de tu <strong>pago.</strong></p>
                 <p>Te sugerimos que al usarla realices el <strong>pago antes</strong> de la fecha de <strong>vencimiento</strong> para evitar aclaraciones.</p>
                 <div className='bank-bottom-container'>
                     <div className='liquidate-left'>
                         <div className='liquidate-resume'>
-                            <p className='bold-type'>Tu parcialidad no. <strong>{balance.curentInstallment.idDeferral}</strong></p>
-                            <hr/>
-                            <div className='liquidate-values'><p className='bold-type'>Monto a pagar:</p><p className='bold-type'>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
+                            <p className='bold-type'>DETALLES DEL PAGO</p>
                             <hr/>
                             <div className='liquidate-values'><p>Capital:</p><p>{balance.curentInstallment.principalBalance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
                             <hr/>
                             <div className='liquidate-values'><p>Intereses:</p><p>{balance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p></div>
                             <hr/>
-                            <p className='bold-type'>Fecha de vencimiento</p>
-                            <p style={{textAlign: 'right'}}>{momentEs(balance.curentInstallment.dueDate).format('D/MMM/Y')}</p>
+                            <div className='liquidate-values'><p className='bold-type'>Monto a pagar:</p><p style={{textAlign: 'right'}} className='bold-type'>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> IVA incluído</small></p></div>
+                            <hr/>
+                            <p>Fecha de vencimiento</p>
+                            <p className='bold-type' style={{textAlign: 'right'}}>{momentEs(balance.curentInstallment.dueDate).format('D/MMM/Y')}</p>
                         </div>
                     </div>
                     <div className='bank-accordion'>
@@ -74,12 +74,22 @@ const Cash = ({balance}) => {
                                 <li>Acude a cualquier tienda participante y realiza tu pago en efectivo</li>
                             </ol>
                             <div className='flex-distributed'>
-                                <img width='250px' src="/img/oxxo-black.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/soriana.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/comercialmexicana.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/extra.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/7eleven.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/Walmart.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/superama.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/Circle_K.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/bodega-aurrera.png" alt="efectivo"/>
+                                <img width='250px' src="/img/paycash/oxxo.png" alt="efectivo"/>
                             </div>
                             {reference ? 
-                            <p className='btn-minimal-width' style={{width: '80%', margin: '0 auto', backgroundColor: 'gray', cursor: 'default'}}>{reference}</p>
+                            <>
+                                <p className='btn-minimal-width' style={{width: '80%', margin: '0 auto', backgroundColor: 'gray', cursor: 'default', padding: '10px 1rem'}}>Hemos enviado la referencia a tu correo electrónico</p>
+                            </>
                             :
-                            <p onClick={requestRef} className='btn-minimal-width' style={{width: '80%', margin: '0 auto'}}>{loading ? <BallClipRotate loading color='white'/> : 'SOLICITAR NÚMERO DE REFERENCIA'}</p>}
+                            <p onClick={requestRef} className='btn-minimal-width' style={{width: '80%', margin: '0 auto', padding: '10px 1rem', border: '2px solid gray'}}>{loading ? <BallClipRotate loading color='white'/> : 'SOLICITAR NÚMERO DE REFERENCIA'}</p>}
                         </div>
                     </div>
                 </div>
