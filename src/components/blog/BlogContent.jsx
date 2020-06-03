@@ -32,21 +32,21 @@ export const BlogContent = ({category, entries}) => {
                             </div>
                         </Link>
                         <div className='right-blog-container'>
-                            <div className='text-blog-container'>
+                            <Link to={{pathname: `/blog/${entries[1].fields.url}`, state: {id: entries[1].sys.id}}} className='text-blog-container'>
                                 <p className='entrie-title'>{entries[1].fields.title}</p>
                                 <p className='entrie-description'>{entries[1].fields.text}</p>
                                 <p className='entrie-date'>{momentEs(entries[1].fields.publishTime).format('DD/MM/YYYY')}</p>
-                            </div>
-                            <div className='text-blog-container'>
+                            </Link>
+                            <Link to={{pathname: `/blog/${entries[2].fields.url}`, state: {id: entries[2].sys.id}}} className='text-blog-container'>
                                 <p className='entrie-title'>{entries[2].fields.title}</p>
                                 <p className='entrie-description'>{entries[2].fields.text}</p>
                                 <p className='entrie-date'>{momentEs(entries[2].fields.publishTime).format('DD/MM/YYYY')}</p>
-                            </div>
-                            <div className='text-blog-container'>
+                            </Link>
+                            <Link to={{pathname: `/blog/${entries[3].fields.url}`, state: {id: entries[3].sys.id}}} className='text-blog-container'>
                                 <p className='entrie-title'>{entries[3].fields.title}</p>
                                 <p className='entrie-description'>{entries[3].fields.text}</p>
                                 <p className='entrie-date'>{momentEs(entries[3].fields.publishTime).format('DD/MM/YYYY')}</p>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <h2>Lo más reciente</h2>

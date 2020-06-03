@@ -10,7 +10,7 @@ export const Restructure = () => {
                 <div>
                     <ol className='numbers-work'>
                         <li><p><strong>Considera lo siguiente al solicitar recorrer la fecha de pago de tu parcialidad:</strong><br/>- Tener pagada la primer parcialidad de tu préstamo<br/>- No haber utilizado este beneficio en tu parcialidad anterior</p></li>
-                        <li><p><strong>Formas de pago:</strong><br/>El cargo se realizará directamente a la cuenta registrada en tu perfil Vivus sólo debes ingresar y solicitar esta opción o bien, para solicitarlo con nosotros vía WhatsApp comunícate al 55 67717 0755. Si tu cuenta presenta algún imprevisto</p></li>
+                        <li><p><strong>Formas de pago:</strong><br/>El cargo se realizará directamente a la cuenta registrada en tu perfil Vivus sólo debes ingresar y solicitar esta opción o bien, para solicitarlo con nosotros vía WhatsApp comunícate al 55 67717 0750. Si tu cuenta presenta algún imprevisto</p></li>
                     </ol>
                 </div>
             </div>
