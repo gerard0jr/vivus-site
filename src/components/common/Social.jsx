@@ -22,10 +22,10 @@ export const Social = ({location}) => {
                         <FontAwesomeIcon onClick={scrollBottom} className='clickable' icon={faEnvelope}/>
                     </li>
                     <li>
-                        <a target='_blank' rel="noopener noreferrer" href='https://www.facebook.com/Vivus4finance'><FontAwesomeIcon onClick={scrollBottom} className='clickable' icon={faFacebookF}/></a>
+                        <a target='_blank' rel="noopener noreferrer" href='https://www.facebook.com/VivusMexico/'><FontAwesomeIcon onClick={scrollBottom} className='clickable' icon={faFacebookF}/></a>
                     </li>
                     <li style={{border: 'none'}}>
-                        <a target='_blank' rel="noopener noreferrer" href='https://www.youtube.com/channel/UCRQsy4zv4Qsb1IdcOaLEICw'><FontAwesomeIcon onClick={scrollBottom} className='clickable' icon={faYoutube}/></a>
+                        <a target='_blank' rel="noopener noreferrer" href='https://www.youtube.com/channel/UC6PJggQxcN-HxYRlCwfUrnA'><FontAwesomeIcon onClick={scrollBottom} className='clickable' icon={faYoutube}/></a>
                     </li>
                 </ul>
             </div>
