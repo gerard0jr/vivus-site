@@ -8,7 +8,7 @@ import publicIp from 'public-ip'
 
 const idProduct = 1
 
-const iovationBlackBox = document.getElementsByName('ioBlackBox')[0].value
+// const iovationBlackBox = document.getElementsByName('ioBlackBox')[0].value
 
 const Done = (props) => {
 
@@ -26,7 +26,7 @@ const Done = (props) => {
                 idCustomer,
                 customerMail,
                 customerIP: myIp,
-                iovationBlackBox
+                iovationBlackBox: ''
             }
             //TAG MANAGER
             getAnalytics({idCustomer, idProduct}, validToken)

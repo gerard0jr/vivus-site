@@ -180,7 +180,7 @@ const CargoAuto = (props) => {
                         </div>
                     </div>
                     <div style={{marginLeft:'2rem', lineHeight: '2rem'}}>
-                        <p>Solicito y autorizo a 4Finance, S.A. de C.V. SOFOM ENR realice cargos periódicos para el pago de mi préstamo de forma &nbsp; 
+                        <p>Solicito y autorizo a 4Finance, S.A. de C.V. SOFOM ENR realice cargos para el pago de mi préstamo de forma &nbsp; 
                             <input value={data && data.frequence} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}}/> a mi cuenta CLABE y/o tarjeta bancaria de &nbsp;
                             <input value={data && data.bank} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> con número &nbsp;
                             <input type='text' value={data && data.bankAccountNumber} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> por un importe de &nbsp;

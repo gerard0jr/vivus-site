@@ -127,7 +127,10 @@ const More = (props) => {
 
     useEffect(() => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
-        if(demoUser) return setUser(demoUser)
+        if(demoUser){
+                getData(demoUser)
+             return setUser(demoUser)
+            }
         let user = JSON.parse(sessionStorage.getItem('loggedUser'))
         setUser(user)
         getData(user)
@@ -150,7 +153,7 @@ const More = (props) => {
                 <div className='more-container'>
                     <div className='loading-calc'>
                         <p>Cargando...</p>
-                        <BallClipRotate color='#A3CD3A' loading/>
+                        <BallClipRotate color='white' loading/>
                     </div>
                 </div>
             :
@@ -245,10 +248,10 @@ const More = (props) => {
                             <div className='amount-calculator-info'>
                                 <h3 className='amount-calc-title'>Préstamo</h3>
                                 <p className='amount-calc-subtitle'>General</p>
-                                <p className='big-amount-calc'>{amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                <p className='big-amount-calc'>{amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                                 <div className='amount-info-row'>
                                     <p>Préstamo</p>
-                                    <p>{loadingSimulation ? 'Cargando...' : amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                    <p>{loadingSimulation ? 'Cargando...' : amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                                 </div>
                                 <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                                 <div className='amount-info-row'>
@@ -259,14 +262,14 @@ const More = (props) => {
                                 <div className='amount-info-row'>
                                     <p>Interés</p>
                                     <div>
-                                        <p>{loadingSimulation ? 'Cargando...' : interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                        <p>{loadingSimulation ? 'Cargando...' : interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                     </div>
                                 </div>
                                 <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                                 <div className='amount-info-row'>
                                     <p><strong>Monto a devolver</strong></p>
                                     <div>
-                                        <p><strong>{loadingSimulation ? 'Cargando...' : firstPayment.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                        <p><strong>{loadingSimulation ? 'Cargando...' : firstPayment.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                     </div>
                                 </div>
                                 <hr style={{width: '100%', border: '0.5px solid #737373'}}/>

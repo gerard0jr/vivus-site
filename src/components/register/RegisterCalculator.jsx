@@ -279,7 +279,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                         <div className='calculator-info'>
                             <div className='info-row-register'>
                                 <p>Préstamo</p>
-                                <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
@@ -290,14 +290,14 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                             <div className='info-row-register'>
                                 <p>Interés</p>
                                 <div>
-                                    <p>{interesIVA.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                    <p>{interesIVA.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                 </div>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
-                                <p><strong>Parcialidad a pagar</strong></p>
+                                <p><strong>Monto a pagar</strong></p>
                                 <div>
-                                    <p><strong>{(firstPaymentAmount).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                    <p><strong>{(firstPaymentAmount).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                 </div>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
@@ -308,7 +308,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                             <div className='cat-prom'>
                                 <b>CAT: {cat}%</b> promedio sin IVA para fines informativos y de comparación exclusivamente. <br/>Fecha de cálculo: {momentEs(today).format('D/MMM/Y')}<br/><br/>
                                 Calculadora para fines informativos y de comparación. <br/><br/>
-                                Nunca solicitamos anticipos, cuotas, pago de pólizas o cualquier otro concepto para otorgarte un préstamo.
+                                <span style={{color:'red'}}>Nunca solicitamos anticipos, cuotas, pago de pólizas o cualquier otro concepto para otorgarte un préstamo.</span>
                             </div>
                             {/* <div className='amortization-button'>
                                 <div style={{textAlign: 'left', padding: '0 1rem'}}>

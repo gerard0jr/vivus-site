@@ -7,6 +7,8 @@ import CashOption from '../pay-components/liquidate-components/CashOption'
 import '../../newStyles.scss'
 import { momentEs } from '../../../../services/moment'
 import { getToken, requestExtension } from '../../../../services/api'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 
 const idProduct = 1
@@ -53,7 +55,9 @@ const MoveOption = ({user}) => {
         <div className='move-option-container'>
             <div className='left-move-option'>
                 <div className='move-option-title flex-centered'>
-                    <img src="/img/calendar_icon.png" alt="calendar"/>
+                    <div style={{fontSize: '3rem', margin: '0 1rem 0 0'}}>
+                        <FontAwesomeIcon icon={faCalendar}/>
+                    </div>
                     <div>
                         <p className='move-md-size'><strong>Recorre la fecha</strong></p>   
                         <p style={{fontSize: '1.5rem'}}>de pago de tu préstamo</p>
@@ -72,7 +76,7 @@ const MoveOption = ({user}) => {
                             <p>hasta</p>
                             <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
                             <hr/>
-                            <p className='move-md-size'><strong>{extensionData.priceSeven ? extensionData.priceSeven.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
+                            <p className='move-md-size'><strong>{extensionData.priceSeven ? extensionData.priceSeven.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}<small> MXN</small></strong></p>
                             <small>Costo de la extensión</small>
                             <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
                                 <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(7)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
@@ -86,7 +90,7 @@ const MoveOption = ({user}) => {
                             <p>hasta</p>
                             <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
                             <hr/>
-                            <p className='move-md-size'><strong>{extensionData.priceFourteen ? extensionData.priceFourteen.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
+                            <p className='move-md-size'><strong>{extensionData.priceFourteen ? extensionData.priceFourteen.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}<small> MXN</small></strong></p>
                             <small>Costo de la extensión</small>
                             <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
                                 <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(14)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
@@ -100,7 +104,7 @@ const MoveOption = ({user}) => {
                             <p>hasta</p>
                             <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
                             <hr/>
-                            <p className='move-md-size'><strong>{extensionData.priceThirty ? extensionData.priceThirty.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}</strong></p>
+                            <p className='move-md-size'><strong>{extensionData.priceThirty ? extensionData.priceThirty.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}<small> MXN</small></strong></p>
                             <small>Costo de la extensión</small>
                             <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
                                 <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(30)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>

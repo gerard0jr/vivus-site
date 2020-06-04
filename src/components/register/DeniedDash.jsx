@@ -248,12 +248,12 @@ const DeniedDash = (props) => {
                         </div>
                     </div>
                     {error ? 
-                        <div style={{height: '609px', padding: '3rem 2rem', textAlign: 'left', backgroundColor: '#FD6B21', color: 'white'}} className='right-dash-denied'>
+                        <div style={{height: '609px', padding: '3rem 2rem', textAlign: 'left', backgroundColor: '#A5CD39', color: 'white'}} className='right-dash-denied'>
                             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Lo sentimos</h1>
                             <h2 style={{margin: '0', padding: '0 0 1rem', fontWeight: 200, fontSize: '3rem'}}>ocurrió un error, intenta más tarde</h2>
                         </div>
                         :
-                        <div style={{height: '609px', padding: '3rem 2rem', textAlign: 'left', backgroundColor: '#FD6B21', color: 'white'}} className='right-dash-denied'>
+                        <div style={{height: '609px', padding: '3rem 2rem', textAlign: 'left', backgroundColor: '#A5CD39', color: 'white'}} className='right-dash-denied'>
                             <div>
                                 <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Te esperamos</h1>
                                 <h2 style={{margin: '0', padding: '0 0 1rem', fontWeight: 200, fontSize: '3rem'}}>de vuelta pronto</h2>

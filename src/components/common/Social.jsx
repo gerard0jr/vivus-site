@@ -12,7 +12,7 @@ export const Social = ({location}) => {
 
     return (
         <div className='social'>
-            <a className='whatsapp' rel="noopener noreferrer" target='_blank' href='https://api.whatsapp.com/send?phone=525579064344&text=Hola%20Vivus%20hoy%20necesito%20su%20ayuda&source=&data='><img src="/img/whatsapp.png" alt="whatsapp"/></a>
+            <a className='whatsapp' rel="noopener noreferrer" target='_blank' href='http://bit.ly/WAVivus'><img src="/img/whatsapp.png" alt="whatsapp"/></a>
             <div className="quick-contacts-content">
                 <ul>
                     <li>

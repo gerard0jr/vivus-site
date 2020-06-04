@@ -419,30 +419,30 @@ export const SecondLoan = (props) => {
                                     <p>Préstamo</p>
                                 </div>
                                 <div className='loan-right-title'>
-                                    <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                    <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                                 </div>
                             </div>
                             <div className='info-row-register'>
                                 <p>Préstamo</p>
-                                <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
                                 <p>Plazo</p>
-                                <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'semanas'}</p>
+                                <p>{plazo} {periodicidad === 2 ? 'quincenas' : 'días'}</p>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
                                 <p>Interés</p>
                                 <div>
-                                    <p>{interesIVA.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                    <p>{interesIVA.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                 </div>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
                                 <p><strong>Parcialidad a pagar</strong></p>
                                 <div>
-                                    <p><strong>{(firstPaymentAmount).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                    <p><strong>{(firstPaymentAmount).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                 </div>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>

@@ -117,7 +117,7 @@ const Default = ({history, setBalance, bannerId}) => {
             if(user.eMail === 'demo@demo.com'){
                 let dummyData = {
                     creditLimit: 5000,
-                    creditLimitUsed: 1500,
+                    creditLimitUsed: 2000,
                     liquidateAmount: 1500,
                     term: 3,
                     frequency: 3,
@@ -170,17 +170,17 @@ const Default = ({history, setBalance, bannerId}) => {
                             <p className='title'><strong>Mi préstamo</strong></p>
                             <div className="prestamo">
                                 <div className='prestamo-bars'>
-                                    <div style={{width: `${(customerBalance.creditLimit - customerBalance.creditLimitUsed) * 500 / customerBalance.creditLimit}px`}} className="prestamo-bar-disponible"></div>
                                     <div style={{width: `${customerBalance.creditLimitUsed * 500 / customerBalance.creditLimit}px`}} className="prestamo-bar-uso"></div>
+                                    <div style={{width: `${(customerBalance.creditLimit - customerBalance.creditLimitUsed) * 500 / customerBalance.creditLimit}px`}} className="prestamo-bar-disponible"></div>
                                 </div>
                                 <div className="prestamo-texto">
                                     <div className='prestamo-disponible'>
-                                        <p>Importe disponible</p>
-                                        <p>{(customerBalance.creditLimit - customerBalance.creditLimitUsed).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                        <p>Importe en uso</p>
+                                        <p style={{color: '#006d38'}}>{customerBalance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</p>
                                     </div>
                                     <div className='prestamo-en-uso'>
-                                        <p>Importe en uso</p>
-                                        <p>{customerBalance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                        <p>Importe disponible</p>
+                                        <p style={{color: '#a3cd3a'}}>{(customerBalance.creditLimit - customerBalance.creditLimitUsed).toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</p>
                                     </div>
                                 </div>
                             </div>
@@ -195,11 +195,11 @@ const Default = ({history, setBalance, bannerId}) => {
                                 </div>
                                 <div className="parcialidad-container">
                                     <p>Interés</p>
-                                    <p>{customerBalance.curentInstallment ?  customerBalance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</p>
+                                    <p>{customerBalance.curentInstallment ?  customerBalance.curentInstallment.interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0} MXN</p>
                                 </div>
                                 <div className="parcialidad-container">
-                                    <p>Monto a pagar</p>
-                                    <p>{customerBalance.curentInstallment ? customerBalance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0}</p>
+                                    <p>Monto total a pagar</p>
+                                    <p>{customerBalance.curentInstallment ? customerBalance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 0} MXN</p>
                                     <p>IVA incluído</p>
                                 </div>
                                 <div className="parcialidad-container">

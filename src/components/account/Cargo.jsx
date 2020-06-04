@@ -311,11 +311,11 @@ const Cargo = (props) => {
                                 <div className='data'>
                                     <div className='data-margin'>
                                         <p className='data-title'>Monto del préstamo</p>
-                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                                     </div>
                                     <div className='data-margin'>
                                         <p className='data-title'>Interés</p>
-                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>${balance.installments.reduce((acc, installment) => acc + installment.interest, 0).toFixed(2)}</p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>${balance.installments.reduce((acc, installment) => acc + installment.interest, 0).toFixed(2)}<small> MXN</small></p>
                                     </div>
                                 </div>
                                 <div className='data'>
@@ -331,7 +331,7 @@ const Cargo = (props) => {
                                 <div className='data'>
                                     <div className='data-margin'>
                                         <p className='data-title'>Monto total a pagar</p>
-                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} <small style={{color: 'white'}}>IVA incluído</small></p> 
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.curentInstallment.paymentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small> <small style={{color: 'white'}}>IVA incluído</small></p> 
                                     </div>
                                     <div className='data-margin'>
                                         <p className='data-title'>Fin del préstamo</p>
