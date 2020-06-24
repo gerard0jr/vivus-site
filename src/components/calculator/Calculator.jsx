@@ -23,6 +23,7 @@ const Calculator = (props) => {
     const [interesIVA, setInteresIVA] = useState(null)
     const [fecha, setFecha] = useState(null)
     const [amortizationTable, setAmortizationTable] = useState([])
+    const [commision, setCommision] = useState(120)
 
     let today = new Date()
 
@@ -36,6 +37,7 @@ const Calculator = (props) => {
         setInteresIVA(0)
         setFecha('DD/MM/AAA')
         setFirstPaymentAmount(0)
+        setCommision(120)
     }
 
     const initialConfiguration = async () => {
@@ -75,6 +77,7 @@ const Calculator = (props) => {
                         setFecha(data.firstDueDate)
                         setFirstPaymentAmount(data.firstPaymentAmount)
                         setAmortizationTable(data.amortizationTable)
+                        // setCommision(data.commision)
                     }
                 })
                 .catch(err => setConfig('error'))
@@ -88,6 +91,7 @@ const Calculator = (props) => {
                     setFecha(data.firstDueDate)
                     setFirstPaymentAmount(data.firstPaymentAmount)
                     setAmortizationTable(data.amortizationTable)
+                    // setCommision(data.commision)
                 }
             })
             .catch(err => setConfig('error'))
@@ -248,6 +252,13 @@ const Calculator = (props) => {
                         <p>Interés</p>
                         <div>
                             <p>{interesIVA.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                        </div>
+                    </div>
+                    <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
+                    <div className='info-row'>
+                        <p>Comisión por disposición</p>
+                        <div>
+                            <p>{commision.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                         </div>
                     </div>
                     <hr style={{width: '100%', border: '0.5px solid #737373'}}/>

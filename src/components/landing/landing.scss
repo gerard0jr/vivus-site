@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     width: 100%;
     max-height: 870px;
+    min-height: 820px;
     height: 100vh;
     background-position: bottom center;
     box-shadow: 0 8px 6px -6px #e6e6e6;
@@ -181,7 +182,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    margin: 28vh 0 5rem;
+    margin: 300px 0 5rem;
 }
 
 .home-reasons{
@@ -820,7 +821,7 @@
         display: none;
     }
     .reasons-container{
-        margin: 250px 2rem;
+        margin: 300px 2rem;
     }
 }
 

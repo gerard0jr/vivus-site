@@ -28,6 +28,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
     const [edit, setEdit] = useState(false)
     const [loading, setLoading] = useState(true)
     const [amortizationTable, setAmortizationTable] = useState([])
+    const [commision, setCommision] = useState(120)
     const [serverError, setServerError] = useState(false)
 
     let today = new Date()
@@ -49,6 +50,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                     setFecha(data.firstDueDate) 
                     setLoading(false)
                     setAmortizationTable(data.amortizationTable)
+                    // setCommision(data.commision)
                 }
             })
             .catch(err => console.log(err))
@@ -291,6 +293,13 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                                 <p>Interés</p>
                                 <div>
                                     <p>{interesIVA.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                </div>
+                            </div>
+                            <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
+                            <div className='info-row-register'>
+                                <p>Comisión por disposición</p>
+                                <div>
+                                    <p>{commision.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                 </div>
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>

@@ -91,17 +91,14 @@ export const PrestamosOnline = () => {
                         plazos previamente.
                     </p>
                     <p>
-                        <span class="bold-type type-up"> *Clientes Nuevos:</span> Sólo aplica para pago oportuno del primer préstamo. Sujeto a aprobación del préstamo. En caso de 
-                        requerir el servicio de reestructura del préstamo, aplicará el pago correspondiente por dicho servicio. Interés mensual ordinario aplicable es de 
-                        <span class="bold-type type-up"> 17.50%</span> más el IVA. Por defecto, la tasa de interés anual fija es de <span class="bold-type type-up"> 210%</span> 
-                        más el IVA. O un <span class="bold-type type-up"> Costo Anual Total (CAT)</span> PROMEDIO:<span class="bold-type type-up"> 592.56%</span> sin IVA por 
-                        $6,000 M.N. calculado sobre un préstamo de 30 días. Solamente para información y fines comparativos.
+                        <span className="bold-type type-up"> *Sujeto aprobación de:</span> crédito, que la información y fotografías solicitadas cumplan con los requisitos y de acuerdo a las políticas internas de aprobación.
                     </p>
                     <p>
-                        <span class="bold-type type-up">Clientes Existentes:</span> la tasa de interés mensual ordinaria aplicable es de <span class="bold-type type-up">  35%</span> 
-                        más el IVA. Por defecto, la tasa de interés anual fija es de <span class="bold-type type-up"> 420%</span> más el IVA. O un 
-                        <span class="bold-type type-up"> Costo Anual Total (CAT)</span> PROMEDIO: <span class="bold-type type-up"> 3564.4%</span> sin IVA por $6,000 M.N. 
-                        calculado sobre un préstamo de 30 días. Solamente para información y fines comparativos.
+                        <span className="bold-type type-up">CAT:</span> la tasa de interés mensual ordinaria aplicable es de <span className="bold-type type-up">35%</span> más el IVA.
+                        Por defecto, la tasa de interés anual fija es de <span className="bold-type type-up">420%</span> más el IVA más
+                        comisión por disposición del 6% financiada. O un <span className="bold-type type-up">Costo Anual Total</span>
+                        <span className="bold-type type-up">(CAT)</span> PROMEDIO: <span className="bold-type type-up">3564.4%</span> sin IVA por $6,000 M.N. calculado sobre un
+                        préstamo de 30 días. Solamente para información y fines comparativos.
                     </p>
                     <p>
                         Entre las implicaciones que podrían resultar de la falta de pago están: (1) Intereses moratorios a una tasa anual fija de 

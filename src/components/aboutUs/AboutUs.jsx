@@ -103,7 +103,7 @@ export const AboutUs = () => {
                     </div> */}
                 </div>
                 <div className='call-to-action goTo-about-us'>
-                    <h2>Obtén tu primer préstamo con 50% de descuento.*</h2>
+                    <h2>Obtén tu primer préstamo con nosotros en menos de 30min.*</h2>
                     <p>Conoce desde el inicio cuanto debes pagar</p>
                     <Link to='/registration'><p className='cta-button'>SOLICÍTALO YA</p></Link>
                 </div>

@@ -1739,7 +1739,11 @@ th, td {
 .loan-right-title{
     width: 50%;
     text-align: right;
-    font-size: 4rem;
+    font-size: 3rem;
+}
+
+.loan-right-title span{
+    font-size: 1.3rem;
 }
 
 .amortization-loan-button{

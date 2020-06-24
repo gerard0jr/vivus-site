@@ -27,6 +27,7 @@ export const SecondLoan = (props) => {
     const [cat, setCat] = useState(0)
     const [interesIVA, setInteresIVA] = useState(0)
     const [fecha, setFecha] = useState('dd/mm/aaaa')
+    const [commision, setCommision] = useState(0)
     const [serverError, setServerError] = useState(false)
 
     let today = new Date()
@@ -282,6 +283,7 @@ export const SecondLoan = (props) => {
                 setInteresIVA(500)
                 setFirstPaymentAmount(new Date())
                 setFecha(new Date()) 
+                setCommision(120)
                 setLoading(false)
                 return
             }
@@ -419,7 +421,7 @@ export const SecondLoan = (props) => {
                                     <p>Préstamo</p>
                                 </div>
                                 <div className='loan-right-title'>
-                                    <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
+                                    <p>{monto.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<span>MXN</span></p>
                                 </div>
                             </div>
                             <div className='info-row-register'>
@@ -440,7 +442,14 @@ export const SecondLoan = (props) => {
                             </div>
                             <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                             <div className='info-row-register'>
-                                <p><strong>Parcialidad a pagar</strong></p>
+                                <p>Comisión por disposición</p>
+                                <div>
+                                    <p>{commision.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                </div>
+                            </div>
+                            <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
+                            <div className='info-row-register'>
+                                <p><strong>Monto total a pagar</strong></p>
                                 <div>
                                     <p><strong>{(firstPaymentAmount).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></strong></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                 </div>
