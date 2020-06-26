@@ -49,6 +49,7 @@ export const SecondLoan = (props) => {
                     setFecha(data.firstDueDate) 
                     setLoading(false)
                     setAmortizationTable(data.amortizationTable)
+                    setCommision(data.commision)
                 }
             })
             .catch(err => console.log(err))

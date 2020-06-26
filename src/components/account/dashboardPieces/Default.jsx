@@ -42,6 +42,7 @@ const Default = ({history, setBalance, bannerId}) => {
                             if(res.data.creditLimitUsed === 0) return history.push('/dashboard')
                             setCustomerBalance(res.data)
                             setBalance(res.data)
+                            sessionStorage.setItem('balance', JSON.stringify(res.data))
                             return setLoading(false)
                         }
                         setServerError(true)
@@ -144,6 +145,7 @@ const Default = ({history, setBalance, bannerId}) => {
                     ]
                 }
                 setCustomerBalance(dummyData)
+                sessionStorage.setItem('balance', JSON.stringify(dummyData))
                 return setBalance(dummyData)
             }
             getData(user)

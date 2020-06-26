@@ -20,10 +20,12 @@ const More = (props) => {
     const [data, setData] = useState({})
     const [serverError, setServerError] = useState(false)
     const [allowed, setAllowed] = useState(false) 
+    const [balance, setBalance] = useState({}) 
     //SIMULATION VALUES
     const [amount, setAmount] = useState(0)
     const [interest, setInterest] = useState(0)
     const [plazo, setPlazo] = useState(0)
+    const [commision, setCommision] = useState(0)
     // const [table, setTable] = useState([])
     const [firstPayment, setFirstPayment] = useState(0)
 
@@ -71,6 +73,7 @@ const More = (props) => {
                     const {data} = res
                     setInterest(data.interest)
                     setFirstPayment(data.firstPaymentAmount)
+                    setCommision(data.commision)
                     // setTable(data.amortizationTable)
                     setLoadingSimulation(false)
                 })
@@ -79,13 +82,15 @@ const More = (props) => {
     }
 
     const getData = async (user) => {
+        let userBalance = JSON.parse(sessionStorage.getItem('balance'))
+        if(userBalance) setBalance(userBalance)
         if(user.eMail === 'demo@demo.com'){
             setUser(user)
             setAmount(2000)
             setPlazo(7)
             setData({
-                minAmount: 2000,
-                maxAmount: 5000,
+                minAmount: 1000,
+                maxAmount: 2000,
                 actualLoan: 2000,
                 term: 7,
                 frequency: 3,
@@ -159,8 +164,12 @@ const More = (props) => {
             :
                 <div className='more-container'>
                     <div className='left-monto-option'>
-                        <p style={{margin: '0'}} className='move-md-size'><strong>Solicita un</strong></p>
-                        <p className='move-md-size'>nuevo préstamo</p>
+                        <p style={{margin: '0'}} className='move-md-size'><strong>Solicita</strong></p>
+                        <p className='move-md-size'>más dinero</p>
+                        <div className='calc-amounts'>
+                            <p>Monto actual de préstamo: <strong>{balance.creditLimit.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</strong></p>
+                            <p>Monto disponible: <strong>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</strong></p>
+                        </div>
                         <div className='title-winput'>
                             <p>Monto total</p>
                             <div className="slider-input-wrapper">
@@ -263,6 +272,13 @@ const More = (props) => {
                                     <p>Interés</p>
                                     <div>
                                         <p>{loadingSimulation ? 'Cargando...' : interest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
+                                    </div>
+                                </div>
+                                <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
+                                <div className='amount-info-row'>
+                                    <p>Comisión por disposición</p>
+                                    <div>
+                                        <p>{loadingSimulation ? 'Cargando...' : commision.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                     </div>
                                 </div>
                                 <hr style={{width: '100%', border: '0.5px solid #737373'}}/>

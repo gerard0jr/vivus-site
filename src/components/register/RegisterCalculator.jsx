@@ -23,12 +23,12 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
     const [periodicidad, setPeriodicidad] = useState(3)
     const [cat, setCat] = useState(null)
     const [interesIVA, setInteresIVA] = useState(null)
+    const [commision, setCommision] = useState(0)
     const [fecha, setFecha] = useState(null)
     const [registerData, setRegisterData] = useState(null)
     const [edit, setEdit] = useState(false)
     const [loading, setLoading] = useState(true)
     const [amortizationTable, setAmortizationTable] = useState([])
-    const [commision, setCommision] = useState(120)
     const [serverError, setServerError] = useState(false)
 
     let today = new Date()
@@ -50,7 +50,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                     setFecha(data.firstDueDate) 
                     setLoading(false)
                     setAmortizationTable(data.amortizationTable)
-                    // setCommision(data.commision)
+                    setCommision(data.commision)
                 }
             })
             .catch(err => console.log(err))

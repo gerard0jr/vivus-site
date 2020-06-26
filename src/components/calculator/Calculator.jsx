@@ -23,7 +23,7 @@ const Calculator = (props) => {
     const [interesIVA, setInteresIVA] = useState(null)
     const [fecha, setFecha] = useState(null)
     const [amortizationTable, setAmortizationTable] = useState([])
-    const [commision, setCommision] = useState(120)
+    const [commision, setCommision] = useState(0)
 
     let today = new Date()
 
@@ -77,7 +77,7 @@ const Calculator = (props) => {
                         setFecha(data.firstDueDate)
                         setFirstPaymentAmount(data.firstPaymentAmount)
                         setAmortizationTable(data.amortizationTable)
-                        // setCommision(data.commision)
+                        setCommision(data.commision)
                     }
                 })
                 .catch(err => setConfig('error'))
@@ -91,7 +91,7 @@ const Calculator = (props) => {
                     setFecha(data.firstDueDate)
                     setFirstPaymentAmount(data.firstPaymentAmount)
                     setAmortizationTable(data.amortizationTable)
-                    // setCommision(data.commision)
+                    setCommision(data.commision)
                 }
             })
             .catch(err => setConfig('error'))

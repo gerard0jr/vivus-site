@@ -1290,9 +1290,6 @@ th, td {
 .left-monto-option .move-md-size{
     font-size: 2.5rem !important;
 }
-.left-monto-option .move-md-size:nth-child(2){
-    margin-bottom: 2rem !important;
-}
 
 .right-monto-option{
     width: 55%;
@@ -1717,6 +1714,10 @@ th, td {
     color: black;
 }
 
+.left-loan .rangeslider__labels .rangeslider__label-item {
+    color: black;
+}
+
 .right-loan{
     border-radius: 20px 20px 0 0;
     -webkit-border-radius: 20px 20px 0 0;
@@ -1780,6 +1781,14 @@ th, td {
     color: white!important;
     font-weight: 600;
 
+}
+
+.calc-amounts{
+    margin: 1rem 0;
+}
+
+.calc-amounts p{
+    margin: 10px 0 !important;
 }
 
 @media(max-width: 1460px){
