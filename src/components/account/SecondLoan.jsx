@@ -29,6 +29,7 @@ export const SecondLoan = (props) => {
     const [fecha, setFecha] = useState('dd/mm/aaaa')
     const [commision, setCommision] = useState(0)
     const [serverError, setServerError] = useState(false)
+    const [idClient, setIdClient] = useState(0)
 
     let today = new Date()
 
@@ -39,7 +40,7 @@ export const SecondLoan = (props) => {
             if(!response.data) return props.push('/error')
             if(response.data) validToken = response.data.token
         }       
-        getSimulation(idProduct, amount, freq, term, validToken)
+        getSimulation(idProduct, amount, freq, term, idClient, validToken)
             .then(res => {
                 const { data } = res
                 if(res.status === 200){
@@ -150,7 +151,7 @@ export const SecondLoan = (props) => {
             setPeriodicidad(3)
             setPlazo(4)
             // sessionStorage.setItem('proposal', JSON.stringify({monto: 3000, periodicidad: 1, plazo: 4, idProduct}))
-            simulate(3000, 1, 4)
+            simulate(3000, 3, 4)
         })
     }
 
@@ -189,6 +190,7 @@ export const SecondLoan = (props) => {
         const validToken = response.data.token
         getCustomerByMail(idProduct, localRegister.eMail, validToken)
             .then(res => {
+                setIdClient(res.data.customerId)
                 setCustomer(res.data)
                 proposal(res.data.customerId, validToken)
             })
@@ -310,6 +312,7 @@ export const SecondLoan = (props) => {
                         data.idCustomer = emptyCustomer.idCustomer
                     }
                     else data.idCustomer = emptyCustomer.customerId
+                    setIdClient(data.idCustomer)
                     checkUser(data.idCustomer)
                     setCustomer({customerId:data.idCustomer, eMail: emptyCustomer.eMail, mobile:emptyCustomer.mobile})
                     proposal(data.idCustomer, validToken)
@@ -318,6 +321,7 @@ export const SecondLoan = (props) => {
             }
             setCustomer(loggedUser)
             checkUser(loggedUser)
+            setIdClient(loggedUser.customerId)
             proposal(loggedUser.customerId, validToken)
         }
         initialConfig()

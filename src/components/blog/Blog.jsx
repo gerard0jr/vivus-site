@@ -20,7 +20,7 @@ export const Blog = () => {
             query: category
         })
             .then(ents => {
-                setEntries(ents.items)
+                setEntries(ents.items.filter(item => item.fields.title))
                 setLoading(false)
                 drawContent()
             })

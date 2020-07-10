@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import ChargeOption from '../pay-components/liquidate-components/ChargeOption'
 import BankOption from '../pay-components/liquidate-components/BankOption'
@@ -36,9 +36,10 @@ const MoveOption = ({user}) => {
         if(!response) return setServerError(true)
         let validToken = response.data.token
         const data = {
-            idProduct,
+            idAction: 2,
+            days: selected,
             idCustomer: user.customerId,
-            idAction: 2
+            idProduct
         }
         requestExtension(data, validToken)
         .then(res => {
@@ -51,6 +52,39 @@ const MoveOption = ({user}) => {
 
         })
     }
+
+    useEffect(() => {
+        let loadExtension = async () => {
+            let response = await getToken()  
+            if(!response) return setServerError(true)
+            let validToken = response.data.token
+            const data = {
+                idAction: 1,
+                days: 0,
+                idCustomer: user.customerId,
+                idProduct
+            }
+            requestExtension(data, validToken)
+            .then(res => {
+                const {data} = res
+                if(data){
+                    setExtensionData({
+                        oldDueDate: data.details[0].oldDueDate,
+                        dueDateSeven: data.details[0].newDueDate,
+                        dueDateFourteen: data.details[1].newDueDate,
+                        dueDateThirty: data.details[2].newDueDate,
+                        priceSeven: data.details[0].extensionFee,
+                        priceFourteen: data.details[1].extensionFee,
+                        priceThirty: data.details[2].extensionFee,
+                        reference: data.details[0].oxxoReference
+                    })
+                }            
+    
+            })
+        }
+        loadExtension()
+    }, [])
+
     return (
         <div className='move-option-container'>
             <div className='left-move-option'>

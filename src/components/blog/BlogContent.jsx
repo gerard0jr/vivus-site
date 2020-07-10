@@ -3,10 +3,12 @@ import { momentEs } from '../../services/moment'
 import { Link } from 'react-router-dom'
 
 export const BlogContent = ({category, entries}) => {
-    console.log(entries)
     return (
         <div>
-            {
+            {   
+                entries.length === 0 ? 
+                    null
+                :    
                 category !== '' ? 
                     <div className='entries-container'>
                         {entries.map((entrie, ix) => 
@@ -24,7 +26,7 @@ export const BlogContent = ({category, entries}) => {
                 :
                 <>
                     <div className='big-blog-container'>
-                        <Link to={{pathname: `/blog/${entries[0].fields.url}`, state: {id: entries[0].sys.id}}} style={{backgroundImage: `url(${entries[0].fields.image.fields.file.url})`}} className='left-blog-container'>
+                        <Link to={{pathname: `/blog/${entries[0].fields.url}`, state: {id: entries[0].sys.id}}} style={{backgroundImage: `url(${entries[0].fields.image ? entries[0].fields.image.fields.file.url : '/img/blog/default.jfif'})`}} className='left-blog-container'>
                             <div className='opacity-mask'></div>
                             <div className='absolute-text'>
                                 <p className='entrie-date'>{momentEs(entries[0].fields.publishTime).format('DD/MM/YYYY')}</p>

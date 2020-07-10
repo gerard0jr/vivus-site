@@ -41,9 +41,8 @@ export const getConfiguration = (idProduct, token) =>
         .then(configuration => configuration)
         .catch(err => err)
 
-export const getSimulation = (idProduct, amount, frequency, term, token) => {
-    if(!idProduct || !amount || !frequency || !term || !token) return new Promise(resolve => resolve({status: 400}))
-    return axios.post(`${apiUrl}/Simulator/GetSimulation`, {idProduct, amount, frequency, term}, {headers: {'Authorization': `Bearer ${token}`}})
+export const getSimulation = (idProduct, amount = 0, frequency, term, idClient, token) => {
+    return axios.post(`${apiUrl}/Simulator/GetSimulation`, {idProduct, amount, frequency, term, idClient}, {headers: {'Authorization': `Bearer ${token}`}})
         .then(simulation => simulation)
         .catch(err => err)
     }

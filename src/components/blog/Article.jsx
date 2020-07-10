@@ -104,7 +104,7 @@ export const Article = ({match}) => {
                         </div>
                         <div className="lastest-posts">
                             <h3>Últimos:</h3>
-                            {lastest.items.map(lastPost => {
+                            {lastest.items.filter(item => item.fields.title).map(lastPost => {
                                 return (
                                     <Link onClick={scrollToTop} to={`/blog/${lastPost.fields.url}`} key={lastPost.fields.title} className='related-post'>
                                         <img src={lastPost.fields.image.fields.file.url} alt="rel post"/>

@@ -26,6 +26,7 @@ const Calculator = (props) => {
     const [commision, setCommision] = useState(0)
 
     let today = new Date()
+    let idClient = 0
 
     const [config, setConfig] = useState(null)
 
@@ -47,42 +48,25 @@ const Calculator = (props) => {
         getConfiguration(idProduct, response.data.token)
             .then(res => {
                 const { data } = res
-                console.log(data)
                 if(res.status === 200) {
                     setMonto(data.defaultAmount)
                     setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
                     setConfig(data)
-                    return simulate(data.dafaultAmount, 2, data.frequencies[0].frequencyTerm.defaultValue, response.data.token)
+                    return simulate(data.dafaultAmount, 3, data.frequencies[0].frequencyTerm.defaultValue, response.data.token)
                 }
                 setConfig('error')
             })
-            .catch(err => setConfig('error'))
+            // .catch(err => setConfig('error'))
     }
 
-    const simulate = async (amount, freq, term, inputToken) => {
-        if(!inputToken){
-            let validToken = await cookie.load('token')
-            if(!validToken) {
-                const response = await getToken()
-                if(response.status !== 200) return loadSimulation()
-                validToken = response.data.token
-            }
-            getSimulation(idProduct, amount, freq, term, validToken)
-                .then(res => {
-                    const { data } = res
-                    console.log(data)
-                    if(res.status === 200){
-                        setCat(data.cat)
-                        setInteresIVA(data.interest)
-                        setFecha(data.firstDueDate)
-                        setFirstPaymentAmount(data.firstPaymentAmount)
-                        setAmortizationTable(data.amortizationTable)
-                        setCommision(data.commision)
-                    }
-                })
-                .catch(err => setConfig('error'))
+    const simulate = async (amount, freq, term) => {
+        let validToken = await cookie.load('token')
+        if(!validToken) {
+            const response = await getToken()
+            if(response.status !== 200) return loadSimulation()
+            validToken = response.data.token
         }
-        getSimulation(idProduct, amount, freq, term, inputToken)
+        getSimulation(idProduct, amount, freq, term, idClient, validToken)
             .then(res => {
                 const { data } = res
                 if(res.status === 200){
@@ -91,10 +75,10 @@ const Calculator = (props) => {
                     setFecha(data.firstDueDate)
                     setFirstPaymentAmount(data.firstPaymentAmount)
                     setAmortizationTable(data.amortizationTable)
-                    setCommision(data.commision)
+                    return setCommision(data.commision)
                 }
             })
-            .catch(err => setConfig('error'))
+            // .catch(err => setConfig('error'))
     }
 
     const updateMonto = val => {
@@ -121,9 +105,9 @@ const Calculator = (props) => {
     }
 
     useEffect(() => {
-        simulate(monto, periodicidad, plazo)
+        if(config !== null && config !== 'error') simulate(monto, periodicidad, plazo)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [monto, periodicidad, plazo])
+    }, [monto, periodicidad, plazo, config])
 
     useEffect(() => {
         initialConfiguration()

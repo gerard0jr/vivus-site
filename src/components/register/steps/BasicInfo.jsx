@@ -167,6 +167,10 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                             .catch(err => setLoadingForm(false))
                         }
                     })
+                    .catch(err => {
+                        setServerError(false)
+                        setLoadingForm(false)
+                    })
                 }
                 setServerError(true)
                 setLoadingForm(false)

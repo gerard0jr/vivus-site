@@ -13,10 +13,10 @@ const idProduct = 1
 const Default = ({history, setBalance, bannerId}) => {
     const [customerBalance, setCustomerBalance] = useState({creditLimit: 0, creditLimitUsed: 0, liquidateAmount: 0})
     const [contract, setContract] = useState('')
-    const [accStatement, setAccStatement] = useState(null)
+    // const [accStatement, setAccStatement] = useState(null)
     const [serverError, setServerError] = useState(false)
     const [loading, setLoading] = useState(true)
-    const [loadingAcc, setLoadingAcc] = useState(true)
+    // const [loadingAcc, setLoadingAcc] = useState(true)
     const [open, setOpen] = useState(false)
 
     const getData = async (user) => {
@@ -60,14 +60,14 @@ const Default = ({history, setBalance, bannerId}) => {
                 })
                 .catch(err => console.log(err))
         
-                getAccountStatement(data, validToken)
-                .then(res => {
-                    if(res.data){
-                        setAccStatement(res.data.document)
-                        setLoadingAcc(false)
-                    }
-                })
-                .catch(err =>  console.log(err))
+                // getAccountStatement(data, validToken)
+                // .then(res => {
+                //     if(res.data){
+                //         setAccStatement(res.data.document)
+                //         setLoadingAcc(false)
+                //     }
+                // })
+                // .catch(err =>  console.log(err))
         
                 //TAG MANAGER
                 getAnalytics({idCustomer: user.customerId, idProduct}, validToken)
@@ -234,7 +234,7 @@ const Default = ({history, setBalance, bannerId}) => {
                     )}
                     </Media>
                     <div className="flex-horizontal" style={{justifyContent: 'space-evenly', width: '100%', marginTop: '0.9rem'}}>
-                        <Popup onClose={() => setOpen(false)} open={open} position="right center">
+                        {/* <Popup onClose={() => setOpen(false)} open={open} position="right center">
                             <iframe style={{width:'100%', height:'85%'}} src={`data:application/pdf;base64,${accStatement}`} title='Contract' frameborder="0"></iframe>
                             <div className='button-container'>
                                 <a title='Estado de cuenta detallado' download='Estado de Cuenta' href={`data:application/pdf;base64,${accStatement}`} style={{color: 'black', textDecoration: 'underline', cursor: 'pointer', fontWeight: 'bold'}} onClick={() => setOpen(false)}>Descargar estado de cuenta</a>
@@ -242,12 +242,12 @@ const Default = ({history, setBalance, bannerId}) => {
                             <div className='button-container'>
                                 <p className='btn-register' style={{marginLeft: '1rem', backgroundColor: 'lightgray'}} onClick={() => setOpen(false)}>Cerrar</p>
                             </div>
-                        </Popup>
-                        {loadingAcc ? 
+                        </Popup> */}
+                        {/* {loadingAcc ? 
                             <span style={{color: 'gray'}}>Cargando estado de cuenta...</span> 
                             : checkMobile ? <a title='Estado de cuenta detallado' download='Estado de cuenta' href={`data:application/pdf;base64,${accStatement}`} style={{color: 'black', textDecoration: 'underline', cursor: 'pointer', fontWeight: 'bold'}}><u>Estado de cuenta detallado</u></a>
                             : <p style={{cursor: 'pointer', color: 'black'}} rel="noopener noreferrer" onClick={() => setOpen(true)}><u>Estado de cuenta detallado</u></p>
-                        }
+                        } */}
                         {contract.length > 0 ? <a href={`data:application/pdf;base64,${contract}`} download="contrato.pdf">Tu contrato</a> : <p style={{color: 'gray'}}>Cargando contrato...</p>}
                         
                     </div>

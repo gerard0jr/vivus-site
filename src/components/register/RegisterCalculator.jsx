@@ -32,6 +32,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
     const [serverError, setServerError] = useState(false)
 
     let today = new Date()
+    let idClient = 0
 
     const simulate = async (amount, freq, term) => {
         let validToken = await cookie.load('token')
@@ -40,7 +41,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
             if(!response.data) return props.push('/error')
             if(response.data) validToken = response.data.token
         }
-        getSimulation(idProduct, amount, freq, term, validToken)
+        getSimulation(idProduct, amount, freq, term, idClient, validToken)
             .then(res => {
                 const { data } = res
                 if(res.status === 200){
@@ -97,7 +98,7 @@ const RegisterCalculator = ({proposalChange = {}, props}) => {
                     setRegisterData({sliderConfig:config})
                     setMonto(data.defaultAmount)
                     setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
-                    simulate(data.defaultAmount, 2, data.frequencies[0].frequencyTerm.defaultValue)
+                    simulate(data.defaultAmount, 3, data.frequencies[0].frequencyTerm.defaultValue)
                     sessionStorage.setItem('proposal', JSON.stringify({idProduct, monto:data.defaultAmount, periodicidad:3, plazo:data.frequencies[0].frequencyTerm.defaultValue}))
                 }
             })
