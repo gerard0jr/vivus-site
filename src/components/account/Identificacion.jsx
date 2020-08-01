@@ -10,11 +10,11 @@ const Identificacion = (props) => {
 
     const [cargadoAnverso, setCargadoAnverso] = useState(false)
     const [cargadoReverso, setCargadoReverso] = useState(false)
-    const [cargadoNomina, setCargadoNomina] = useState(false)
+    // const [cargadoNomina, setCargadoNomina] = useState(false)
     const [cargadoSelfie, setCargadoSelfie] = useState(false)
     const [loading, setLoading] = useState(true)
     const [loading1, setLoading1] = useState(true)
-    const [loading2, setLoading2] = useState(true)
+    // const [loading2, setLoading2] = useState(true)
     const [loading3, setLoading3] = useState(true)
     const [user, setUser] = useState(null)
     const [fileSizeError, setFileSizeError] = useState(false)
@@ -81,36 +81,36 @@ const Identificacion = (props) => {
         reader.readAsDataURL(file)
 
     }
-    const handleFileNomina = e => {
-        setLoading2(true)
-        let file = e.target.files[0]
-        if(file.size > 10000000) return setFileSizeError(true)
-        let extension = file.type.replace('image/','')
-        let reader = new FileReader()
-        reader.onprogress = e => {setLoading2(true)}
-        reader.onload = e => {
-            const finalString = e.target.result.replace(`data:image/${extension};base64,`,'')
-            const data = {
-                idProduct,
-                idCustomer: user.customerId,
-                idDocument: 28,
-                fileName: file.name,
-                fileExtension: file.type.replace('image/',''),
-                fileContent: finalString
-            }    
-            uploadFile(data, token)
-                .then(res => {
-                    if(res.status === 200){
-                        setLoading2(false)
-                        return setCargadoNomina(true)
-                    }
-                    return setServerError(true)
-                })
-                .catch(err => setLoading2(false))
-        }
-        reader.readAsDataURL(file)
+    // const handleFileNomina = e => {
+    //     setLoading2(true)
+    //     let file = e.target.files[0]
+    //     if(file.size > 10000000) return setFileSizeError(true)
+    //     let extension = file.type.replace('image/','')
+    //     let reader = new FileReader()
+    //     reader.onprogress = e => {setLoading2(true)}
+    //     reader.onload = e => {
+    //         const finalString = e.target.result.replace(`data:image/${extension};base64,`,'')
+    //         const data = {
+    //             idProduct,
+    //             idCustomer: user.customerId,
+    //             idDocument: 28,
+    //             fileName: file.name,
+    //             fileExtension: file.type.replace('image/',''),
+    //             fileContent: finalString
+    //         }    
+    //         uploadFile(data, token)
+    //             .then(res => {
+    //                 if(res.status === 200){
+    //                     setLoading2(false)
+    //                     return setCargadoNomina(true)
+    //                 }
+    //                 return setServerError(true)
+    //             })
+    //             .catch(err => setLoading2(false))
+    //     }
+    //     reader.readAsDataURL(file)
 
-    }
+    // }
 
     const handleFileSelfie = e => {
         setLoading3(true)
@@ -167,11 +167,11 @@ const Identificacion = (props) => {
                 idCustomer,
                 idDocument: 30
             }
-            const dataNomina = {
-                idProduct,
-                idCustomer,
-                idDocument: 28
-            }
+            // const dataNomina = {
+            //     idProduct,
+            //     idCustomer,
+            //     idDocument: 28
+            // }
             const dataSelfie = {
                 idProduct,
                 idCustomer,
@@ -195,15 +195,15 @@ const Identificacion = (props) => {
                     setLoading1(false)
                 })
                 .catch(err => console.log(err))
-            getFile(dataNomina, validToken)
-                .then(res => {
-                    if(res.status === 200){
-                        setCargadoNomina(true)
-                        return setLoading2(false)
-                    }
-                    setLoading2(false)
-                })
-                .catch(err => console.log(err))
+            // getFile(dataNomina, validToken)
+            //     .then(res => {
+            //         if(res.status === 200){
+            //             setCargadoNomina(true)
+            //             return setLoading2(false)
+            //         }
+            //         setLoading2(false)
+            //     })
+            //     .catch(err => console.log(err))
             getFile(dataSelfie, validToken)
                 .then(res => {
                     if(res.status === 200){
@@ -223,7 +223,7 @@ const Identificacion = (props) => {
                     if(res.status && res.data.idStatus === 1){
                         if(res.data.idSubStatus === 219){
                             setCargadoAnverso(true)
-                            setCargadoNomina(true)
+                            // setCargadoNomina(true)
                             return setCargadoReverso(true)
                         }
                     }
@@ -278,7 +278,7 @@ const Identificacion = (props) => {
                 //TAG MANAGER
             }
         let approved = sessionStorage.getItem('APP')
-        // if(approved === 'no') return props.history.push('/denied')
+        if(approved === 'no') return props.history.push('/denied')
         let getUser = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(!getUser){
             let emptyCustomer = JSON.parse(sessionStorage.getItem('empty-customer'))
@@ -310,10 +310,10 @@ const Identificacion = (props) => {
     let fillDemo = () => {
         setLoading(false)
         setLoading1(false)
-        setLoading2(false)
+        // setLoading2(false)
         setLoading3(false)
         setCargadoAnverso(true)
-        setCargadoNomina(true)
+        // setCargadoNomina(true)
         setCargadoReverso(true)
         setCargadoSelfie(true)
     }
@@ -324,13 +324,13 @@ const Identificacion = (props) => {
             <div className='id-container'>
                 <div className="id-top-container">
                     <div className='top-instructions'>
-                        <div className={cargadoAnverso && cargadoReverso && cargadoSelfie && cargadoNomina ? 'document-uploaded' : null}>
-                            <h2>{cargadoAnverso && cargadoReverso && cargadoSelfie && cargadoNomina ? 'Estamos revisando tu' : 'Necesitamos tu'}</h2>
-                            <h3><strong>{cargadoAnverso && cargadoReverso && cargadoSelfie && cargadoNomina ? 'Solicitud' : 'identificación oficial'}</strong></h3>
+                        <div className={cargadoAnverso && cargadoReverso && cargadoSelfie ? 'document-uploaded' : null}>
+                            <h2>{cargadoAnverso && cargadoReverso && cargadoSelfie ? 'Estamos revisando tu' : 'Necesitamos tu'}</h2>
+                            <h3><strong>{cargadoAnverso && cargadoReverso && cargadoSelfie ? 'Solicitud' : 'identificación oficial'}</strong></h3>
                         </div>
-                        <p>¡Finalmente solo necesitamos tu identificación oficial y comprobante de ingresos!</p>
+                        <p>¡Finalmente solo necesitamos tu identificación oficial y una selfie!</p>
                         <br/>
-                        <p>Tu identificación debe encontrarse vigente y tu comprobante de ingreso puede ser tu último recibo de nómina timbrado por el SAT, un estado de cuenta bancario o tu última declaración de impuestos. Tan pronto los recibamos completos, en tan solo unos minutos recibirás el depósito de tu préstamo.</p>
+                        <p>Tu identificación debe encontrarse vigente. Tan pronto los recibamos completos, en tan solo unos minutos recibirás el depósito de tu préstamo.</p>
                         <h5 style={{fontSize: '1rem'}}>Por favor lee detalladamente las instrucciones para enviarnos tu identificación:</h5>
                     </div>
                     <div className='instructions'>
@@ -380,7 +380,7 @@ const Identificacion = (props) => {
                         <div  className='buttons-wrapper'style={{margin: '1rem 0'}}>
                             <input onChange={handleFileAnverso} style={{display: 'none'}} type="file" accept="image/*" name="userIDAnverso" id="userIDAnverso"/>
                             <input onChange={handleFileReverso} style={{display: 'none'}} type="file" accept="image/*" name="userIDReverso" id="userIDReverso"/>
-                            <input onChange={handleFileNomina} style={{display: 'none'}} type="file" accept="image/*" name="userIDNomina" id="userIDNomina"/>
+                            {/* <input onChange={handleFileNomina} style={{display: 'none'}} type="file" accept="image/*" name="userIDNomina" id="userIDNomina"/> */}
                             <input onChange={handleFileSelfie} style={{display: 'none'}} type="file" accept="image/png, image/jpeg" name="userIDSelfie" id="userIDSelfie"/>
                             <div>
                                 <div className='button-wrapper-id'>
@@ -391,9 +391,9 @@ const Identificacion = (props) => {
                                 </div>
                             </div>
                             <div>
-                                <div className='button-wrapper-id'>
+                                {/* <div className='button-wrapper-id'>
                                     <p style={cargadoNomina ? {backgroundColor: '#88CF00'} : null} onClick={() => document.getElementById('userIDNomina').click()} className='btn-minimal-width' disabled={cargadoNomina}>{loading2 ? 'CARGANDO...' : cargadoNomina ? 'COMPROBANTE DE INGRESOS CARGADO' : 'CARGAR COMPROBANTE DE INGRESOS'}</p>
-                                </div>    
+                                </div>     */}
                                 <div className='button-wrapper-id'>
                                     <p style={cargadoSelfie ? {backgroundColor: '#88CF00'} : null} onClick={() => document.getElementById('userIDSelfie').click()} className='btn-minimal-width' disabled={cargadoSelfie}>{loading3 ? 'CARGANDO...' : cargadoSelfie ? 'SELFIE CARGADA' : 'CARGAR SELFIE'}</p>
                                 </div>    
@@ -413,8 +413,7 @@ const Identificacion = (props) => {
                                 <img src="/img/mail-account.png" alt='email'/>
                             </div>
                             <div>
-                                <p>Envíanos tus documentos a la siguiente dirección <a href="mailto:documentos@Vivus.com.mx">documentos@Vivus.com.mx</a></p>
-                                <br/>
+                                <p>Envíanos tus documentos a la siguiente dirección <a style={{color: '#A7CE3A'}} href="mailto:documentos@Vivus.com.mx">documentos@Vivus.com.mx</a></p>
                                 <p>Este método podría tomar más tiempo que cargar las imágenes</p>
                             </div>
                         </div>
@@ -426,15 +425,15 @@ const Identificacion = (props) => {
                             <p>No podremos procesar tu solicitud sin ellos.</p>
                         </div>
                     </div>
-                    {cargadoAnverso && cargadoReverso && cargadoSelfie && cargadoNomina ? 
-                        <div className='help-banner'>
-                            <h2>¿Necesitas ayuda?</h2>
-                            <h4>Mándanos un WhatsApp</h4>
-                        </div>
-                        :
-                        null
-                    }
                 </div>
+                {cargadoAnverso && cargadoReverso && cargadoSelfie ? 
+                    <div className='help-banner'>
+                        <h2>¿Necesitas ayuda?</h2>
+                        <h4>Mándanos un WhatsApp</h4>
+                    </div>
+                    :
+                    null
+                }
             </div>
         </div>
     )

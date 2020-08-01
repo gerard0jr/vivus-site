@@ -3,7 +3,7 @@ import React from 'react'
 const Options = ({cargos, setCargos}) => {
     return (
         <div>
-            <h3>Otras opciones</h3>
+            <h3>Pagar mi préstamo</h3>
             <div className='pagar-text-box'><p>Si tienes algún problema con tu cuenta en la que realizaremos el cargo automático, te ofrecemos las siguientes opciones para realizar tu pago:</p></div>
             <div className='options-buttons'>
                 <div className='op-left-buttons'>

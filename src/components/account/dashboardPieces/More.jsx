@@ -18,7 +18,7 @@ const More = (props) => {
     const [loadingCalc, setLoadingCalc] = useState(true)
     const [user, setUser] = useState({})
     const [data, setData] = useState({})
-    const [serverError, setServerError] = useState(false)
+    const [serverError, setServerError] = useState('')
     const [allowed, setAllowed] = useState(false) 
     const [balance, setBalance] = useState({}) 
     //SIMULATION VALUES
@@ -32,7 +32,7 @@ const More = (props) => {
     const getLoan = async () => {
         setLoadingDone(true)
         let response = await getToken() 
-        if(!response) return setServerError(true)
+        if(!response) return setServerError('Error en el servidor')
         let validToken = response.data.token
         const sentData = {
             idProduct,
@@ -50,7 +50,7 @@ const More = (props) => {
             })
             .catch(err => {
                 if(err.response.status === 400){
-                    setServerError(true)
+                    setServerError('Error en el servidor')
                     setAllowed(false)
                     setLoadingDone(false)
                 }
@@ -65,7 +65,7 @@ const More = (props) => {
         }
         setLoadingSimulation(true)
         let response = await getToken() 
-        if(!response) return setServerError(true)
+        if(!response) return setServerError('Error en el servidor')
         let validToken = response.data.token
         if(data.actualLoan){
             getSimulation(idProduct, amount , data.frequency, data.term, validToken)
@@ -103,7 +103,7 @@ const More = (props) => {
             return setAllowed(true)
         }
         let response = await getToken() 
-        if(!response) return setServerError(true)
+        if(!response) return setServerError('Error en el servidor')
         let validToken = response.data.token
         const data = {
             idProduct,
@@ -117,15 +117,20 @@ const More = (props) => {
         requestAdditionalAmount(data, validToken)
             .then(res => {
                 const {data} = res
-                setData(data)
-                setAmount(data.simulation.amount)
-                setLoadingCalc(false)
-                setAllowed(true)
+                if(data){
+                    setData(data)
+                    setAmount(data.simulation.amount)
+                    setLoadingCalc(false)
+                    setAllowed(true)
+                }
+                setServerError('Error en el servidor')
             })
             .catch(err => {
                 if(err.response){
+                    if(err.response.status === 400) setServerError(`Error: ${err.response.status}. Error en el servidor`)
+                    if(err.response.status === 403) setServerError(`Error: ${err.response.status}. No puedes solicitar más dinero`)
+                    if(err.response.status === 404) setServerError(`Error: ${err.response.status}. No encontrado`)
                     setLoadingCalc(false)
-                    if(err.response.status === 400) return setServerError(true)
                 }
             })
     }
@@ -151,7 +156,7 @@ const More = (props) => {
         {
             serverError ? 
                 <div className='more-container'>
-                    <p>Error en el servidor</p>
+                    <p>{serverError}</p>
                 </div>
             :
             loadingCalc ? 

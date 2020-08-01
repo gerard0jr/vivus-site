@@ -39,8 +39,8 @@
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
-    "start": "PORT=8000 react-scripts start",
-    "start-windows": "set PORT=8000 && react-scripts start",
+    "start-linux": "PORT=8000 react-scripts start",
+    "start": "set PORT=8000 && react-scripts start",
     "information": "for unix, change the command above for 'PORT=8000 react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test",

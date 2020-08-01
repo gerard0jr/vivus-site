@@ -50,14 +50,14 @@ const Routes = () => {
             {inManteinance ? 
                 <Switch>
                     {/* RUTAS EN mantenimiento */}
-                    <Route exact path='/' component={Home}/>
+                    {/* <Route exact path='/' component={Home}/> */}
                     <Route exact path='/en-mantenimiento' component={Manteinance} /> 
                     <Route path='/*' render={props => <Redirect to='/en-mantenimiento'/>} /> 
                 </Switch>
                 :
                 <Switch>
-                    {/* <Route exact path='/en-mantenimiento' component={Manteinance} /> 
-                    <Route exact path='/' render={props => <Redirect to='/en-mantenimiento'/>} />  */}
+                    <Route exact path='/en-mantenimiento' component={Manteinance} /> 
+                    {/* <Route exact path='/' render={props => <Redirect to='/en-mantenimiento'/>} />  */}
                     {/* Home */}
                     <Route exact path='/' component={Home}/>
                     {/* Landing sections */}

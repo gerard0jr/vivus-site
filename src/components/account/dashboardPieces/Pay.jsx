@@ -11,9 +11,9 @@ const Pay = ({balance}) => {
 
     return (
         <div className='pagar-container'>
-            {cargos === 'resumen' || cargos === 'liquidate' ? 
+            {/* {cargos === 'resumen' || cargos === 'liquidate' ? 
                 <div>
-                    <h3>Cargo automático</h3>
+                    <h3>Anticipar pago</h3>
                     <div className='pagar-text-box'><p>Despreocúpate ya tenemos programado el cargo de tu pago para que no hagas filas ni pagues comisiones extra en los establecimientos</p></div>
                     <div className='liquidar-prestamo'>
                         <span>Selecciona aquí si quieres</span>
@@ -23,7 +23,7 @@ const Pay = ({balance}) => {
                 </div>
                 :
                 null
-            }    
+            }     */}
             { cargos === 'resumen' ?
                 <Options cargos={cargos} setCargos={setCargos}/>
                 : cargos === 'liquidate' ?

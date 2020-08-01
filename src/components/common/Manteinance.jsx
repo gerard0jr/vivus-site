@@ -5,16 +5,14 @@ export const Manteinance = () => {
         <div className='app-container'>
             <div className='manteinance-page'>
                 <div className='left-manteinance'>
-                    <h1>Estamos haciendo mejoras en nuestra página web</h1>
-                    <h2>Enseguida volveremos a estar disponibles</h2>
-                    <h3>Disculpa las molestias</h3>
-                    <br/>
-                    <h3 style={{fontWeight: 'bold'}}>¿Necesitas ayuda?</h3>
-                    <h2>info@Vivus.com.mx</h2>
-                    <h2>(0155) 6717 0750</h2>
+                    <h1>PÁGINA EN</h1>
+                    <h2>MANTENIMIENTO</h2>
+                    <h3>¡Nos encontramos trabajando para atenderte mejor!</h3>
+                    <h4>En breve estaremos nuevamente disponibles</h4>
+                    <h4>Lamentamos los inconvenientes</h4>
                 </div>
                 <div className='right-manteinance'>
-                    <img src="/img/manteinance.png" alt="manteinance-Vivus"/>
+                    <img src="/img/man.png" alt="manteinance-Vivus"/>
                 </div>
             </div>
         </div>

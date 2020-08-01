@@ -248,7 +248,7 @@ const Default = ({history, setBalance, bannerId}) => {
                             : checkMobile ? <a title='Estado de cuenta detallado' download='Estado de cuenta' href={`data:application/pdf;base64,${accStatement}`} style={{color: 'black', textDecoration: 'underline', cursor: 'pointer', fontWeight: 'bold'}}><u>Estado de cuenta detallado</u></a>
                             : <p style={{cursor: 'pointer', color: 'black'}} rel="noopener noreferrer" onClick={() => setOpen(true)}><u>Estado de cuenta detallado</u></p>
                         } */}
-                        {contract.length > 0 ? <a href={`data:application/pdf;base64,${contract}`} download="contrato.pdf">Tu contrato</a> : <p style={{color: 'gray'}}>Cargando contrato...</p>}
+                        {contract.length > 0 ? <a href={`data:application/pdf;base64,${contract}`} download="contrato_VIVUS.pdf">Tu contrato</a> : <p style={{color: 'gray'}}>Cargando contrato...</p>}
                         
                     </div>
                 </>

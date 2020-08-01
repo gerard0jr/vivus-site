@@ -22,7 +22,6 @@ const NewDashboard = (props) => {
     const checkUser = (user, token) => {
         return getStatus(idProduct, user.customerId, false, token)
         .then(res =>{
-            console.log(res)
             setBannerId(res.data.bannerId)
             if(res.status && res.data.idStatus === 4){
                 return props.history.push('/denied')
@@ -42,9 +41,7 @@ const NewDashboard = (props) => {
                 if(res.data.idStatus === 6){
                     if(res.data.idSubStatus === 15) return props.history.push('/application-complete')
                 }
-                if(res.data.idStatus === 8){
-                    if(res.data.idSubStatus === 55) return props.history.push('/dashboard')
-                }
+                if(res.data.idStatus === 8) return props.history.push('/dashboard')
                 if(res.data.idStatus === 4){
                     return props.history.push('/denied')
                 }

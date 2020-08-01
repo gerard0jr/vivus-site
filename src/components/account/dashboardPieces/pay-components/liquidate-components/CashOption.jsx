@@ -38,6 +38,10 @@ const CashOption = ({moveImgWidth, extensionReference}) => {
             setExtension(1234789456123)
             return setLoading(false)
         }
+        if(extensionReference){
+            setLoading(false)
+            return setExtension(true)
+        }
         setLoading(true)
         if(user){
             getData(user)

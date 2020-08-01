@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from 'react'
 import ReactTooltip from 'react-tooltip'
 import { getToken, getCustomerByMail, getStatus, getProposal, getSimulation, getConfiguration, saveProposal, getAnalytics } from '../../services/api'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTable, faDownload } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faTable, faDownload } from '@fortawesome/free-solid-svg-icons'
 import { PopInformation } from '../register/PopInformation'
 import cookie from 'react-cookies'
 import Slider from 'react-rangeslider'
@@ -20,9 +20,9 @@ export const SecondLoan = (props) => {
     const [customer, setCustomer] = useState(null)
     const [amortizationTable, setAmortizationTable] = useState([])
     const [registerData, setRegisterData] = useState(null)
-    const [monto, setMonto] = useState(0)
+    const [monto, setMonto] = useState(1000)
     const [firstPaymentAmount, setFirstPaymentAmount] = useState(0)
-    const [plazo, setPlazo] = useState(1)
+    const [plazo, setPlazo] = useState(7)
     const [periodicidad, setPeriodicidad] = useState(3)
     const [cat, setCat] = useState(0)
     const [interesIVA, setInteresIVA] = useState(0)
@@ -147,11 +147,11 @@ export const SecondLoan = (props) => {
                 setPlazo(res.data.term)
                 return simulate(res.data.amount, res.data.opFrequency, res.data.term)
             }
-            setMonto(3000)
-            setPeriodicidad(3)
-            setPlazo(4)
+            // setMonto(3000)
+            // setPeriodicidad(3)
+            // setPlazo(4)
             // sessionStorage.setItem('proposal', JSON.stringify({monto: 3000, periodicidad: 1, plazo: 4, idProduct}))
-            simulate(3000, 3, 4)
+            // simulate(3000, 3, 7)
         })
     }
 
@@ -163,15 +163,15 @@ export const SecondLoan = (props) => {
         setPlazo(val)
     }
 
-    const updatePeriodicidad = val => {
-        if(val === 2){
-            if(plazo > 6) setPlazo(6)
-        }
-        if(val === 1){
-            if(plazo < 4) setPlazo(4)
-        }
-        setPeriodicidad(val)
-    }
+    // const updatePeriodicidad = val => {
+    //     if(val === 2){
+    //         if(plazo > 6) setPlazo(6)
+    //     }
+    //     if(val === 1){
+    //         if(plazo < 4) setPlazo(4)
+    //     }
+    //     setPeriodicidad(val)
+    // }
 
     useEffect(() => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))

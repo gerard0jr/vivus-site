@@ -2,7 +2,7 @@ import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import '../../newStyles.scss'
 import 'react-tabs/style/react-tabs.scss'
-import ChargeOption from './liquidate-components/ChargeOption'
+// import ChargeOption from './liquidate-components/ChargeOption'
 import BankOption from './liquidate-components/BankOption'
 import DebitOption from './liquidate-components/DebitOption'
 import CashOption from './liquidate-components/CashOption'
@@ -32,14 +32,14 @@ const Liquidate = ({balance}) => {
                 <div className='liquidate-paginator'>
                 <Tabs>
                     <TabList>
-                        <Tab>Cargo automático</Tab>
+                        {/* <Tab>Cargo automático</Tab> */}
                         <Tab>Efectivo en tiendas</Tab>
                         <Tab>Banco</Tab>
                         <Tab>Tarjeta de Débito</Tab>
                     </TabList>
-                    <TabPanel>
+                    {/* <TabPanel>
                         <ChargeOption balance={balance}/>
-                    </TabPanel>
+                    </TabPanel> */}
                     <TabPanel>
                         <CashOption balance={balance}/>
                     </TabPanel>

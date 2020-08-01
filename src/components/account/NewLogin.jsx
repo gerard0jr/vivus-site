@@ -118,6 +118,7 @@ const NewLogin = (props) => {
           return login(submittedData, validToken)
             .then(res => {
               const { data } = res
+              console.log(data)
               if(res.status === 200){
                 sessionStorage.setItem('loggedUser', JSON.stringify(data.customer))
                 return checkStatus(data.customer.customerId, validToken, myIp)

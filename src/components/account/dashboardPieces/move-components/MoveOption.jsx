@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import ChargeOption from '../pay-components/liquidate-components/ChargeOption'
+// import ChargeOption from '../pay-components/liquidate-components/ChargeOption'
 import BankOption from '../pay-components/liquidate-components/BankOption'
 import DebitOption from '../pay-components/liquidate-components/DebitOption'
 import CashOption from '../pay-components/liquidate-components/CashOption'
@@ -17,18 +17,19 @@ const MoveOption = ({user}) => {
     const [willPay, setWillPay] = useState(false)
     const [serverError, setServerError] = useState(false)
     const [extensionData, setExtensionData] = useState({
-        oldDueDate: new Date(),
-        dueDateSeven: new Date(),
-        dueDateFourteen: new Date(),
-        dueDateThirty: new Date(),
-        priceSeven: 121,
-        priceFourteen: 216,
-        priceThirty: 429,
-        reference: '123456789'
+        oldDueDate: null,
+        dueDateSeven: null,
+        dueDateFourteen: null,
+        dueDateThirty: null,
+        priceSeven: 0,
+        priceFourteen: 0,
+        priceThirty: 0,
+        reference: '0'
     })
     const [selected, setSelected] = useState(null)
+    const [extensionError, setExtensionError] = useState(null)
 
-    const setExtension = async () => {
+    const setExtension = async (days) => {
         let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
         let loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'))
         if(demoUser || loggedUser.eMail === 'demo@demo.com') return setWillPay(true)
@@ -37,7 +38,7 @@ const MoveOption = ({user}) => {
         let validToken = response.data.token
         const data = {
             idAction: 2,
-            days: selected,
+            days,
             idCustomer: user.customerId,
             idProduct
         }
@@ -55,6 +56,7 @@ const MoveOption = ({user}) => {
 
     useEffect(() => {
         let loadExtension = async () => {
+            let user = await JSON.parse(sessionStorage.getItem('loggedUser'))
             let response = await getToken()  
             if(!response) return setServerError(true)
             let validToken = response.data.token
@@ -67,7 +69,9 @@ const MoveOption = ({user}) => {
             requestExtension(data, validToken)
             .then(res => {
                 const {data} = res
-                if(data){
+                console.log(data)
+                if(!data) return setExtensionError('Server Error: 400')
+                if(data.continue){
                     setExtensionData({
                         oldDueDate: data.details[0].oldDueDate,
                         dueDateSeven: data.details[0].newDueDate,
@@ -79,7 +83,9 @@ const MoveOption = ({user}) => {
                         reference: data.details[0].oxxoReference
                     })
                 }            
-    
+                else {
+                    setExtensionError(data.rejectReasons[0].reason)
+                }
             })
         }
         loadExtension()
@@ -100,7 +106,7 @@ const MoveOption = ({user}) => {
                 <p style={{fontSize: '1.2rem'}}>Selecciona el número de días que deseas recorrer</p>
                 <div className='move-vencimiento'>
                     <p>Vencimiento actual de tu préstamo:</p>
-                    <p className='move-md-size' style={{marginLeft: '2rem', textAlign: 'right'}}>{momentEs(extensionData.oldDueDate).format('D/MMM/Y')}</p>
+                    <p className='move-md-size' style={{marginLeft: '2rem', textAlign: 'right'}}>{extensionData.oldDueDate ? momentEs(extensionData.oldDueDate).format('D/MMM/Y') : '-'}</p>
                 </div>
                 <div className="move-options-container">
                     <div className={selected === 7 ? 'move-nuevo-vencimiento move-selected' : 'move-nuevo-vencimiento'}>
@@ -108,12 +114,12 @@ const MoveOption = ({user}) => {
                             <p>7</p>
                             <p>días</p>
                             <p>hasta</p>
-                            <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
+                            <p>{extensionData.dueDateSeven ? momentEs(extensionData.dueDateSeven).format('D/MMM/Y') : '-'}</p>
                             <hr/>
-                            <p className='move-md-size'><strong>{extensionData.priceSeven ? extensionData.priceSeven.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}<small> MXN</small></strong></p>
+                            <p className='move-md-size'><strong>{extensionData.priceSeven ? extensionData.priceSeven.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '-'}<small> MXN</small></strong></p>
                             <small>Costo de la extensión</small>
                             <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
-                                <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(7)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
+                                <p style={extensionError ? {backgroundColor: 'gray'} : null} className='btn-minimal-width move-select-button' onClick={extensionError ? null : () => setExtension(7)}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
                             </div>
                         </div>
                     </div>
@@ -122,12 +128,12 @@ const MoveOption = ({user}) => {
                             <p>14</p>
                             <p>días</p>
                             <p>hasta</p>
-                            <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
+                            <p>{extensionData.dueDateFourteen ? momentEs(extensionData.dueDateFourteen).format('D/MMM/Y') : '-'}</p>
                             <hr/>
-                            <p className='move-md-size'><strong>{extensionData.priceFourteen ? extensionData.priceFourteen.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}<small> MXN</small></strong></p>
+                            <p className='move-md-size'><strong>{extensionData.priceFourteen ? extensionData.priceFourteen.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '-'}<small> MXN</small></strong></p>
                             <small>Costo de la extensión</small>
                             <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
-                                <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(14)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
+                                <p style={extensionError ? {backgroundColor: 'gray'} : null} className='btn-minimal-width move-select-button' onClick={extensionError ? null : () => setExtension(14)}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
                             </div>
                         </div>
                     </div>
@@ -136,12 +142,12 @@ const MoveOption = ({user}) => {
                             <p>30</p>
                             <p>días</p>
                             <p>hasta</p>
-                            <p>{momentEs(extensionData.dueDateSeven).format('D/MMM/Y')}</p>
+                            <p>{extensionData.dueDateThirty ? momentEs(extensionData.dueDateThirty).format('D/MMM/Y') : '-'}</p>
                             <hr/>
-                            <p className='move-md-size'><strong>{extensionData.priceThirty ? extensionData.priceThirty.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'Cargando...'}<small> MXN</small></strong></p>
+                            <p className='move-md-size'><strong>{extensionData.priceThirty ? extensionData.priceThirty.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '-'}<small> MXN</small></strong></p>
                             <small>Costo de la extensión</small>
                             <div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
-                                <p className='btn-minimal-width move-select-button' onClick={() => {setExtension(); setSelected(30)}}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
+                                <p style={extensionError ? {backgroundColor: 'gray'} : null} className='btn-minimal-width move-select-button' onClick={extensionError ? null : () => setExtension(30)}>{serverError ? 'Error en el servidor' : 'PAGAR'}</p>
                             </div>
                         </div>
                     </div>
@@ -153,27 +159,35 @@ const MoveOption = ({user}) => {
                 </p>
             </div>
             <div className='right-move-option'>
-                {willPay ? <div className='will-pay-options'>
-                    <p><strong>¿Cómo pagar el servicio</strong></p>
-                    <p>para recorrer fecha de pago?</p>
-                    <br/><br/>
-                    <Tabs>
-                        <TabList>
-                            <Tab className='tabs-underlined'>Efectivo en tiendas</Tab>
-                            <Tab className='tabs-underlined'>Banco</Tab>
-                            <Tab className='tabs-underlined'>Tarjeta de Débito</Tab>
-                        </TabList>
-                        <TabPanel>
-                            <CashOption extensionReference={extensionData.reference} moveImgWidth={'200px'}/>
-                        </TabPanel>
-                        <TabPanel>
-                            <BankOption/>
-                        </TabPanel>
-                        <TabPanel>
-                            <DebitOption moveLoan={true}/>
-                        </TabPanel>
-                    </Tabs>
-                </div> : <div className='blank-div'></div>}
+                {
+                    willPay ? 
+                    <div className='will-pay-options'>
+                        <p><strong>¿Cómo pagar el servicio</strong></p>
+                        <p>para recorrer fecha de pago?</p>
+                        <br/><br/>
+                        <Tabs>
+                            <TabList>
+                                <Tab className='tabs-underlined'>Efectivo en tiendas</Tab>
+                                <Tab className='tabs-underlined'>Banco</Tab>
+                                <Tab className='tabs-underlined'>Tarjeta de Débito</Tab>
+                            </TabList>
+                            <TabPanel>
+                                <CashOption extensionReference={extensionData.reference} moveImgWidth={'200px'}/>
+                            </TabPanel>
+                            <TabPanel>
+                                <BankOption/>
+                            </TabPanel>
+                            <TabPanel>
+                                <DebitOption moveLoan={true}/>
+                            </TabPanel>
+                        </Tabs>
+                    </div> 
+                : 
+                    <div className='blank-div'>
+                    {
+                        extensionError ? <div className='extension-error'><p>{extensionError}</p></div> : null
+                    }    
+                    </div>}
             </div>
         </div>
     )

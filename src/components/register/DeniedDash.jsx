@@ -3,7 +3,7 @@ import '../account/newStyles.scss'
 import { withRouter } from 'react-router-dom'
 import Slider from 'react-rangeslider'
 import { BallClipRotate } from 'react-pure-loaders'
-import { getToken, getStatus, getCustomerByMail, getAnalytics } from '../../services/api'
+import { getToken, getStatus, getCustomerByMail, getAnalytics, getConfiguration } from '../../services/api'
 import TagManager from 'react-gtm-module'
 
 const idProduct = 1
@@ -11,16 +11,32 @@ const idProduct = 1
 const DeniedDash = (props) => {
     let stepWidth = 25
     const [user, setUser] = useState(null)
-    const [monto, setMonto] = useState(2000)
-    const [plazo, setPlazo] = useState(6)
+    const [monto, setMonto] = useState(3000)
+    const [plazo, setPlazo] = useState(7)
     const [periodicidad, setPeriodicidad] = useState('quincenal')
     const [dias, setDias] = useState(null)
     const [error, setError] = useState(false)
+    const [data, setData] = useState({
+        minAmount: 1000,
+        maxAmount: 1000,
+        stepAmount: 1000,
+        frequencies: [{frequencyTerm: {minTerm: 7, maxTerm: 30, stepTerm: 1}}]
+    })
 
     const loadCustomer = async (user) => {
         let response = await getToken()
         if(!response) return
         let validToken = response.data.token
+        getConfiguration(idProduct, validToken)
+            .then(res => {
+                const { data } = res
+                if(res.status === 200) {
+                    console.log(data)
+                    setData(data)
+                    setMonto(data.defaultAmount)
+                    setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
+                }
+            })
         getStatus(idProduct, user.customerId, false, validToken)
             .then(res => {
                 if(res.status === 200){
@@ -81,6 +97,15 @@ const DeniedDash = (props) => {
         if(localRegister){
             let response = await getToken()
             const validToken = response.data.token
+            getConfiguration(idProduct, validToken)
+            .then(res => {
+                const { data } = res
+                if(res.status === 200) {
+                    setData(data)
+                    setMonto(data.defaultAmount)
+                    setPlazo(data.frequencies[0].frequencyTerm.defaultValue)
+                }
+            })
             getCustomerByMail(idProduct, localRegister.eMail, validToken)
                 .then(res => {
                     setUser(res.data)
@@ -193,11 +218,11 @@ const DeniedDash = (props) => {
                                     <span className='step' style={{marginLeft: `${stepWidth}px`}}></span>
                                 </div>
                                 <Slider 
-                                    min={1000} 
-                                    max={8000} 
+                                    min={data.minAmount} 
+                                    max={data.maxAmount} 
                                     value={monto} 
-                                    labels={{1000:'$1,000', 8000: '$8,000'}} 
-                                    step={1000} 
+                                    labels={{[data.minAmount]:data.minAmount, [data.maxAmount]: data.maxAmount}} 
+                                    step={data.stepAmount} 
                                     orientation='horizontal' 
                                     tooltip={false}
                                     onChange={val => setMonto(val)}
@@ -236,10 +261,10 @@ const DeniedDash = (props) => {
                                     <span className='step' style={{marginLeft: `${stepWidth}px`}}></span>
                                 </div>
                                 <Slider 
-                                    min={periodicidad === 'quincenal' ? 7 : 4} 
-                                    max={periodicidad === 'quincenal' ? 30 : 12} 
+                                    min={data.frequencies[0].minTerm} 
+                                    max={data.frequencies[0].maxTerm} 
                                     value={plazo} 
-                                    labels={periodicidad === 'quincenal' ? {7:'7', 30: '30'} : {4: '4', 12: '12'}} 
+                                    labels={{[data.frequencies[0].frequencyTerm.minTerm]:data.frequencies[0].frequencyTerm.minTerm, [data.frequencies[0].frequencyTerm.maxTerm]: data.frequencies[0].frequencyTerm.maxTerm}} 
                                     orientation='horizontal' 
                                     tooltip={false}
                                     onChange={val => setPlazo(val)}
