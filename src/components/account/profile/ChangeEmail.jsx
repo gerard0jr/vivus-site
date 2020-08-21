@@ -38,7 +38,6 @@ const ChangeEmail = ({history, setSection}) => {
             }
             sendCodeByNewEMail(data, validToken)
             .then(res => {
-                console.log(res)
                 if(res.status === 200){
                     setValidEmail(true)
                     setLoading(false)

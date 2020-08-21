@@ -30,6 +30,7 @@ export const SecondLoan = (props) => {
     const [commision, setCommision] = useState(0)
     const [serverError, setServerError] = useState(false)
     const [idClient, setIdClient] = useState(0)
+    const [loadingAmount, setLoadingAmount] = useState(false)
 
     let today = new Date()
 
@@ -57,6 +58,7 @@ export const SecondLoan = (props) => {
     }
 
     const finishProposal = async () => {
+        setLoadingAmount(true)
         if(customer.eMail === 'demo@demo.com') return props.history.push('/pre-approved')
         let validToken = await cookie.load('token')
         if(!validToken){
@@ -66,6 +68,7 @@ export const SecondLoan = (props) => {
         }
         saveProposal(idProduct, customer.customerId, monto, periodicidad, plazo, validToken)
             .then(res => {
+                setLoadingAmount(false)
                 if(res.status === 200){
                     return getStatus(idProduct, customer.customerId, false, validToken)
                     .then(res => {
@@ -478,7 +481,7 @@ export const SecondLoan = (props) => {
                                         <FontAwesomeIcon icon={faTable}/>
                                     </div>
                                 </div> */}
-                                <p onClick={finishProposal} style={{width: '50%', padding: '1rem 0'}} className="btn">SOLICÍTALO YA</p>
+                                <p onClick={finishProposal} style={{width: '50%', padding: '1rem 0'}} className="btn">{loadingAmount ? <BallClipRotate loading color='white'/> : 'SOLICÍTALO YA'}</p>
                             </div>
                             {serverError ? <p style={{padding: '2rem 0 1rem', color: 'red'}}>Ocurrió un problema, intenta nuevamente</p> : null}
                         </div>

@@ -57,6 +57,17 @@
   }  
 // react tabs styles END
 
+.router-loading{
+    height: calc(100vh - 405px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.router-loading > div{
+    width: 50px;
+    height: 50px;
+}
+
 .password-wrapper{
     display: flex;
     align-items: center;
@@ -1081,6 +1092,29 @@ th, td {
     padding: 1rem;
 }
 
+.move-sent{
+    padding-top: 1.5rem;
+    text-align: center;
+}
+.move-sent p:nth-child(1){
+    font-size: 1.5rem;
+}
+.move-sent p:nth-child(2){
+    font-size: 1.3rem;
+    margin-bottom: 10px !important;
+}
+.move-sent p:nth-child(4){
+    font-size: 1.2rem;
+}
+.move-sent p:nth-child(5){
+    margin-top: 12px !important;
+    font-size: 0.8rem;
+}
+.move-sent a{
+    color: #A3CD3A;
+    text-decoration: underline;
+}
+
 .move-medium-size{
     font-size: 3rem !important; 
 }
@@ -1170,6 +1204,8 @@ th, td {
 .move-options-container{
     display: flex;
     max-width: 250px;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .move-nuevo-vencimiento{
@@ -1212,6 +1248,17 @@ th, td {
     padding: 0.5rem !important;
     font-weight: 600 !important;
     width: 65px;
+}
+
+.info-blank-div{
+    color: black;
+    text-align: center;
+}
+.info-blank-div p:nth-child(1){
+    font-size: 1.8rem;
+}
+.info-blank-div p:nth-child(2){
+    font-size: 1.8rem;
 }
 
 .big-loader > div{
@@ -1261,8 +1308,13 @@ th, td {
     border-radius: 20px;
     background-color: white;
     margin-left: 1rem;
+    justify-content: center;
     display: flex;
     align-items: center;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .extension-error{
@@ -1354,7 +1406,7 @@ th, td {
 
 .big-amount-calc{
     text-align: right;
-    font-size: 3rem;
+    font-size: 2.6rem;
     margin: 10px 0 !important;
     font-weight: bold;
 }

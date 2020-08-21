@@ -98,7 +98,6 @@ const Questionnaire = (props) => {
                 // 200 array de preguntas, 403 solicita respuesta y salta
             })
             .catch(err => {
-                console.log(err.response)
                 if(err.response.status === 403){
                     sessionStorage.setItem('APP', 'yes')
                     return props.history.push('/pre-approved')    

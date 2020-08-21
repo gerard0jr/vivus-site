@@ -320,7 +320,7 @@ const Identificacion = (props) => {
 
     return (
         <div className='app-container'>
-            <div onClick={fillDemo} className="fill-demo">DEMO</div>
+            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
             <div className='id-container'>
                 <div className="id-top-container">
                     <div className='top-instructions'>

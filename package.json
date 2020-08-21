@@ -24,6 +24,7 @@
     "react-countdown-now": "^2.1.2",
     "react-d3-speedometer": "^0.7.3",
     "react-dom": "^16.11.0",
+    "react-facebook-pixel": "^1.0.3",
     "react-gtm-module": "^2.0.8",
     "react-media": "^1.10.0",
     "react-pdf": "^4.1.0",

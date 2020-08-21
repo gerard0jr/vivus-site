@@ -8,7 +8,6 @@ export const RegisterSteps = ({props, currentStep, setCurrentStep}) => {
     return (
         <Steps type="navigation" current={currentStep} 
         onChange={current => {
-            console.log(current)
             if(current === 0) return props.history.push('/registration')
             if(current === 1) return props.history.push('/registration/personal-details')
             if(current === 2) return props.history.push('/registration/employment-details')

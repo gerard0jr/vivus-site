@@ -12,7 +12,7 @@ const More = (props) => {
 
     let stepWidth = 22
     let periodicidad = 3
-
+    
     const [loadingDone, setLoadingDone] = useState(false)
     const [loadingSimulation, setLoadingSimulation] = useState(false)
     const [loadingCalc, setLoadingCalc] = useState(true)
@@ -32,7 +32,7 @@ const More = (props) => {
     const getLoan = async () => {
         setLoadingDone(true)
         let response = await getToken() 
-        if(!response) return setServerError('Error en el servidor')
+        if(!response) return setServerError('Error en el servidor, Token')
         let validToken = response.data.token
         const sentData = {
             idProduct,
@@ -50,7 +50,12 @@ const More = (props) => {
             })
             .catch(err => {
                 if(err.response.status === 400){
-                    setServerError('Error en el servidor')
+                    setServerError('Error en el servidor, Monto Adicional')
+                    setAllowed(false)
+                    setLoadingDone(false)
+                }
+                if(err.response.status === 404){
+                    setServerError('Error 404')
                     setAllowed(false)
                     setLoadingDone(false)
                 }
@@ -65,10 +70,10 @@ const More = (props) => {
         }
         setLoadingSimulation(true)
         let response = await getToken() 
-        if(!response) return setServerError('Error en el servidor')
+        if(!response) return setServerError('Error en el servidor, Token')
         let validToken = response.data.token
         if(data.actualLoan){
-            getSimulation(idProduct, amount , data.frequency, data.term, validToken)
+            getSimulation(idProduct, amount , data.frequency, data.term, user.customerId, validToken)
                 .then(res => {
                     const {data} = res
                     setInterest(data.interest)
@@ -103,7 +108,7 @@ const More = (props) => {
             return setAllowed(true)
         }
         let response = await getToken() 
-        if(!response) return setServerError('Error en el servidor')
+        if(!response) return setServerError('Error en el servidor, Token')
         let validToken = response.data.token
         const data = {
             idProduct,
@@ -122,6 +127,8 @@ const More = (props) => {
                     setAmount(data.simulation.amount)
                     setLoadingCalc(false)
                     setAllowed(true)
+                    setPlazo(data.term)
+                    return
                 }
                 setServerError('Error en el servidor')
             })
@@ -172,8 +179,8 @@ const More = (props) => {
                         <p style={{margin: '0'}} className='move-md-size'><strong>Solicita</strong></p>
                         <p className='move-md-size'>más dinero</p>
                         <div className='calc-amounts'>
-                            <p>Monto actual de préstamo: <strong>{balance.creditLimit.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</strong></p>
-                            <p>Monto disponible: <strong>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</strong></p>
+                            <p>Monto actual de préstamo: <strong>{data.actualLoan.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</strong></p>
+                            <p>Monto disponible: <strong>{data.maxAmount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} MXN</strong></p>
                         </div>
                         <div className='title-winput'>
                             <p>Monto total</p>
@@ -244,11 +251,11 @@ const More = (props) => {
                                 <span className='step' style={{marginLeft: `${stepWidth}px`}}></span>
                             </div>
                             <Slider 
-                                min={data.minPlazo} 
-                                max={data.maxPlazo} 
-                                value={amount} 
-                                labels={{[data.minPlazo]:`${data.minPlazo}`, 
-                                        [data.maxPlazo]: `${data.maxPlazo}`}} 
+                                min={plazo} 
+                                max={plazo} 
+                                value={plazo} 
+                                labels={{[plazo]:`${plazo}`, 
+                                        [plazo]: `${plazo}`}} 
                                 orientation='horizontal' 
                                 tooltip={false} 
                                 step={data.step}
@@ -281,7 +288,7 @@ const More = (props) => {
                                 </div>
                                 <hr style={{width: '100%', border: '0.5px solid #737373'}}/>
                                 <div className='amount-info-row'>
-                                    <p>Comisión por disposición</p>
+                                    <p style={{textAlign: 'left'}}>Comisión por disposición</p>
                                     <div>
                                         <p>{loadingSimulation ? 'Cargando...' : commision.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p><p style={{fontSize: '0.6rem'}}>IVA incluído</p>
                                     </div>
@@ -302,7 +309,7 @@ const More = (props) => {
                                     Fecha de vencimiento del préstamo es {loadingSimulation ? 'Cargando...' : plazo} días a partir de la fecha de su expedición efectiva
                                 </div>
                                 
-                                <p onClick={getLoan} className="btn">SOLICÍTALO YA</p>
+                                <p onClick={getLoan} className="btn">{loadingDone ? <BallClipRotate loading color='white'/> : 'SOLICÍTALO YA'}</p>
                             </div>
                         </div>
                         

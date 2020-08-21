@@ -164,7 +164,7 @@ const CargoAuto = (props) => {
 
     return (
         <div className='app-container'>
-            <div onClick={fillDemo} className="fill-demo">DEMO</div>
+            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
             <div className='buro-container'>
                 <div>
                     <p>Estamos <span style={{fontSize:'2rem'}}>ya casi listos</span> para que disfutes de tu nuevo <span style={{fontSize:'2.8rem'}}>préstamo,</span> <span style={{fontSize:'2.4rem'}}> el cual será más fácil pagar</span><span style={{fontSize:'2.8rem'}}> sin filas</span><span style={{fontSize:'2.4rem'}}> ni</span><span style={{fontSize:'2.8rem'}}> comisiones extras.</span></p>
@@ -190,7 +190,7 @@ const CargoAuto = (props) => {
                         <p>Atentamente. <input type="text" value={data && data.customerName} style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white', width: '300px'}} /></p>
                     </div>
                 </div>
-                <p className={auth ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={goTo}>CONTINUAR</p>
+                <p className={auth ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={auth ? goTo : null}>CONTINUAR</p>
             </div>
         </div>
     )               

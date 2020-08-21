@@ -31,7 +31,6 @@ const DeniedDash = (props) => {
             .then(res => {
                 const { data } = res
                 if(res.status === 200) {
-                    console.log(data)
                     setData(data)
                     setMonto(data.defaultAmount)
                     setPlazo(data.frequencies[0].frequencyTerm.defaultValue)

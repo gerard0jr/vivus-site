@@ -33,21 +33,30 @@ import { SecondLoan } from '../components/account/SecondLoan';
 import { Manteinance } from '../components/common/Manteinance';
 import { momentEs } from '../services/moment'
 import { Article } from '../components/blog/Article';
+import { BallClipRotate } from 'react-pure-loaders';
 
 const Routes = () => {
-
+    // For manteinance, change inManteinance default value to true
     const [inManteinance, setInManteinance] = useState(false)
+    const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //     let startDate   = momentEs("04-04-2020 01:00", "DD/MM/YYYY HH:mm")
-    //     let endDate     = momentEs("04-04-2021 17:00", "DD/MM/YYYY HH:mm")
-    //     if(momentEs().isBetween(startDate, endDate)) return setInManteinance(true)
-    //     return setInManteinance(false)
-    // }, [])
+    // Uncomment for manteinance page and change date range
+    useEffect(() => {
+        // let startDate   = momentEs("16-08-2020 01:00", "DD/MM/YYYY HH:mm")
+        // let endDate     = momentEs("20-08-2020 08:00", "DD/MM/YYYY HH:mm")
+        // if(momentEs().isBetween(startDate, endDate)) setInManteinance(true)
+        // else setInManteinance(false)
+        setLoading(false)
+    }, [])
 
     return(
         <>
-            {inManteinance ? 
+            {
+                loading ? 
+                <div className='router-loading'>
+                    <BallClipRotate loading color='#A3CD3A'/>
+                </div>
+                : inManteinance ? 
                 <Switch>
                     {/* RUTAS EN mantenimiento */}
                     {/* <Route exact path='/' component={Home}/> */}
@@ -56,7 +65,7 @@ const Routes = () => {
                 </Switch>
                 :
                 <Switch>
-                    <Route exact path='/en-mantenimiento' component={Manteinance} /> 
+                    {/* <Route exact path='/en-mantenimiento' component={Manteinance} />  */}
                     {/* <Route exact path='/' render={props => <Redirect to='/en-mantenimiento'/>} />  */}
                     {/* Home */}
                     <Route exact path='/' component={Home}/>

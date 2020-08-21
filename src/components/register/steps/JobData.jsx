@@ -269,7 +269,7 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
 
     return (
         <div className='register-form-container'>
-            <div onClick={fillDemo} className="fill-demo">DEMO</div>
+            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Detalles</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>de tu empleo</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>

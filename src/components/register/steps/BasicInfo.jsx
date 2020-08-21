@@ -386,7 +386,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
         <>
         {!tokenError ? 
         <div className='register-form-container'>
-            <div onClick={fillDemo} className="fill-demo">DEMO</div>
+            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Registro</h1>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
             <div style={{marginBottom: '1rem'}}>

@@ -2,6 +2,8 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import TagManager from 'react-gtm-module'
+// import ReactPixel from 'react-facebook-pixel'
+import Pixel from './pixel'
 
 export const PreApproved = () => {
     //TAG MANAGER
@@ -17,6 +19,9 @@ export const PreApproved = () => {
     }
     TagManager.dataLayer(tagManagerArgs)
     //TAG MANAGER
+    // let options = {autoConfig: true, debug: true}
+    // ReactPixel.init('285010758598337', options)
+    // ReactPixel.pageView()
     return (
         <div className='app-container'>
             <div style={{textAlign: 'center', padding: '7rem 5rem'}} className='register-form-container-100'>
@@ -30,6 +35,7 @@ export const PreApproved = () => {
                     En cuanto depositemos el dinero a tu cuenta, podrás acceder al administrador de tu préstamo iniciando sesión en la plataforma
                 </h2>
             </div>
+            <Pixel name='PIXEL 1'/>
         </div>
     )
 }

@@ -21,6 +21,7 @@ const Cargo = (props) => {
     const [termsAccepted, setTermsAccepted] = useState(false)
     const [contract, setContract] = useState(null)
     const [balance, setBalance] = useState({
+        amount: 0,
         creditLimitUsed:0,
         installments: [{ idDeferral: 'cargando...', dueDate: new Date(), interest: 0}, { idDeferral: 'cargando...', dueDate: new Date(), interest: 0}, { idDeferral: 'cargando...', dueDate: new Date(), interest: 0}, { idDeferral: 'cargando...', dueDate: new Date(), interest: 0}, { idDeferral: 'cargando...', dueDate: new Date(), interest: 0}, { idDeferral: 'cargando...', dueDate: new Date(), interest: 0}],
         term: 0,
@@ -112,9 +113,10 @@ const Cargo = (props) => {
         getProposal(idProduct, idCustomer, token)
             .then(res => {
                 if(res.status === 200){
-                    getSimulation(idProduct, res.data.creditLimit, res.data.opFrequency, res.data.term, idCustomer, token)
+                    getSimulation(idProduct, res.data.amount, res.data.opFrequency, res.data.term, idCustomer, token)
                         .then(resSim => {
                             setBalance({...balance, 
+                                amount: res.data.amount,
                                 creditLimitUsed: res.data.creditLimit,
                                 term: res.data.term,
                                 idFrequency: res.data.opFrequency,
@@ -279,7 +281,7 @@ const Cargo = (props) => {
 
     return (
         <div className='app-container'>
-            <div onClick={fillDemo} className="fill-demo">DEMO</div>
+            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
             <Popup onClose={() => setOpen(false)} open={open} position="right center">
                 <iframe style={{width:'100%', height:'85%'}} src={`data:application/pdf;base64,${contract}`} title='Contract' frameborder="0"></iframe>
                 <div className='button-container'>
@@ -326,7 +328,7 @@ const Cargo = (props) => {
                                 <div className='data'>
                                     <div className='data-margin'>
                                         <p className='data-title'>Monto del préstamo</p>
-                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.creditLimitUsed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
+                                        <p style={{fontWeight:'600', color: 'darkgreen', fontSize: '1.2rem'}}>{balance.amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}<small> MXN</small></p>
                                     </div>
                                     <div className='data-margin'>
                                         <p className='data-title'>Interés</p>
@@ -359,7 +361,7 @@ const Cargo = (props) => {
                             </div>
                         </div>
                         <div className= 'contrato-bottom'>
-                            <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : () => window.scrollTo(0,0)}>{loadingConfirm ? <BallClipRotate loading color={'#A3CD3A'}/> : !termsAccepted ? 'DESCARGA EL CONTRATO' : 'CONTINUAR'}</p>
+                            <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : () => window.scrollTo(0,0)}>{loadingConfirm ? <BallClipRotate loading color={'white'}/> : !termsAccepted ? 'DESCARGA EL CONTRATO' : 'CONTINUAR'}</p>
                             {serverError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente(400, bad request)</p> : null}
                             <Link style={{color: 'black', fontWeight: 'bold', textDecoration: 'underline'}} to='/dashboard'>Modificar solicitud de préstamo</Link>
                         </div>

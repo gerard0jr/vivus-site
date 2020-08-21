@@ -36,7 +36,6 @@ const ChangePhone = ({history, setSection}) => {
             }
             sendCodeByNewSMS(data, validToken)
             .then(res => {
-                console.log(res)
                 if(res.status === 200){
                     setValidNumber(true)
                     setLoading(false)

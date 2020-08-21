@@ -69,7 +69,6 @@ const Done = (props) => {
             //TAG MANAGER
             getRiskResult(data, validToken)
                 .then(res => {
-                    // console.log(res)
                     if(res.status === 200){
                         if(res.data.continue === true){
                             return props.history.push('/registration/questionary')

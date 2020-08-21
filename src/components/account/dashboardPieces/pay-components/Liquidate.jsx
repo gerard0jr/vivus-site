@@ -9,7 +9,6 @@ import CashOption from './liquidate-components/CashOption'
 import { momentEs } from '../../../../services/moment'
 
 const Liquidate = ({balance}) => {
-    console.log(balance)
     return (
         <div className='liquidate-container'>
             <div className='liquidate-left'>

@@ -9,7 +9,7 @@ import TagManager from 'react-gtm-module'
 import { momentEs } from './services/moment'
 
 const tagManagerArgs = {
-  gtmId: 'GTM-TQJ8F7K',
+  gtmId: 'GTM-MPJSNJN',
   dataLayerName: 'dataLayer'
 }
 

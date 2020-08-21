@@ -66,6 +66,7 @@ const Calculator = (props) => {
             if(response.status !== 200) return loadSimulation()
             validToken = response.data.token
         }
+        if(!amount || amount < 1) return
         getSimulation(idProduct, amount, freq, term, idClient, validToken)
             .then(res => {
                 const { data } = res
