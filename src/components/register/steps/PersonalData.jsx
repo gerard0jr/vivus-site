@@ -85,6 +85,11 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
 
     const handleCaseData = e => setData({...data, [e.target.name]: e.target.value.toUpperCase()})
 
+    let checkPhoneError = phone => {
+        let phoneArray = phone.split('')
+        return phoneArray.every(v => v === phoneArray[0])
+    }
+
     const handleSubmit = async () => {
         let curpRx = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/
         var rfcRx = /[A-ZÑ&]{3,4}\d{6}([A-V1-9][A-Z1-9][0-9A])?$/
@@ -126,6 +131,8 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
         setReferenceNameError(false)
         if(!referenceNumber || referenceNumber.length < 10) return setReferenceNumberError(true)
         if(referenceNumber.search(/[a-zA-Z]/) !== -1) return setReferenceNumberError(true)
+        setReferenceNumberError(false)
+        if(checkPhoneError(referenceNumber)) return setReferenceNumberError(true)
         setReferenceNumberError(false)
         if(customer.eMail === 'demo@demo.com') return props.history.push('/registration/employment-details')
         setLoading(true)
@@ -416,6 +423,7 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
             return loadCustomerData(loggedUser.customerId, validToken)
         }
         loadPersonalData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     let fillDemo = () => {
@@ -445,7 +453,7 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
 
     return (
         <div className='register-form-container'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Información</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>Personal</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
@@ -461,9 +469,9 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
             <div className={birthDateError ? 'input-div input-error' : 'input-div'}>
                 <p style={{fontWeight: 'bold'}}><strong>Fecha de nacimiento</strong></p>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <input style={{width: '40px', padding: '0.6rem', fontSize: '1rem', marginRight: '6px'}} onChange={e => setDate({...date, day:e.target.value})} placeholder='dd' type='number' name='birthDate' min='1' max='31' value={date.day}/> / 
-                    <input style={{width: '40px', padding: '0.6rem', fontSize: '1rem', margin: '0 6px'}} onChange={e => setDate({...date, month:e.target.value})} placeholder='mm' type='number' name='birthDate' min='1' max='12' value={date.month}/> /
-                    <input style={{width: '50px', padding: '0.6rem', fontSize: '1rem', marginLeft: '6px'}} onChange={e => setDate({...date, year:e.target.value})} placeholder='aaaa' type='number' name='birthDate' min='1953' max='2100' value={date.year}/>
+                    <input style={{width: '40px', padding: '0.6rem', fontSize: '1rem', marginRight: '6px'}} onChange={e => { if(e.target.value.length > 2) return; setDate({...date, day:e.target.value})}} placeholder='dd' type='number' name='birthDate' min='1' max='31' value={date.day}/> / 
+                    <input style={{width: '40px', padding: '0.6rem', fontSize: '1rem', margin: '0 6px'}} onChange={e => { if(e.target.value.length > 2) return; setDate({...date, month:e.target.value})}} placeholder='mm' type='number' name='birthDate' min='1' max='12' value={date.month}/> /
+                    <input style={{width: '50px', padding: '0.6rem', fontSize: '1rem', marginLeft: '6px'}} onChange={e => { if(e.target.value.length > 4) return; setDate({...date, year:e.target.value})}} placeholder='aaaa' type='number' name='birthDate' min='1953' max='2100' value={date.year}/>
                 </div>
             </div>
             <div className='input-div'>
@@ -477,14 +485,14 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
             <div className='input-div'>
                 <p style={{fontWeight: 'bold'}}><strong>Sexo</strong></p>
                 <div style={{display: 'flex', alignItems: 'center'}} onChange={e => setData({...data, gender:parseInt(e.target.value)})}>
-                    <input style={{margin: '5px'}} type='radio' name='gender' checked={data.gender === 1} value={1}/> <span style={{marginRight: '1rem'}}>Hombre</span>
-                    <input style={{margin: '5px'}} type='radio' name='gender' checked={data.gender === 2} value={2}/> <span>Mujer</span>
+                    <input style={{margin: '5px'}} type='radio' id='hombre' name='gender' checked={data.gender === 1} value={1}/> <label for='hombre' style={{marginRight: '1rem'}}>Hombre</label>
+                    <input style={{margin: '5px'}} type='radio' id='mujer' name='gender' checked={data.gender === 2} value={2}/> <label for='mujer'>Mujer</label>
                 </div>
             </div>
             <div className={curpError || curpRepeatError ? 'input-div input-error' : 'input-div'}>
                 <p style={{fontWeight: 'bold'}}><strong>CURP</strong></p>
                 <div>
-                    <input disabled={localLoaded} style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleCaseData} type='text' name='curp' maxlength="18" value={data.curp}/>
+                    <input disabled={localLoaded} style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleCaseData} onKeyPress={() => setCurpError(false)} type='text' name='curp' maxlength="18" value={data.curp}/>
                 </div>
                 {curpRepeatError ? <p><small style={{color: 'red', padding: '1rem 0', fontWeight: 'bold'}}>No es posible continuar, este CURP ya tiene una solicitud</small></p> : null}
                 <small>Registra tu CURP a 18 dígitos (ejemplo: AAPR931117HDFMNR09). SI no la tienes, puedes obtenerla en <a href="https://www.gob.mx/curp/">https://www.gob.mx/curp/</a></small>
@@ -499,6 +507,39 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
             <div className='register-subtitle'>
                 <h5>Domicilio</h5>
                 <p>Por favor, captura tu domicilio actual</p>
+            </div>
+            <div className={zipCodeError ? 'input-div input-error' : 'input-div'}>
+                <p style={{fontWeight: 'bold'}}><strong>Código Postal</strong></p>
+                <div className='zip-button-container'>
+                    <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='zipCode' maxlength="5" value={data.zipCode}/>
+                    <div onClick={() => validateZip()} style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}>{loadingZip ? <BallBeat loading color={'white'}/> : 'Verificar'}</div>
+                </div>
+                {notFoundZip ? <small style={{color: 'red'}}>Código postal no encontrado</small> : null}
+            </div>
+            <div className='input-div'>
+                <p style={{fontWeight: 'bold'}}><strong>Estado</strong></p>
+                <div>
+                    <input disabled style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type='text' name='idState' maxlength="30" value={stateName}/>
+                </div>
+            </div>
+            <div className={municipalityError ? 'input-div input-error' : 'input-div'}>
+                <p style={{fontWeight: 'bold'}}><strong>Alcaldía o Municipio</strong></p>
+                <div>
+                    <input disabled style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='municipality' maxlength="30" value={municipality}/>
+                </div>
+            </div>
+            <div className={suburbError ? 'input-div input-error' : 'input-div'}>
+                <p style={{fontWeight: 'bold'}}><strong>Colonia</strong></p>
+                <div>
+                {colCat.length > 0 ? 
+                <select value={suburb} style={{width: '200px', padding: '0.6rem', fontSize: '1rem', backgroundColor: 'white'}} name='suburb' onChange={e => setSuburb(e.target.value)}>
+                    {colCat.map((res, ix) => <option key={ix} value={res.colonia}>{res.colonia}</option>)}
+                </select>
+                : 
+                <select style={{width: '200px', padding: '0.6rem', fontSize: '1rem', backgroundColor: 'white'}} name='dummy'>
+                    <option value=''>Ingresar CP</option>
+                </select>}
+                </div>
             </div>
             <div className={streetError ? 'input-div input-error' : 'input-div'}>
                 <p style={{fontWeight: 'bold'}}><strong>Calle</strong></p>
@@ -517,39 +558,6 @@ export const PersonalData = ({props, setCurrentStep, changeProposal}) => {
                 <p style={{fontWeight: 'bold'}}><strong>Número interior</strong></p>
                 <div>
                     <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='interiorNumber' maxlength="25" value={data.interiorNumber}/>
-                </div>
-            </div>
-            <div className={zipCodeError ? 'input-div input-error' : 'input-div'}>
-                <p style={{fontWeight: 'bold'}}><strong>Código Postal</strong></p>
-                <div className='zip-button-container'>
-                    <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='zipCode' maxlength="5" value={data.zipCode}/>
-                    <div onClick={() => validateZip()} style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}>{loadingZip ? <BallBeat loading color={'white'}/> : 'Verificar'}</div>
-                </div>
-                {notFoundZip ? <small style={{color: 'red'}}>Código postal no encontrado</small> : null}
-            </div>
-            <div className={municipalityError ? 'input-div input-error' : 'input-div'}>
-                <p style={{fontWeight: 'bold'}}><strong>Alcaldía o Municipio</strong></p>
-                <div>
-                    <input disabled style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='municipality' maxlength="30" value={municipality}/>
-                </div>
-            </div>
-            <div className='input-div'>
-                <p style={{fontWeight: 'bold'}}><strong>Estado</strong></p>
-                <div>
-                    <input disabled style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} type='text' name='idState' maxlength="30" value={stateName}/>
-                </div>
-            </div>
-            <div className={suburbError ? 'input-div input-error' : 'input-div'}>
-                <p style={{fontWeight: 'bold'}}><strong>Colonia</strong></p>
-                <div>
-                {colCat.length > 0 ? 
-                <select value={suburb} style={{width: '200px', padding: '0.6rem', fontSize: '1rem', backgroundColor: 'white'}} name='suburb' onChange={e => setSuburb(e.target.value)}>
-                    {colCat.map((res, ix) => <option key={ix} value={res.colonia}>{res.colonia}</option>)}
-                </select>
-                : 
-                <select style={{width: '200px', padding: '0.6rem', fontSize: '1rem', backgroundColor: 'white'}} name='dummy'>
-                    <option value=''>Ingresar CP</option>
-                </select>}
                 </div>
             </div>
             <div className='register-subtitle'>

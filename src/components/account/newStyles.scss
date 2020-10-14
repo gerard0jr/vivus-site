@@ -547,7 +547,7 @@ th, td {
 }
 
 .check-contrato{
-    max-width: 360px;
+    max-width: 380px;
     min-width: 280px;
     height: 60px;
     background-color: white;
@@ -555,10 +555,7 @@ th, td {
     display: flex;
     align-items: center;
     margin: 1rem auto;
-}
-
-.check-contrato input{
-    margin-left: 1rem;
+    padding: 0 10px;
 }
 
 .check-contrato input[type="checkbox" i]{
@@ -580,7 +577,7 @@ th, td {
 }
 
 .check-contrato span{
-    color: lightgrey;
+    color: darkslategray;
 }
 
 .check-contrato p, .check-contrato span{
@@ -2341,7 +2338,7 @@ th, td {
         flex-direction: column;
     }
     .cargo-container{
-        padding: 2rem 10px;
+        padding: 1rem 10px;
     }
     .resume-dashboard-red{
         width: auto;
@@ -2356,6 +2353,13 @@ th, td {
         margin: 0 1rem;
         justify-content: center;
         flex-direction: column;
+    }
+    .resumen-left h2{
+        margin: 1rem 0;
+        text-align: center;
+    }
+    .data{
+        align-items: center;
     }
 }
 
@@ -2406,6 +2410,28 @@ th, td {
     .options-buttons{
         margin: 0;
     }
+    .educacion-fin{
+        padding: 1rem 0;
+    }
+    .educacion-fin input{
+        max-width: 230px;
+    }
+    .right-check-text{
+        max-width: 300px;
+    }
+    .right-check-text p{
+        text-align: justify;
+    }
+    .btn-minimal-width{
+        margin: 0 auto;
+        max-width: 250px;
+    }
+    .op-left-buttons{
+        margin: 1rem 0;
+    }
+    .options-buttons{
+        flex-wrap: nowrap;
+    }
 }
 
 @media (max-width: 479px){
@@ -2428,9 +2454,6 @@ th, td {
         width: 95%;
         margin: 0 auto;
     }
-    .btn-minimal-width{
-        width: 70% !important;
-    }
     .flex-horizontal{
         padding: 0;
     }
@@ -2446,5 +2469,8 @@ th, td {
     }
     .amount-calculator-info {
         padding: 1rem;
+    }
+    .leftLogin input{
+        width: auto !important;
     }
 }

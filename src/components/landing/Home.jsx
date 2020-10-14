@@ -34,7 +34,7 @@ export const Home = (props) => {
             dataLayerName: 'dataLayer'
         }
         TagManager.dataLayer(tagManagerArgs)
-    }, [])
+    }, [props.location.search])
 
     useEffect(() => {
         let startDate   = momentEs("01/04/2020", "DD/MM/YYYY")
@@ -124,7 +124,7 @@ export const Home = (props) => {
                             <li>
                                 <span className="como-vivus-span"><strong>2</strong></span>
                                 <strong className="bold-title">Confirma tu identidad</strong>
-                                <p>Te pediremos que nos envíes una foto de tu Credencial para Votar expedida por el INE y cualquiera de los siguientes documentos: tu último recibo de nómina timbrado por el Servicio de Administración Tributaria (SAT), algún estado de cuenta reciente o tu declaración de impuestos.</p>
+                                <p>Te pediremos que nos envíes una foto de tu Credencial para Votar expedida por el INE.</p>
                             </li>
                             <li>
                                 <span className="como-vivus-span"><strong>3</strong></span>

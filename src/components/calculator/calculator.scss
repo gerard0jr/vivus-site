@@ -386,6 +386,45 @@
       margin: 0 auto !important;
       right: auto !important;
   }
+  .title-winput{
+    padding: 1rem 0 0 !important;
+  }
+  .title-winput p{
+    font-size: 1.2rem;
+  }
+  .slider-input{
+    max-width: 70px !important;
+    font-size: 0.8rem !important;
+    height: 20px !important;
+    line-height: normal !important;
+  }
+  .calc-hr{
+    display: none;
+  }
+  .calc-hr2{
+    margin-top: 40px !important;
+  }
+  .calculator{
+    top: 7rem !important;
+  }
+  .slider-container-go{
+    padding: 0rem 2rem 1rem;
+  }
+  div.calculator > div.slider-container-go > div:nth-child(5){
+    padding: 5px 0 5px !important;
+  }
+  .info-row{
+    padding: 0;
+  }
+  .slider-input-wrapper{
+    line-height: 2rem !important;
+  }
+  .top-left-slider-toggle h3{
+    font-size: 1.2rem !important;
+  }
+  .top-left-slider-toggle h2{
+    font-size: 1.2rem !important;
+  }
 }
 
 @media(max-width: 375px){

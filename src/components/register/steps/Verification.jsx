@@ -237,7 +237,7 @@ export const Verification = ({props, setCurrentStep}) => {
 
     return (
         <div className={'register-form-container-full'}>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Ingresar</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>NIP</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>

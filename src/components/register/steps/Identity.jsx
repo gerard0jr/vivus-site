@@ -9,15 +9,15 @@ export const Identity = ({props, setCurrentStep}) => {
 
     const [loading, setLoading] = useState(false)
     const [customer, setCustomer] = useState(null)
-    const [authorized, setAuthorized] = useState(false)
+    const [authorized, setAuthorized] = useState(true)
     const [nip, setNip] = useState(null)
     const [nipError, setNipError] = useState(null)
 
     const handleSubmit = async () => {
-        if(customer.eMail === 'demo@demo.com') return props.history.push('/registration-complete')
         if(!authorized) return
         if(!nip) return setNipError(true)
         if(nip.length > 4) return setNipError(true)
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/registration-complete')
         setLoading(true)
         let response = await getToken()
         let validToken = response.data.token
@@ -243,17 +243,17 @@ export const Identity = ({props, setCurrentStep}) => {
 
     return (
         <div className='register-form-container-full'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Autorización consulta</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>de historial crediticio</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
-            <div style={{margin: '2rem 0 0'}}>
-                <small>Para continuar y si estás de acuerdo con la consulta de tu historial crediticio da un click en la siguiente casilla y vuelve a ingresar el mismo NIP que te enviamos previamente</small>
-            </div>
             <div className='buro-acepto'>
-                <div className='educacion-fin'>
-                    <input onChange={() => setAuthorized(!authorized)} type='checkbox' name='educacion' checked={authorized} value={authorized}/>
-                    <p style={{marginLeft: '1rem', marginBottom: '1rem'}}>Acepto la consulta de mi Buró de Crédito</p>
+                <div className='educacion-fin checkbox-div'>
+                        <label className="container">
+                            <input onChange={() => setAuthorized(!authorized)} type='checkbox' name='educacion' checked={authorized} value={authorized}/>
+                            <span style={{top: '12px'}} className="checkmark"></span>
+                            <p style={{fontWeight: 'bold', margin: '0 0 0 2rem'}}><strong>ACEPTAR Y CONTINUAR</strong></p>
+                        </label>
                 </div>
                 <p className='buro-terminos'>Por este medio, declaro bajo protesta de decir verdad, que la información proporcionada a 4finance, S.A. de C.V. SOFOM ENR en este formato electrónico es verdadera y precisa, por este medio libero a 4finance, S.A. de C.V. SOFOM ENR de cualquier responsabilidad en relación con la misma. Por este medio autorizo a 4finance, S.A. de C.V. SOFOM ENR para realizar mediante sus representantes o cualquier otra persona autorizada para tal propósito, cualquier investigación sobre mi historial crediticio o del historial crediticio de la persona que por este medio represento ante Círculo de Crédito S.A. de C.V. Sociedad de Información Crediticia y/o Trans Union de México S.A. Sociedad de Información Crediticia. Además, por este medio declaro que estoy consciente del alcance de las actividades realizadas por las sociedades de información crediticia y del uso y propósitos de la información crediticia que obtendrá 4finance, S.A. de C.V. SOFOM ENR como se refleja en el reporte de crédito correspondiente. Por este medio, consiento el estar vinculado por esta autorización por un periodo de tres años empezando en esta fecha y en cualquier caso, durante el tiempo en que la relación jurídica con 4finance S.A. de C.V. SOFOM ENR sea válida. Por este medio, consiento que 4finance S.A. de C.V. SOFOM ENR, Círculo de Créditos S.A. de C.V: Sociedad de Información Crediticia y/o Trans Union de México S.A., Sociedad de Información  Crediticia tendrán en custodia este documento de acuerdo con el artículo 28 de la ley para regular las sociedades de información crediticia</p>
             </div>

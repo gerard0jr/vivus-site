@@ -270,6 +270,7 @@ export const SecondLoan = (props) => {
         const initialConfig = async () => {
             let demoUser = JSON.parse(sessionStorage.getItem('demoUser'))
             const loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))
+            if(!loggedUser) return props.history.push('/login')
             if(demoUser || loggedUser.eMail === 'demo@demo.com') {
                 if(loggedUser && loggedUser.eMail === 'demo@demo.com') setCustomer(loggedUser)
                 else setCustomer(demoUser)
@@ -298,8 +299,26 @@ export const SecondLoan = (props) => {
             const checkUser = async (user) => {
                 getStatus(idProduct, user.customerId, false, validToken)
                     .then(res =>{
+                        if(res.status && res.data.idStatus === 1){
+                            if(res.data.idSubStatus === 180) return props.history.push('/registration/personal-details')
+                            if(res.data.idSubStatus === 181) return props.history.push('/registration/employment-details')
+                            if(res.data.idSubStatus === 182) return props.history.push('/registration/nip-bureau')
+                            if(res.data.idSubStatus === 183) return props.history.push('/registration/identity')
+                            if(res.data.idSubStatus === 184) return props.history.push('/registration/identity')
+                            if(res.data.idSubStatus === 185) return props.history.push('/registration/nip-bureau')
+                            if(res.data.idSubStatus === 195) return props.history.push('/registration-complete')
+                            if(res.data.idSubStatus === 196) return props.history.push('/pre-approved')
+                            if(res.data.idSubStatus === 203) return props.history.push('/pre-approved')
+                            if(res.data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                            if(res.data.idSubStatus === 217) return props.history.push('/application-complete')
+                            if(res.data.idSubStatus === 218) return props.history.push('/application-complete')
+                            if(res.data.idSubStatus === 219)return props.history.push('/application-complete')
+                        }
                         if(res.status && res.data.idStatus === 4){
                             return props.history.push('/denied')
+                        }
+                        if(res.status && res.data.idStatus === 6){
+                            return props.history.push('/application-complete')
                         }
                     })
             }

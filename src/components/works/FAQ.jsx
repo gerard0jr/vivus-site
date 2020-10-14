@@ -17,7 +17,6 @@ const questions = [
     '¿Qué puedo hacer si no puedo pagar mi préstamo en tiempo?',
     '¿Cómo puedo cambiar mi información personal?',
     '¿En cuanto tiempo dan respuesta a mi solicitud?',
-    '¿Cómo debo enviar mi comprobante de ingresos?',
     '¿Por qué el monto adicional debe ser a un plazo de 3 meses?',
     '¿Con quién puedo hablar en caso de no encontrar respuestas a mis dudas?',
 ]
@@ -25,7 +24,7 @@ const questions = [
 const answers = [
     'Si eres cliente nuevo da clic en Solicítalo Ya y completa la solicitud del préstamo. Una vez registrado para ingresar a tu perfil deberás seleccionar ¿Ya eres cliente?, elige el monto, periodicidad de pago, así como plazo de tu conveniencia y sigue las instrucciones. Cualquier duda, por favor, comunícate con nuestro Equipo de Servicio al Cliente mediante WhatsApp o bien, llamando al (0155) 6717 0750 de lunes a Viernes de 8:00-20:00 y Sábados de 8:00 a 14:00 o contáctanos en info@vivus.com.mx',
     'Para obtener el préstamo debes: 1) Ser ciudadano mexicano(a) 2) Tener de 20 a 65 años 3) Ser empleado, profesionista independiente o contar con ingreso regular  4) Tener un teléfono celular y un correo electrónico 5) Completar toda la información requerida en la solicitud de préstamo 6) Enviar la documentación solicitada.',
-    'Debes subir las fotos (frente y reverso) de tu identificación oficial (IFE/INE), en formato de imagen, por favor no envíes PDF. Puedes hacerlo a través de tu perfil en el portal Vivus.com.mx, WhatsApp o bien, enviarla a documentos@Vivus.com.mx. En caso de que la Credencial de Elector no contenga la dirección, te solicitaremos un comprobante de domicilio (luz agua o teléfono no mayor a 3 meses). Por último, deberás enviarnos un recibo de nómina timbrado por el SAT más reciente, estado de cuenta o bien, declaración de impuestos.',
+    'Debes subir las fotos (frente y reverso) de tu identificación oficial (IFE/INE), en formato de imagen, por favor no envíes PDF. Puedes hacerlo a través de tu perfil en el portal Vivus.com.mx, WhatsApp o bien, enviarla a documentos@Vivus.com.mx.',
     'Puedes solicitar un préstamo desde 3,000 pesos y hasta un máximo de 9,000 pesos. El monto disponible es determinado en forma individual para cada uno de nuestros clientes. Puedes revisar tu límite de préstamo disponible ingresando a tu perfil en Vivus.com.mx',
     'Puedes solicitar un préstamo por un plazo de hasta 3 meses, pero no menor a 1 mes.',
     'Una vez que has solicitado tu préstamo puedes ingresar a tu perfil en Vivus.com.mx y solicitar un monto adicional siempre y cuando no sobrepases tu límite de crédito y tu primer parcialidad se encuentre cubierta. Si tu límite ha sido alcanzado debes realizar el pago de tu siguiente parcialidad antes de solicitar más dinero.',
@@ -38,7 +37,6 @@ const answers = [
     'Si crees que necesitas más tiempo para pagar tu préstamo, por favor, ingresa a tu perfil en Vivus.com.mx y consulta la opción de recorrer la fecha de pago de tu parcialidad, solo si tu primer parcialidad se encuentra pagada y no hayas utilizado este beneficio en tu parcialidad anterior.',
     'Ingresa a tu perfil en Vivus.com.mx y solicita el cambio de la información que necesites. Por seguridad, te haremos llegar un código PIN a tu correo o celular a fin de validar cualquier cambio. ',
     'Si tu solicitud fue pre aprobada y la información que registraste, así como los documentos que nos envías son correctos y cumplen con las características requeridas, ¡te damos respuesta en minutos!',
-    'El comprobante de ingresos debe estar timbrado por el SAT y no debe ser mayor a 3 meses, si no cuentas con alguno, también puedes enviarnos un estado de cuenta o bien, declaración de impuestos de los últimos 3 meses.',
     'Para VIVUS es muy importante cuidar de tu economía, por ese motivo solicitamos que  el monto adicional se pague a un plazo de 3 meses y de esta manera evitar que excedas tu capacidad de pago. No te preocupes, puedes liquidar anticipadamente y no tendrás ninguna penalización o inconveniente al solicitar tu siguiente préstamo.',
     'Puedes contactar a nuestro Equipo de Servicio al Cliente llamando al (0155) 6717 0750 de Lunes a Viernes de 8:00 -20:00 hrs. o los Sábados de 8:00 a 14:00 hrs.'
 ]

@@ -25,7 +25,17 @@ const NavBar = ({isLogged, location, setLocation}) => {
           matches ? (
             <div  className="flex-horizontal-new navbar" style={location === 'manteinance' ? {padding: '1rem 6rem'} : null}>
                 {location === 'manteinance' ? <img width='300px' src='/img/navbar/logo-vivus-mexico.svg' alt='vivus logo'/> : <Link onClick={() => setLocation('home')} to='/'><img width='300px' src={tempScreen ? '/img/navbar/logo-vivus-mexico.svg' : location === 'home' ? '/img/navbar/logo-vivus-mexico.svg' : '/img/navbar/logo-vivus-mexico.svg'} alt='vivus logo'/></Link>}
-                <div style={tempScreen ? {fontSize:'2rem', color: '#ff6b00', marginTop: '10px'} : location === 'home' ? {fontSize:'2rem', color: 'gray', marginTop: '10px'} : {fontSize:'2rem', color: 'black', marginTop: '20px'}}>
+                {
+                    location === 'home' || location === 'works' || location === 'blog' || location === 'us' ?
+                    <ul className='menu-client-home'>
+                        <li className='menu-button-home'>
+                            {location === 'manteinance' ? null : <Link onClick={() => {setLocation('app'); setShowMenu(false)}} to='/login'>¿Ya eres cliente?</Link>}
+                        </li>
+                    </ul>
+                    :
+                    null
+                }
+                <div style={tempScreen ? {fontSize:'2rem', color: '#ff6b00'} : location === 'home' ? {fontSize:'2rem', color: 'gray'} : {fontSize:'2rem', color: 'black'}}>
                     <FontAwesomeIcon onClick={() => setShowMenu(!showMenu)} icon={faBars}/>
                 </div>
                 {isLogged && location !== 'home' && location !== 'works' && location !== 'app' && location !== 'blog' 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const apiUrl = 'https://tk4f.com.mx/vivus/traceidentityservice/api'
-// const apiUrl = 'https://tk4f-stage.com.mx/stagevivus/TraceIdentityService/api'
+// const apiUrl = 'https://tk4f.com.mx/vivus/traceidentityservice/api'
+const apiUrl = 'https://tk4f-stage.com.mx/stagevivus/TraceIdentityService/api'
 
 // SECURITY //
 export const getToken = () => 
@@ -199,7 +199,6 @@ export const checkSecurityCode = (data, token) =>
 export const setContractAuthorization = (data, token) => 
     axios.post(`${apiUrl}/Customer/SetContractAuthorization`, {...data}, {headers: {'Authorization': `Bearer ${token}`}})
         .then(authorized => authorized)
-        .catch(err => err)
 
 export const setBureauAuthorization = (data, token) => 
     axios.post(`${apiUrl}/Customer/SetBureauAuthorization`, {...data}, {headers: {'Authorization': `Bearer ${token}`}})
@@ -214,7 +213,6 @@ export const getDirectDebitInformation = (data, token) =>
 export const setDirectDebitAuthorization = (data, token) => 
     axios.post(`${apiUrl}/Customer/SetDirectDebitAuthorization`, {...data}, {headers: {'Authorization': `Bearer ${token}`}})
         .then(debitAuth => debitAuth)
-        .catch(err => err)
 
     // REGISTER
 export const getRegistration = (idProduct, idCustomer, eMail, token) => 

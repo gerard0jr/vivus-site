@@ -18,15 +18,15 @@ const NewDashboard = (props) => {
     const [balance, setBalance] = useState({})
     const [bannerId, setBannerId] = useState(null)
     const [serverError, setServerError] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const checkUser = (user, token) => {
+        setLoading(true)
         return getStatus(idProduct, user.customerId, false, token)
         .then(res =>{
-            setBannerId(res.data.bannerId)
-            if(res.status && res.data.idStatus === 4){
-                return props.history.push('/denied')
-            }
+            if(res.status && res.data.idStatus === 4) return props.history.push('/denied')
             if(res.status === 200){
+                setBannerId(res.data.bannerId)
                 if(res.data.idStatus === 1){
                     if(res.data.idSubStatus === 184) return props.history.push('/registration')
                     if(res.data.idSubStatus === 196) return props.history.push('/pre-approved')
@@ -36,16 +36,18 @@ const NewDashboard = (props) => {
                     return props.history.push('/registration')
                 }
                 if(res.data.idStatus === 7){
+                    setLoading(false)
                     return
                 }
                 if(res.data.idStatus === 6){
                     if(res.data.idSubStatus === 15) return props.history.push('/application-complete')
                 }
                 if(res.data.idStatus === 8) return props.history.push('/dashboard')
-                if(res.data.idStatus === 4){
-                    return props.history.push('/denied')
-                }
+                if(res.data.idStatus === 4) return props.history.push('/denied')
             }
+            setLoading(false)
+            setServerError(true)
+            return props.history.push({pathname: '/error', state: {endpoint: 'getStatus', status: res.status}})
         })
         .catch(err => setServerError(true))
     }
@@ -66,7 +68,8 @@ const NewDashboard = (props) => {
         let getToken = cookie.load('token')
         if(!getToken) return props.history.push('/login')
         checkUser(getUser, getToken)
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.history])
 
     useEffect(() => {
         // if(props.location.pathname.includes('/borrow-more')) setFlux('move')
@@ -75,15 +78,15 @@ const NewDashboard = (props) => {
     return (
         <div className='app-container'>
             {
-                // serverError ? 
-                //     <div style={{textAlign: 'center', justifyContent: 'center'}}>
-                //         <div className='account-container'>
-                //             <div className='left-dash-new'>
-                //                 <h2 style={{margin: '2rem 0'}}>Error en el servidor</h2>
-                //             </div>
-                //         </div>
-                //     </div>
-                // :
+                loading ? 
+                    <div style={{textAlign: 'center', justifyContent: 'center'}}>
+                        <div className='account-container'>
+                            <div className='left-dash-new'>
+                                <h2 style={{margin: '2rem 0'}}>Cargando...</h2>
+                            </div>
+                        </div>
+                    </div>
+                :
                 // user ? 
                     <div style={{textAlign: 'center', justifyContent: 'center'}}>
                         <div className='account-container'>

@@ -145,8 +145,60 @@
     margin-bottom: 1.2rem;
 }
 
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 30px;
+    display: inline-block;
+    color: #000;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 19px;
+    height: 19px;
+    background: #A3CD3A;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
 .input-div small{
     font-weight: 200;
+    max-width: 400px;
 }
 
 .register-subtitle{
@@ -180,6 +232,15 @@
 .checkbox-top{
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
+}
+.checkbox-top p{
+    font-weight: 300 !important;
+}
+.checkbox-top strong{
+    color: #A3CD3A;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .btn-register{
@@ -229,9 +290,10 @@
     position: absolute;
     top: 4px;
     left: 0;
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     background-color: #fff;
+    cursor: pointer;
   }
 
   .container:hover input ~ .checkmark {
@@ -253,8 +315,8 @@
   }
   
   .container .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 11px;
+    top: 7px;
     width: 5px;
     height: 10px;
     border: solid white;
@@ -407,9 +469,6 @@
     .register-container{
         padding: 2rem 0;
     }
-    .register-form-container{
-        max-width: none;
-    }
     .register-calculator{
         width: auto;
         margin-top: 2rem;
@@ -485,5 +544,30 @@
     }
     .checkbox-top{
         flex-direction: column;
+    }
+    .input-div{
+        width: 300px;
+        box-sizing: border-box;
+    }
+    .register-questions{
+        width: 300px;
+    }
+    .zip-button-container{
+        flex-wrap: wrap;
+    }
+    .register-form-container{
+        max-width: 290px;
+    }
+    .payment-register .input-div{
+        width: 100%;
+    }
+    .payment-register input{
+        width: auto !important;
+    }
+    .left-register-full .input-div{
+        width: 280px;
+    }
+    .register-form-container-full h1, .register-form-container-full h2{
+        font-size: 2rem !important;
     }
 }

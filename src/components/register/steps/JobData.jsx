@@ -17,8 +17,8 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
     const [employmentType, setEmploymentType] = useState(1)
     const [idEmploymentIndustry, setIdEmploymentIndustry] = useState(1)
     const [data, setData] = useState({})
-    const [antMonth, setAntMonth] = useState(null)
-    const [antYear, setAntYear] = useState(null)
+    const [antMonth, setAntMonth] = useState(1)
+    const [antYear, setAntYear] = useState(0)
     const [income, setIncome] = useState(null)
 
     const [incomeError, setIncomeError] = useState(false)
@@ -28,6 +28,11 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
 
     const handleData = e => setData({...data, [e.target.name]: e.target.value})
 
+    let checkPhoneError = phone => {
+        let phoneArray = phone.split('')
+        return phoneArray.every(v => v === phoneArray[0])
+    }
+
     const handleSubmit = async () => {
         if(!income) return setIncomeError(true)
         if(!data.employerName) return setEmployerNameError(true)
@@ -35,6 +40,8 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
         if(!data.employmentPhone || data.employmentPhone.length < 10) return setEmployerPhoneError(true)
         if(data.employmentPhone.match(/^[0-9]+$/) === null) return setEmployerPhoneError(true)
         if(data.employmentPhone.search(/[a-zA-Z]/) !== -1) return setEmployerPhoneError(true)
+        else setEmployerPhoneError(false)
+        if(checkPhoneError(data.employmentPhone)) return setEmployerPhoneError(true)
         else setEmployerPhoneError(false)
         if(antMonth === null || antYear === null) return setAntError(true)
         if(customer.eMail === 'demo@demo.com') return props.history.push('/registration/nip-bureau')
@@ -253,6 +260,7 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
             return loadCustomerData(loggedUser.customerId, validToken)
         }
         loadPersonalData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     let fillDemo = () => {
@@ -269,7 +277,7 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
 
     return (
         <div className='register-form-container'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Detalles</h1>
             <h2 style={{margin: '0', padding: 0, fontWeight: 200, fontSize: '3rem'}}>de tu empleo</h2>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
@@ -314,7 +322,7 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
                     <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} maxLength='10' type='text' name='employmentPhone' value={data.employmentPhone}/>
                 </div>
             </div>
-            <div className={antError ? 'input-div input-error' : 'input-div'}>
+            {/* <div className={antError ? 'input-div input-error' : 'input-div'}>
                 <p style={{fontWeight: 'bold'}}><strong>Antiguedad de tu empleo</strong></p>
                 <div>
                     <select style={{width: '200px', padding: '0.6rem', fontSize: '1rem', backgroundColor: 'white'}} name='antYear' onChange={e => setAntYear(parseInt(e.target.value))} value={antYear}>
@@ -351,7 +359,7 @@ export const JobData = ({props, setCurrentStep, changeProposal}) => {
                     : 
                     null}
                 </div>
-            </div>
+            </div> */}
             <div onClick={handleSubmit} style={{width: '200px'}} className='btn-register'>{loading ? <BallBeat loading color={'white'}/> : 'CONTINUAR'}</div>
         </div>
     )

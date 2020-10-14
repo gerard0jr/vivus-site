@@ -221,14 +221,28 @@ const Identificacion = (props) => {
             getStatus(idProduct, user.customerId, false, validToken)
                 .then(res =>{
                     if(res.status && res.data.idStatus === 1){
+                        if(res.data.idSubStatus === 180) return props.history.push('/registration/personal-details')
+                        if(res.data.idSubStatus === 181) return props.history.push('/registration/employment-details')
+                        if(res.data.idSubStatus === 182) return props.history.push('/registration/nip-bureau')
+                        if(res.data.idSubStatus === 183) return props.history.push('/registration/identity')
+                        if(res.data.idSubStatus === 184) return props.history.push('/registration/identity')
+                        if(res.data.idSubStatus === 185) return props.history.push('/registration/nip-bureau')
+                        if(res.data.idSubStatus === 195) return props.history.push('/registration-complete')
+                        if(res.data.idSubStatus === 196) return props.history.push('/pre-approved')
+                        if(res.data.idSubStatus === 203) return props.history.push('/pre-approved')
+                        if(res.data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                        if(res.data.idSubStatus === 217) return props.history.push('/dashboard/confirm')
+                        if(res.data.idSubStatus === 218) {
+                            setCargadoAnverso(true)
+                            return setCargadoReverso(true)
+                        }
                         if(res.data.idSubStatus === 219){
                             setCargadoAnverso(true)
-                            // setCargadoNomina(true)
                             return setCargadoReverso(true)
                         }
                     }
                     if(res.status && res.data.idStatus === 4){
-                        // return props.history.push('/denied')
+                        return props.history.push('/denied')
                     }
                     if(res.status && res.data.idStatus === 6){
                         return props.history.push('/application-complete')
@@ -283,7 +297,7 @@ const Identificacion = (props) => {
         if(!getUser){
             let emptyCustomer = JSON.parse(sessionStorage.getItem('empty-customer'))
             setUser(emptyCustomer)
-            checkUser(getUser)
+            checkUser(emptyCustomer)
             checkFile(emptyCustomer.customerId)
             return
         }
@@ -295,6 +309,7 @@ const Identificacion = (props) => {
         }
         checkFile(getUser.idCustomer)
         return
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -320,7 +335,7 @@ const Identificacion = (props) => {
 
     return (
         <div className='app-container'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <div className='id-container'>
                 <div className="id-top-container">
                     <div className='top-instructions'>

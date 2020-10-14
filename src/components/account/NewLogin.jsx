@@ -210,6 +210,10 @@ const NewLogin = (props) => {
               setPassError(false)
               return props.history.push('/dashboard/welcome')
           }
+          else {
+            setLoading(false)
+            return setServerError(true)
+          }
         })
         .catch(err => setServerError(true))
     }
@@ -229,6 +233,7 @@ const NewLogin = (props) => {
         return setEmail(comesFromRegister.eMail)
       }
       checkRegister()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // TAG MANAGER
@@ -249,7 +254,7 @@ const NewLogin = (props) => {
 
     return (
       <div className='app-container login-container'>
-          {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+          <div onClick={fillDemo} className="fill-demo">DEMO</div>
           <div className='leftLogin'>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Bienvenido de nuevo</h1>
             <h1 style={{margin: '0 0 1rem 0', padding: 0, fontWeight: '300'}}>Ingresa a tu cuenta Vivus</h1>

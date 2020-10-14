@@ -11,14 +11,16 @@ const idProduct = 1
 
 const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
     
-    const [data, setData] = useState({})
+    const [data, setData] = useState({
+        homePhone: '0000000000'
+    })
     const [showPassword, setShowPassword] = useState(false)
     const [showRepeatPassword, setShowRepeatPassword] = useState(false)
     const [passError, setPassError] = useState(false)
     const [passRepeatError, setPassRepeatError] = useState(false)
-    const [termsAccepted, setTermsAccepted] = useState(false)
-    const [privacyAccepted, setPrivacyAccepted] = useState(false)
-    const [financialAccepted, setFinancialAccepted] = useState(false)
+    const [termsAccepted, setTermsAccepted] = useState(true)
+    const [privacyAccepted, setPrivacyAccepted] = useState(true)
+    const [financialAccepted, setFinancialAccepted] = useState(true)
 
     const [customer, setCustomer] = useState(null)
     const [customerInvalid, setCustomerInvalid] = useState(false)
@@ -93,9 +95,14 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
     }, [])
     // TAG MANAGER END
 
+    let checkPhoneError = phone => {
+        let phoneArray = phone.split('')
+        return phoneArray.every(v => v === phoneArray[0])
+    }
+
     const submitData = async () => {
         if(data.eMail === 'demo@demo.com') return props.push('/registration/personal-details')
-        if(!(termsAccepted && privacyAccepted && financialAccepted)) return
+        if(!(termsAccepted && privacyAccepted)) return
         if(!data.firstName) return setFirstNameError(true)
         else setFirstNameError(false)
         if(!data.firstLastName) return setFirstLastNameError(true)
@@ -112,14 +119,8 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
         else setMobilePhoneError(false)
         if(data.mobilePhone === data.homePhone) return setHomePhoneError(true)
         else setHomePhoneError(false)
-        if(!data.homePhone) return setHomePhoneError(true)
-        else setHomePhoneError(false)
-        if(data.homePhone.length < 10) return setHomePhoneError(true)
-        else setHomePhoneError(false)
-        if (data.homePhone.match(/^[0-9]+$/) === null) return setHomePhoneError(true)
-        else setHomePhoneError(false)
-        if (data.homePhone.search(/[a-zA-Z]/) !== -1) return setHomePhoneError(true)
-        else setHomePhoneError(false)
+        if(checkPhoneError(data.mobilePhone)) return setMobilePhoneError(true)
+        else setMobilePhoneError(false)
         let repeatPass = await checkPassword(repeatPassword)
         if(!repeatPass) return
         if(!logged && (!data.password || data.password.length < 6)) return setPassError(true)
@@ -358,6 +359,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
             }
         }
         askLogged()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     let fillDemo = () => {
@@ -386,7 +388,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
         <>
         {!tokenError ? 
         <div className='register-form-container'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <h1 style={{margin: '1rem 0 0 0', padding: 0, fontWeight: 'bold', fontSize: '3rem'}}>Registro</h1>
             <div style={{borderBottom: '5px solid black', width: '50px'}}></div>
             <div style={{marginBottom: '1rem'}}>
@@ -399,7 +401,7 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                 <p style={{fontWeight: 'bold'}}><strong>Correo electrónico</strong></p>
                 <div className='validation-email-register'>
                     <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='eMail' value={data.eMail}/>
-                    {validEmail || customer ? null : loading ? <div style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}><BallBeat loading color={'white'}/></div> : <small onClick={checkUser} style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer'}}>Verificar</small>}
+                    {validEmail || customer ? null : loading ? <div style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer', minWidth: '57px'}}><BallBeat loading color={'white'}/></div> : <small onClick={checkUser} style={{backgroundColor: '#A3CD3A', padding: '0.5rem 1rem', margin: '0 1rem', color: 'white', fontWeight: '600', cursor: 'pointer'}}>Continuar</small>}
                 </div>
                 {customerInvalid ? <><small style={{color: 'red', marginLeft: '1rem'}}>Correo electrónico incorrecto</small><br/></> : null}
                 <small>Para mantenerte informado sobre el progreso de tu solicitud</small>
@@ -435,18 +437,10 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                     </div>
                     <small>Ingresa tu teléfono a 10 dígitos incluyendo código de ciudad (ejemplo: 5511112222)</small>
                 </div>
-                <div className={homePhoneError ? 'input-div input-error' : 'input-div'}>
-                    <p style={{fontWeight: 'bold'}}><strong>Otro teléfono de contacto</strong></p>
-                    <div>
-                        <input style={{width: '250px', padding: '0.6rem', fontSize: '1rem'}} onChange={handleData} type='text' name='homePhone' maxlength="10" value={data.homePhone}/>
-                    </div>
-                    <small style={homePhoneError ? {color: 'red'} : null}>Requerimos de un número telefónico adicional donde podamos localizarte, este número debe ser diferente de tu teléfono celular y debe capturarse a 10 dígitos incluyendo código de ciudad</small>
-                </div>
                 {!logged ? 
                 <>
                     <div className='register-subtitle'>
                         <h5>Cuenta Online</h5>
-                        <p>Revisa tu estado de cuenta aquí</p>
                     </div>
                     <div className={passError ? 'input-div input-error' : 'input-div'}>
                         <p style={{fontWeight: 'bold'}}><strong>Elegir una contraseña</strong></p>
@@ -473,39 +467,15 @@ const BasicInfo = ({setCurrentStep, changeProposal, props}) => {
                 : null}
                 <div className='register-subtitle'>
                     <h5>Consentimiento legal</h5>
-                    <p>Por favor, abre, lee y acepta a Vivus.</p>
                 </div>
                 <div className='checkbox-div'>
                     <div className='checkbox-top'>
                         <label className="container">
-                            <input onChange={() => {setOpenContract(true); blockScroll()}} checked={termsAccepted} type="checkbox"/>
+                            <input onChange={() => {setTermsAccepted(true); setPrivacyAccepted(true)}} checked={termsAccepted && privacyAccepted} type="checkbox"/>
                             <span className="checkmark"></span>
                         </label>
-                        <p style={{fontWeight: 'bold', margin: '0 2rem'}}><strong>Términos del contrato</strong></p>
-                        {termsAccepted ? <p style={{backgroundColor: 'lightgray', cursor: 'default'}} className='btn-register'>Aceptado</p> : <div onClick={contract ? () => {setOpenContract(true); blockScroll()} : null} className='btn-register'>{contract ? 'Por favor, lee y acepta' : <BallBeat loading color={'white'}/>}</div>}
+                        <p style={{fontWeight: 'bold', margin: '0 0 0 2.4rem'}}>He leído y acepto los <strong onClick={() => {setOpenContract(true); blockScroll()}}>Términos del contrato</strong> y <strong onClick={() => {setOpenPrivacy(true); blockScroll()}}>Aviso de privacidad</strong></p>
                     </div>
-                </div>
-                <div className='checkbox-div'>
-                    <div className='checkbox-top'>
-                        <label className="container">
-                            <input onChange={() => {setOpenPrivacy(true); blockScroll()}} checked={privacyAccepted} type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <p style={{fontWeight: 'bold', margin: '0 2rem'}}><strong>Aviso de Privacidad</strong></p>
-                        {privacyAccepted ? <p style={{backgroundColor: 'lightgray', cursor: 'default'}} className='btn-register'>Aceptado</p> : <div onClick={privacy ? () => {setOpenPrivacy(true); blockScroll()} : null} className='btn-register'>{privacy ? 'Por favor, lee y acepta' : <BallBeat loading color={'white'}/>}</div>}
-                    </div>
-                    <small>Al proporcionar tu correo electrónico aceptas recibir por parte de Vivus noticias y comunicaciones promocionales. Podrás revocar dicho consentimiento en cualquier momento, para más detalles consulta nuestro Aviso de Privacidad</small>
-                </div>
-                <div className='checkbox-div'>
-                    <div className='checkbox-top'>
-                        <label className="container">
-                            <input onChange={() => {setOpenFinancial(true); blockScroll()}} checked={financialAccepted} type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <p style={{fontWeight: 'bold', margin: '0 2rem'}}><strong>Educación Financiera</strong></p>
-                        {financialAccepted ? <p style={{backgroundColor: 'lightgray', cursor: 'default'}} className='btn-register'>Aceptado</p> : <div onClick={financial ? () => {setOpenFinancial(true); blockScroll()} : null} className='btn-register'>{financial ? 'Por favor, lee y acepta' : <BallBeat loading color={'white'}/>}</div>}
-                    </div>
-                    <small>Acepto recibir el servicio de Educación Financiera prestado por 4finance</small>
                 </div>
                 <div onClick={submitData} className={termsAccepted && privacyAccepted && financialAccepted ? 'btn-register' : 'btn-register-disabled'}>{loadingForm ? <BallBeat loading color={'white'}/> :  'Continuar'}</div>
                 {serverError ? 

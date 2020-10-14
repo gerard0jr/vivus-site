@@ -36,13 +36,26 @@ const Default = ({history, setBalance, bannerId}) => {
                 if(res.data.idStatus === 6){
                     if(res.data.idSubStatus === 15) return history.push('/repeated/application/pre-approved')
                 }
+                if(res.data.idStatus === 1){
+                    if(res.data.idSubStatus === 184) return history.push('/registration')
+                    if(res.data.idSubStatus === 196) return history.push('/pre-approved')
+                    if(res.data.idSubStatus === 203) return history.push('/pre-approved')
+                    if(res.data.idSubStatus === 206) return history.push('/dashboard/id')
+                    if(res.data.idSubStatus === 217) return history.push('/dashboard/confirm')
+                    return history.push('/registration')
+                }
+                if(res.data.idStatus === 7){
+                    setLoading(false)
+                }
+                if(res.data.idStatus === 8) return history.push('/dashboard')
+                if(res.data.idStatus === 4) return history.push('/denied')
                 getCustomerBalance(data, validToken) //
-                    .then(res => {
-                        if(res.status === 200){
-                            if(res.data.creditLimitUsed === 0) return history.push('/dashboard')
-                            setCustomerBalance(res.data)
-                            setBalance(res.data)
-                            sessionStorage.setItem('balance', JSON.stringify(res.data))
+                    .then(customerBalance => {
+                        if(customerBalance.status === 200){
+                            if(customerBalance.data.creditLimitUsed === 0) return history.push('/dashboard')
+                            setCustomerBalance(customerBalance.data)
+                            setBalance(customerBalance.data)
+                            sessionStorage.setItem('balance', JSON.stringify(customerBalance.data))
                             return setLoading(false)
                         }
                         setServerError(true)
@@ -108,7 +121,9 @@ const Default = ({history, setBalance, bannerId}) => {
                     }
                 })
                 //TAG MANAGER
+                return
             }
+            return history.push({pathname: '/error', state: {endpoint: 'getStatus', status: res.status}})
         })
     }
 
@@ -150,6 +165,7 @@ const Default = ({history, setBalance, bannerId}) => {
             }
             getData(user)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const checkMobile = useMediaQuery({ query: '(max-device-width: 700px)' })

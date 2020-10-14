@@ -168,7 +168,7 @@ const Calculator = (props) => {
                             onChange={val => updateMonto(val)}
                         />
                     </div>
-                    <hr style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem', opacity: 0}}/>
+                    <hr className='calc-hr' style={{width: '100%', border: '0.5px solid #737373', marginTop: '3rem', opacity: 0}}/>
                     {/* <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem'}}>
                         <p style={{marginBottom: '1rem'}}>Periodicidad de pago</p>
                         <div style={{display: 'flex', justifyContent: 'space-evenly', margin: '0.5rem'}}>
@@ -176,7 +176,7 @@ const Calculator = (props) => {
                             <p className={periodicidad === 2 ? 'boton-periodicidad period-active' : 'boton-periodicidad'} onClick={() => updatePeriodicidad(2)}>Quincenal</p>
                         </div>
                     </div> */}
-                    <hr style={{width: '100%', border: '0.5px solid #FAFAFA'}}/>
+                    <hr className='calc-hr2' style={{width: '100%', border: '0.5px solid #FAFAFA'}}/>
                     <div className='title-winput'>
                         <p>Plazo</p>
                         <div className="slider-input-wrapper">
@@ -258,6 +258,7 @@ const Calculator = (props) => {
                         <p><strong>Fecha de pago</strong></p>
                         <p><strong>{momentEs(fecha).format('D/MMM/Y')}</strong></p>
                     </div>
+                    <p onClick={setData} className="mobile-solicitalo">SOLICÍTALO YA</p>
                     <div className='cat-prom'>
                         <b>CAT: {cat}%</b> promedio sin IVA para fines informativos y de comparación exclusivamente. <br/>Fecha de cálculo: {momentEs(today).format('D/MMM/Y')}<br/><br/>
                         Calculadora para fines informativos y de comparación. <br/><br/>

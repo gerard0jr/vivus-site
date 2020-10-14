@@ -10,6 +10,10 @@ import BasicInfo from './steps/BasicInfo'
 import RegisterCalculator from './RegisterCalculator'
 import { withRouter } from 'react-router-dom'
 import { Questionary } from './steps/Questionary'
+import { getStatus, getToken } from '../../services/api'
+import cookie from 'react-cookies'
+
+let idProduct = 1
 
 const Register = (props) => {
 
@@ -26,6 +30,90 @@ const Register = (props) => {
     useEffect(() => {
         setCurrentStep(props.url)
     }, [props.url])
+
+    useEffect(() => {
+        let checkUser = async () => {
+            let validToken = cookie.load('token')
+            if(!validToken){
+                let response = await getToken()
+                if(!response.data) return
+                if(response.data) validToken = response.data.token
+            }
+            let loggedUser = await JSON.parse(sessionStorage.getItem('loggedUser'))
+            if(!loggedUser) {
+                let emptyCustomer = await JSON.parse(sessionStorage.getItem('empty-customer'))
+                if(emptyCustomer){
+                    getStatus(idProduct, emptyCustomer.customerId, false, validToken)
+                        .then(res => {
+                            const { data } = res
+                            if(res.status === 200){
+                                if(data.idStatus === 1){
+                                    if(data.idSubStatus === 180) return props.history.push('/registration/personal-details')
+                                    if(data.idSubStatus === 181) return props.history.push('/registration/employment-details')
+                                    if(data.idSubStatus === 182) return props.history.push('/registration/nip-bureau')
+                                    if(data.idSubStatus === 183) return props.history.push('/registration/identity')
+                                    if(data.idSubStatus === 184) return props.history.push('/registration/identity')
+                                    if(data.idSubStatus === 185) return props.history.push('/registration/nip-bureau')
+                                    if(data.idSubStatus === 195) return props.history.push('/registration-complete')
+                                    if(data.idSubStatus === 196) return props.history.push('/pre-approved')
+                                    if(data.idSubStatus === 203) return props.history.push('/pre-approved')
+                                    if(data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                                    if(data.idSubStatus === 217) return props.history.push('/dashboard/confirm')
+                                    if(data.idSubStatus === 218) return props.history.push('/application-complete')
+                                    if(data.idSubStatus === 219) return props.history.push('/application-complete')
+                                }
+                                if(data.idStatus === 4){
+                                return props.history.push('/denied')
+                                }
+                                if(data.idStatus === 6){
+                                return props.history.push('/dashboard/welcome')
+                                }
+                                if(data.idStatus === 7){
+                                return props.history.push('/dashboard/welcome')
+                                }
+                                return props.history.push('/dashboard/welcome')
+                            }
+                        })
+                        .catch(err => console.log(err))
+                }
+                return
+            }
+            getStatus(idProduct, loggedUser.customerId, false, validToken)
+            .then(res => {
+                const { data } = res
+                if(res.status === 200){
+                    if(data.idStatus === 1){
+                        if(data.idSubStatus === 180) return props.history.push('/registration/personal-details')
+                        if(data.idSubStatus === 181) return props.history.push('/registration/employment-details')
+                        if(data.idSubStatus === 182) return props.history.push('/registration/nip-bureau')
+                        if(data.idSubStatus === 183) return props.history.push('/registration/identity')
+                        if(data.idSubStatus === 184) return props.history.push('/registration/identity')
+                        if(data.idSubStatus === 185) return props.history.push('/registration/nip-bureau')
+                        if(data.idSubStatus === 195) return props.history.push('/registration-complete')
+                        if(data.idSubStatus === 196) return props.history.push('/pre-approved')
+                        if(data.idSubStatus === 203) return props.history.push('/pre-approved')
+                        if(data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                        if(data.idSubStatus === 217) return props.history.push('/dashboard/confirm')
+                        if(data.idSubStatus === 218) return props.history.push('/application-complete')
+                        if(data.idSubStatus === 219) return props.history.push('/application-complete')
+                    }
+                    if(data.idStatus === 4){
+                        return props.history.push('/denied')
+                    }
+                    if(data.idStatus === 6){
+                        return props.history.push('/dashboard/welcome')
+                    }
+                    if(data.idStatus === 7){
+                        return props.history.push('/dashboard/welcome')
+                    }
+                    return props.history.push('/dashboard/welcome')
+                }
+                })
+                .catch(err => console.log(err))
+        }
+        checkUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className='app-container'>

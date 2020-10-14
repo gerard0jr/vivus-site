@@ -71,7 +71,8 @@ const Done = (props) => {
                 .then(res => {
                     if(res.status === 200){
                         if(res.data.continue === true){
-                            return props.history.push('/registration/questionary')
+                            // return props.history.push('/registration/questionary')
+                            return props.history.push('/pre-approved') //NO QUESTIONARY
                         }
                         // return props.history.push('/rejected')
                     }
@@ -121,6 +122,7 @@ const Done = (props) => {
             return loadRisk(loggedUser.customerId, loggedUser.eMail)
         }
         initialConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

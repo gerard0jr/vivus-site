@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './newStyles.scss'
 import { withRouter, Link } from 'react-router-dom'
-import { getFilledContract, getToken, getCustomerByMail, getStatus, getProposal, getSimulation, setContractAuthorization, getAnalytics } from '../../services/api'
+import { getFilledContract, getToken, getCustomerByMail, getStatus, getProposal, getSimulation, setContractAuthorization, getAnalytics, setDirectDebitAuthorization } from '../../services/api'
 import { momentEs } from '../../services/moment'
 import publicIp from 'public-ip'
 import TagManager from 'react-gtm-module'
@@ -16,9 +16,10 @@ const Cargo = (props) => {
     const [customer, setCustomer] = useState(null)
 
     const [loadingConfirm, setLoadingConfirm] = useState(false)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [serverError, setServerError] = useState(false)
-    const [termsAccepted, setTermsAccepted] = useState(false)
+    const [directDebitError, setDirectDebitError] = useState(false)
+    const [termsAccepted, setTermsAccepted] = useState(true)
     const [contract, setContract] = useState(null)
     const [balance, setBalance] = useState({
         amount: 0,
@@ -35,7 +36,7 @@ const Cargo = (props) => {
     const [open, setOpen] = useState(false)
 
     const goTo = async () => {
-        if(customer.eMail === 'demo@demo.com') return props.history.push('/dashboard/confirm')
+        if(customer.eMail === 'demo@demo.com') return props.history.push('/dashboard/id')
         setLoadingConfirm(true)
         const onCoords = async ({coords, timestamp}) => {
             const myIp = await publicIp.v4()
@@ -56,11 +57,44 @@ const Cargo = (props) => {
                     .then(res => {
                         if(res.status === 200){
                             setLoadingConfirm(false)
-                            if(res.data.codigo === '200') return props.history.push('/dashboard/confirm')
+                            // if(res.data.codigo === '200') return props.history.push('/dashboard/confirm')
+                            if(res.data.codigo === '200') {
+                                let coords = sessionStorage.getItem('coords')
+                                if(!coords) coords = 'Location blocked'
+                                const debitData = {
+                                    userAgent: navigator.userAgent,
+                                    ip: myIp,
+                                    authorized: true,
+                                    coordinates: coords,
+                                    idProduct,
+                                    idCustomer: customer.customerId
+                                }
+                                setDirectDebitAuthorization(debitData, validToken)
+                                    .then(res => {
+                                        getStatus(idProduct, customer.customerId, false, validToken)
+                                            .then(response => {
+                                                if(response.status === 200){
+                                                    if(response.data.idSubStatus === 15) return props.history.push('/application-complete')
+                                                    if(response.data.idSubStatus === 218) return props.history.push('/application-complete')
+                                                    if(response.data.idSubStatus === 219) return props.history.push('/dashboard/id')
+                                                    if(response.data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                                                    return props.history.push('/dashboard/id')
+                                                }
+                                                return props.history.push('/dashboard/id')
+                                            })
+                                    })
+                                    .catch(err => {
+                                        if(err.response.status === 400){
+                                            setLoadingConfirm(false)
+                                            setDirectDebitError(true)
+                                        }
+                                    })
+                                    return
+                            }
                         }
                     })
                     .catch(err => {
-                        if(err.response === 400){
+                        if(err.response.status === 400){
                             setLoadingConfirm(false)
                             setServerError(true)
                         }
@@ -86,7 +120,36 @@ const Cargo = (props) => {
                     .then(res => {
                         if(res.status === 200){
                             setLoadingConfirm(false)
-                            if(res.data.codigo === 200) return props.history.push('/dashboard/confirm')
+                            // if(res.data.codigo === 200) return props.history.push('/dashboard/confirm')
+                            if(res.data.codigo === 200) {
+                                let coords = sessionStorage.getItem('coords')
+                                if(!coords) coords = 'Location blocked'
+                                const debitData = {
+                                    userAgent: navigator.userAgent,
+                                    ip: myIp,
+                                    authorized: true,
+                                    coordinates: coords,
+                                    idProduct,
+                                    idCustomer: customer.customerId
+                                }
+                                setDirectDebitAuthorization(debitData, validToken)
+                                    .then(res => {
+                                        getStatus(idProduct, customer.customerId, false, validToken)
+                                        .then(response => {
+                                            if(response.status === 200){
+                                                if(response.data.idSubStatus === 15) return props.history.push('/application-complete')
+                                                if(response.data.idSubStatus === 218) return props.history.push('/application-complete')
+                                                if(response.data.idSubStatus === 219) return props.history.push('/dashboard/id')
+                                                if(response.data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                                                return props.history.push('/dashboard/id')
+                                            }
+                                            if(response.status === 400) return setDirectDebitError(true)
+                                            return props.history.push('/dashboard/id')
+                                        })
+                                    })
+                                    .catch(err => setServerError(true))
+                                return
+                            }
                         }
                         setLoadingConfirm(false)
                         setServerError(true)
@@ -193,20 +256,10 @@ const Cargo = (props) => {
             const loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'))
             if(demoUser || (loggedUser && loggedUser.eMail === 'demo@demo.com')){
                 let dummyData = {
-                    creditLimit: 5000,
+                    amount: 2500,
                     creditLimitUsed: 2500,
-                    liquidateAmount: 1500,
-                    commision: 100,
                     term: 3,
-                    frequency: 1,
-                    curentInstallment: {
-                        idDeferral: 1,
-                        principalBalance: 500,
-                        interest: 250,
-                        paymentValue: 560,
-                        dueDate: new Date()
-                    },
-                    paidAmount: 1000,
+                    idFrequency: 1,
                     startDate: new Date(),
                     installments: [
                         {idDeferral: 1, dueDate: new Date(), paymentValue: 200, interest: 25},
@@ -214,12 +267,14 @@ const Cargo = (props) => {
                         {idDeferral: 3, dueDate: new Date(), paymentValue: 200, interest: 25},
                         {idDeferral: 4, dueDate: new Date(), paymentValue: 200, interest: 25}
                     ],
-                    payments: [
-                        {idDeferral: 1, dueDate: new Date(), paymentValue: 200},
-                        {idDeferral: 2, dueDate: new Date(), paymentValue: 200},
-                        {idDeferral: 3, dueDate: new Date(), paymentValue: 200},
-                        {idDeferral: 4, dueDate: new Date(), paymentValue: 200}
-                    ]
+                    commision: 100,
+                    curentInstallment: {
+                        idDeferral: 1,
+                        principalBalance: 500,
+                        interest: 250,
+                        paymentValue: 560,
+                        dueDate: new Date()
+                    }
                 }
                 setBalance(dummyData)
                 if(loggedUser && loggedUser.eMail==='demo@demo.com') return setCustomer(loggedUser)
@@ -231,6 +286,21 @@ const Cargo = (props) => {
                 if(user.idCustomer){
                     getStatus(idProduct, user.idCustomer, false, validToken)
                         .then(res =>{
+                            if(res.status && res.data.idStatus === 1){
+                                if(res.data.idSubStatus === 180) return props.history.push('/registration/personal-details')
+                                if(res.data.idSubStatus === 181) return props.history.push('/registration/employment-details')
+                                if(res.data.idSubStatus === 182) return props.history.push('/registration/nip-bureau')
+                                if(res.data.idSubStatus === 183) return props.history.push('/registration/identity')
+                                if(res.data.idSubStatus === 184) return props.history.push('/registration/identity')
+                                if(res.data.idSubStatus === 185) return props.history.push('/registration/nip-bureau')
+                                if(res.data.idSubStatus === 195) return props.history.push('/registration-complete')
+                                if(res.data.idSubStatus === 196) return 
+                                if(res.data.idSubStatus === 203) return 
+                                if(res.data.idSubStatus === 206) return props.history.push('/dashboard/id')
+                                if(res.data.idSubStatus === 217) return props.history.push('/dashboard/confirm')
+                                if(res.data.idSubStatus === 218) return props.history.push('/application-complete')
+                                if(res.data.idSubStatus === 219) return props.history.push('/application-complete')
+                            }
                             if(res.status && res.data.idStatus === 4){
                                 return props.history.push('/denied')
                             }
@@ -270,6 +340,7 @@ const Cargo = (props) => {
             getBalance(loggedUser.customerId, validToken)
         }
         initialConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const checkMobile = useMediaQuery({ query: '(max-device-width: 700px)' })
@@ -281,7 +352,7 @@ const Cargo = (props) => {
 
     return (
         <div className='app-container'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <Popup onClose={() => setOpen(false)} open={open} position="right center">
                 <iframe style={{width:'100%', height:'85%'}} src={`data:application/pdf;base64,${contract}`} title='Contract' frameborder="0"></iframe>
                 <div className='button-container'>
@@ -295,18 +366,18 @@ const Cargo = (props) => {
             <div className='cargo-container'>
                 <div className='contract-layer'>
                     <div>
-                        <h2>Por favor lee y acepta el contrato del préstamo</h2>
+                        {/* <h2>Por favor lee y acepta el contrato del préstamo</h2> */}
                         {checkMobile ? 
                         <div className='check-contrato'>
                             <input onClick={() => setOpen(true)} disabled={loading} checked={termsAccepted} type='checkbox' name='educacion' value='educacion'/>
+                            <span>{'ACEPTAR Y CONTINUAR'}</span>
                             {loading ? <span>Cargando contrato...</span> : <a title='Descargar contrato' download='Contrato' href={`data:application/pdf;base64,${contract}`} style={{color: 'black', textDecoration: 'underline', cursor: 'pointer', fontWeight: 'bold'}} onClick={() => setTermsAccepted(true)}><u><strong>Abrir contrato</strong></u></a>}
-                            <span>{loading && !termsAccepted ? 'Cargando...' : !loading && !termsAccepted ? 'Contrato no aceptado' : 'Contrato aceptado'}</span>
                         </div>
                         :
                         <div className='check-contrato'>
                             <input onClick={() => setOpen(true)} disabled={loading} checked={termsAccepted} type='checkbox' name='educacion' value='educacion'/>
+                            <span>{'ACEPTAR Y CONTINUAR'}</span>
                             {loading ? <span>Cargando contrato...</span> : <p style={{cursor: 'pointer', color: 'black'}} rel="noopener noreferrer" onClick={() => setOpen(true)}><u><strong>Abrir contrato</strong></u></p>}
-                            <span>{loading && !termsAccepted ? 'Cargando...' : !loading && !termsAccepted ? 'Contrato no aceptado' : 'Contrato aceptado'}</span>
                         </div>
                         }
                     </div>
@@ -362,7 +433,8 @@ const Cargo = (props) => {
                         </div>
                         <div className= 'contrato-bottom'>
                             <p className={termsAccepted ? 'btn-minimal-width' : 'btn-minimal-width-disabled'} onClick={termsAccepted ? goTo : () => window.scrollTo(0,0)}>{loadingConfirm ? <BallClipRotate loading color={'white'}/> : !termsAccepted ? 'DESCARGA EL CONTRATO' : 'CONTINUAR'}</p>
-                            {serverError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente(400, bad request)</p> : null}
+                            {serverError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente <br/>(400, bad request: setContractAuthorization)</p> : null}
+                            {directDebitError ? <p style={{color: 'red'}}>Ocurrió un error, inténtalo nuevamente <br/>(400, bad request: directDebit)</p> : null}
                             <Link style={{color: 'black', fontWeight: 'bold', textDecoration: 'underline'}} to='/dashboard'>Modificar solicitud de préstamo</Link>
                         </div>
                     </div>

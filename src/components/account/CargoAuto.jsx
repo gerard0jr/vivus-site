@@ -9,7 +9,7 @@ const idProduct = 1
 
 const CargoAuto = (props) => {
     const [customer, setCustomer] = useState(null)
-    const [auth, setAuth] = useState(false)
+    const [auth, setAuth] = useState(true)
     const [data, setData] = useState(null)    
 
     const goTo = async () => {
@@ -164,10 +164,10 @@ const CargoAuto = (props) => {
 
     return (
         <div className='app-container'>
-            {/* <div onClick={fillDemo} className="fill-demo">DEMO</div> */}
+            <div onClick={fillDemo} className="fill-demo">DEMO</div>
             <div className='buro-container'>
                 <div>
-                    <p>Estamos <span style={{fontSize:'2rem'}}>ya casi listos</span> para que disfutes de tu nuevo <span style={{fontSize:'2.8rem'}}>préstamo,</span> <span style={{fontSize:'2.4rem'}}> el cual será más fácil pagar</span><span style={{fontSize:'2.8rem'}}> sin filas</span><span style={{fontSize:'2.4rem'}}> ni</span><span style={{fontSize:'2.8rem'}}> comisiones extras.</span></p>
+                    <p>Estamos <span style={{fontSize:'1.5rem'}}>ya casi listos</span> para que disfrutes de tu nuevo <span style={{fontSize:'2rem'}}>préstamo,</span> <span style={{fontSize:'2rem'}}> el cual será más fácil pagar</span><span style={{fontSize:'2rem'}}> sin filas</span><span style={{fontSize:'2rem'}}> ni</span><span style={{fontSize:'2rem'}}> comisiones extras.</span></p>
                     <p>Solo necesitas activar tu servicio de cargo automático a tu cuenta.</p>
                 </div>
                 <div className='educacion-fin'>
@@ -179,7 +179,7 @@ const CargoAuto = (props) => {
                             </label>
                         </div>
                     </div>
-                    <div style={{marginLeft:'2rem', lineHeight: '2rem'}}>
+                    <div className='right-check-text' style={{marginLeft:'2rem', lineHeight: '2rem'}}>
                         <p>Solicito y autorizo a 4Finance, S.A. de C.V. SOFOM ENR realice cargos para el pago de mi préstamo de forma &nbsp; 
                             <input value={data && data.frequence} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}}/> a mi cuenta CLABE y/o tarjeta bancaria de &nbsp;
                             <input value={data && data.bank} type="text" style={{backgroundColor: '#A3CD3A', color: 'white', borderColor: 'white'}} /> con número &nbsp;
